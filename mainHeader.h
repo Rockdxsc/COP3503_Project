@@ -10,6 +10,7 @@
 #include "enemyClass.h"
 #include "playerClass.h"
 
+#define GRID_DIMENSION 20
 #endif //_TEXTGAME_MAINHEADER_H_
 
 using namespace std;
@@ -25,7 +26,7 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
     vector< vector<int> > masterVector;
 
     // Error Checking
-    if(itemsList.size() + numEnemies > (10 * 10)){
+    if(itemsList.size() + numEnemies > (GRID_DIMENSION * GRID_DIMENSION)){
 
         cout << "Too Many Items on Map!" << endl;
         exit(1);
@@ -41,26 +42,26 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
     }
 
     // Initialize 2D int Matrix to Map Items
-    int mapOverlay[10][10] = {0};
+    int mapOverlay[GRID_DIMENSION][GRID_DIMENSION] = {0};
 
     // Add Door (111) to Map
-    int doorLocation = (int)(10/2);
+    int doorLocation = (int)(GRID_DIMENSION/2);
     mapOverlay[doorLocation][0] = 111;
 
     // Add Player (999) to Map
-    int playerLocation = (int)(10/2);
-    mapOverlay[playerLocation][9] = 999;
+    int playerLocation = (int)(GRID_DIMENSION/2);
+    mapOverlay[playerLocation][(GRID_DIMENSION - 1)] = 999;
 
     // While There are Still Items in 'itemIntList'
     while(itemIntList.size() > 0){
 
         // Generate Two Random Seeds for Each Matrix Dimension
-        int random1 = rand() % 10;
-        int random2 = rand() % 10;
+        int random1 = rand() % GRID_DIMENSION;
+        int random2 = rand() % GRID_DIMENSION;
 
         // Generate a New Random if Both Digits are the Same
         while(random1 == random2){
-            random2 = rand() % 10;
+            random2 = rand() % GRID_DIMENSION;
         }
 
         // If Map Position is Empty, Fill it With an Item
@@ -75,12 +76,12 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
     while(numEnemies > 0){
 
         // Generate Two Random Seeds for Each Matrix Dimension
-        int randomE1 = rand() % 10;
-        int randomE2 = rand() % 10;
+        int randomE1 = rand() % GRID_DIMENSION;
+        int randomE2 = rand() % GRID_DIMENSION;
 
         // Generate a New Random if Both Digits are the Same
         while(randomE1 == randomE2){
-            randomE2 = rand() % 10;
+            randomE2 = rand() % GRID_DIMENSION;
         }
 
         // If Map Position is Empty, Fill it With an Enemy
@@ -95,9 +96,9 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
     vector<int> tempVector;
 
     // Iterator of the mapOverlay
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < GRID_DIMENSION; i++){
 
-        for(int j = 0; j < 10; j++){
+        for(int j = 0; j < GRID_DIMENSION; j++){
 
             // Push Contents into the Temp Vector
             tempVector.push_back(mapOverlay[i][j]);

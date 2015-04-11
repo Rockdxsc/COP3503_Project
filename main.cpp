@@ -15,6 +15,7 @@ int main() {
     itemsList.push_back("Item3");
     itemsList.push_back("Item4");
     itemsList.push_back("Item5");
+    itemsList.push_back("Item6");
 
     vector< vector<int> > integerMap = generateIntMap(itemsList, 10);
     vector< vector<string> > playerMap = generatePlayerMap(integerMap);

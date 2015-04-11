@@ -1,0 +1,78 @@
+
+STEPS 1-3: SETUP
+
+------------------------------------------------------------------------------------------
+
+STEP 1: DETERMINE CURRENT ORIGIN/UPSTREAM SETUP
+
+/* Lists the repositories: */
+
+$ git remote -v
+
+/* 
+
+Output should look something like:
+
+| origin	git@github.com:<YOUR USERNAME>/BHRV_Launchpad2015.git (fetch)
+| origin	git@github.com:<YOUR USERNAME>/BHRV_Launchpad2015.git (push)
+
+If you aren't using SSH, but HTTPS instead, it may look more like: 
+
+| origin    https://github.com/<YOUR USERNAME>/BHRV_Launchpad2015.git (fetch)
+| origin    https://github.com/<YOUR USERNAME>/BHRV_Launchpad2015.git (push)
+
+*/
+
+STEP 2: ADD UPSTREAM TO SYNC CHANGES FROM THE MASTER TO YOUR FORK
+
+$ git remote add upstream https://github.com/hkuchampudi/BHRV_Launchpad2015.git
+
+STEP 3: VERIFY THAT UPSTREAM HAS BEEN ADDED:
+
+$ git remote -v
+
+/* 
+
+Output should look something like:
+
+- SSH
+
+| origin	  git@github.com:<YOUR USERNAME>/BHRV_Launchpad2015.git (fetch)
+| origin	  git@github.com:<YOUR USERNAME>/BHRV_Launchpad2015.git (push)
+| upstream  git@github.com:hkuchampudi/BHRV_Launchpad2015.git (fetch)
+| upstream  git@github.com:hkuchampudi/BHRV_Launchpad2015.git (push)
+
+OR
+
+- HTTPS
+
+| origin    https://github.com/<YOUR USERNAME>/BHRV_Launchpad2015.git (fetch)
+| origin    https://github.com/<YOUR USERNAME>/BHRV_Launchpad2015.git (push)
+| upstream  https://github.com/hkuchampudi/BHRV_Launchpad2015.git (fetch)
+| upstream  https://github.com/hkuchampudi/BHRV_Launchpad2015.git (push)
+
+*/
+
+------------------------------------------------------------------------------------------
+
+STEPS 4-6: USAGE (should be done after every major change to the master repository: 
+hkuchampudi/BHRV_Launchpad2015)
+
+STEP 4: FETCH CHANGES MADE TO MASTER REPO:
+
+$ git fetch upstream
+
+STEP 5: MERGE CHANGES IN THE MASTER REPO TO YOUR FORK:
+
+$ git merge upstream/master
+
+STEP 6: PUSH THE FILES TO YOUR FORK:
+
+$ git push origin master
+
+
+
+VIDEO REFERENCES:
+
+Syncing GitHub Fork: https://www.youtube.com/watch?v=-zvHQXnBO6c
+Fork, Clone, and Pull Requests: https://www.youtube.com/watch?v=V0c8cKe-heI

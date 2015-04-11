@@ -13,19 +13,19 @@ $ git remote -v
 
 Output should look something like:
 
-| origin	git@github.com:<YOUR USERNAME>/BHRV_Launchpad2015.git (fetch)
-| origin	git@github.com:<YOUR USERNAME>/BHRV_Launchpad2015.git (push)
+| origin	git@github.com:<YOUR USERNAME>/COP3503_Project.git (fetch)
+| origin	git@github.com:<YOUR USERNAME>/COP3503_Project.git (push)
 
 If you aren't using SSH, but HTTPS instead, it may look more like: 
 
-| origin    https://github.com/<YOUR USERNAME>/BHRV_Launchpad2015.git (fetch)
-| origin    https://github.com/<YOUR USERNAME>/BHRV_Launchpad2015.git (push)
+| origin    https://github.com/<YOUR USERNAME>/COP3503_Project.git (fetch)
+| origin    https://github.com/<YOUR USERNAME>/COP3503_Project.git (push)
 
 */
 
 STEP 2: ADD UPSTREAM TO SYNC CHANGES FROM THE MASTER TO YOUR FORK
 
-$ git remote add upstream https://github.com/hkuchampudi/BHRV_Launchpad2015.git
+$ git remote add upstream https://github.com/hkuchampudi/COP3503_Project.git
 
 STEP 3: VERIFY THAT UPSTREAM HAS BEEN ADDED:
 
@@ -37,26 +37,26 @@ Output should look something like:
 
 - SSH
 
-| origin	  git@github.com:<YOUR USERNAME>/BHRV_Launchpad2015.git (fetch)
-| origin	  git@github.com:<YOUR USERNAME>/BHRV_Launchpad2015.git (push)
-| upstream  git@github.com:hkuchampudi/BHRV_Launchpad2015.git (fetch)
-| upstream  git@github.com:hkuchampudi/BHRV_Launchpad2015.git (push)
+| origin	  git@github.com:<YOUR USERNAME>/COP3503_Project.git (fetch)
+| origin	  git@github.com:<YOUR USERNAME>/COP3503_Project.git (push)
+| upstream  git@github.com:hkuchampudi/COP3503_Project.git (fetch)
+| upstream  git@github.com:hkuchampudi/COP3503_Project.git (push)
 
 OR
 
 - HTTPS
 
-| origin    https://github.com/<YOUR USERNAME>/BHRV_Launchpad2015.git (fetch)
-| origin    https://github.com/<YOUR USERNAME>/BHRV_Launchpad2015.git (push)
-| upstream  https://github.com/hkuchampudi/BHRV_Launchpad2015.git (fetch)
-| upstream  https://github.com/hkuchampudi/BHRV_Launchpad2015.git (push)
+| origin    https://github.com/<YOUR USERNAME>/COP3503_Project.git (fetch)
+| origin    https://github.com/<YOUR USERNAME>/COP3503_Project.git (push)
+| upstream  https://github.com/hkuchampudi/COP3503_Project.git (fetch)
+| upstream  https://github.com/hkuchampudi/COP3503_Project.git (push)
 
 */
 
 ------------------------------------------------------------------------------------------
 
 STEPS 4-6: USAGE (should be done after every major change to the master repository: 
-hkuchampudi/BHRV_Launchpad2015)
+hkuchampudi/COP3503_Project)
 
 STEP 4: FETCH CHANGES MADE TO MASTER REPO:
 

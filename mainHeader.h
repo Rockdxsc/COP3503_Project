@@ -13,6 +13,19 @@
 #define GRID_DIMENSION 20
 #endif //_TEXTGAME_MAINHEADER_H_
 
+/* FUNCTION PROTOTYPES */
+vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies);
+vector< vector<string> > generatePlayerMap(vector< vector<int> > intMap);
+vector<int> getPlayerPosition(vector< vector<string> >& playerMap);
+void enemyBattle(Player& mainPlayer, Spider& enemySpider);
+void stringToUpper(string &s);
+void printIntMap(vector< vector<int> > inputVector);
+void printPlayerMap(vector< vector<string> > inputVector);
+void clearScreen();
+void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& intMap, vector< vector<string> >& playerMap, vector<string> itemsList);
+void enemyBattle(Player& mainPlayer, Spider& enemySpider);
+string printInventory(Player player);
+
 using namespace std;
 
 // Generate Integer Level Map
@@ -202,6 +215,13 @@ void printPlayerMap(vector< vector<string> > inputVector){
 
 }
 
+// Clears Terminal
+void clearScreen(){
+
+    cout << string( 100, '\n' );
+
+}
+
 // Returns a Vector Containing the Players Current X,Y Position
 vector<int> getPlayerPosition(vector< vector<string> >& playerMap){
 
@@ -228,7 +248,7 @@ vector<int> getPlayerPosition(vector< vector<string> >& playerMap){
 }
 
 // Movement Function
-void movePlayer(string direction, vector< vector<int> >& intMap, vector< vector<string> >& playerMap){
+void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& intMap, vector< vector<string> >& playerMap, vector<string> itemsList){
 
     // Get the Player's Coordinates
     vector<int> playerPosition = getPlayerPosition(playerMap);
@@ -264,15 +284,14 @@ void movePlayer(string direction, vector< vector<int> >& intMap, vector< vector<
                 /* If Enemy, Start Battle */
                 if(interactionStatus == 666){
                     Spider spider1;
-                    int eLevel = spider1.returnLevel();
-                    int eHealth = spider1.returnHealth();
-                    cout << "YOU HAVE ENCOUNTERED A SPIDER OF LEVEL " << eLevel << " AND HEALTH " << eHealth << endl;
+                    enemyBattle(gamePlayer, spider1);
                 }
 
                 /* If Item/Puzzle, Announce/Pickup Item */
                 if(interactionStatus <= 100){
                     int ElementNumber = intMap.at(futureYPosition).at(currentXPosition);
-                    cout << "YOU HAVE ENCOUNTERED ITEM " << ElementNumber << endl;
+                    cout << "You Have Found: " << itemsList.at(ElementNumber - 1) << endl;
+                    gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
                 }
 
                 // After Interaction is Completed Mark the Player Position
@@ -296,7 +315,7 @@ void movePlayer(string direction, vector< vector<int> >& intMap, vector< vector<
 
     }
 
-    if(direction == "SOUTH"){
+    else if(direction == "SOUTH"){
 
         int futureYPosition = playerPosition.at(1) + 1;
 
@@ -319,15 +338,14 @@ void movePlayer(string direction, vector< vector<int> >& intMap, vector< vector<
                 /* If Enemy, Start Battle */
                 if(interactionStatus == 666){
                     Spider spider1;
-                    int eLevel = spider1.returnLevel();
-                    int eHealth = spider1.returnHealth();
-                    cout << "YOU HAVE ENCOUNTERED A SPIDER OF LEVEL " << eLevel << " AND HEALTH " << eHealth << endl;
+                    enemyBattle(gamePlayer, spider1);
                 }
 
                 /* If Item/Puzzle, Announce/Pickup Item */
                 if(interactionStatus <= 100){
                     int ElementNumber = intMap.at(futureYPosition).at(currentXPosition);
-                    cout << "YOU HAVE ENCOUNTERED ITEM " << ElementNumber << endl;
+                    cout << "You Have Found: " << itemsList.at(ElementNumber - 1) << endl;
+                    gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
                 }
 
                 // After Interaction is Completed Mark the Player Position
@@ -351,7 +369,7 @@ void movePlayer(string direction, vector< vector<int> >& intMap, vector< vector<
 
     }
 
-    if(direction == "WEST"){
+    else if(direction == "WEST"){
 
         int futureXPosition = playerPosition.at(0) - 1;
 
@@ -374,15 +392,14 @@ void movePlayer(string direction, vector< vector<int> >& intMap, vector< vector<
                 /* If Enemy, Start Battle */
                 if(interactionStatus == 666){
                     Spider spider1;
-                    int eLevel = spider1.returnLevel();
-                    int eHealth = spider1.returnHealth();
-                    cout << "YOU HAVE ENCOUNTERED A SPIDER OF LEVEL " << eLevel << " AND HEALTH " << eHealth << endl;
+                    enemyBattle(gamePlayer, spider1);
                 }
 
                 /* If Item/Puzzle, Announce/Pickup Item */
                 if(interactionStatus <= 100){
                     int ElementNumber = intMap.at(currentYPosition).at(futureXPosition);
-                    cout << "YOU HAVE ENCOUNTERED ITEM " << ElementNumber << endl;
+                    cout << "You Have Found: " << itemsList.at(ElementNumber - 1) << endl;
+                    gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
                 }
 
                 // After Interaction is Completed Mark the Player Position
@@ -406,7 +423,7 @@ void movePlayer(string direction, vector< vector<int> >& intMap, vector< vector<
 
     }
 
-    if(direction == "EAST"){
+    else if(direction == "EAST"){
 
         int futureXPosition = playerPosition.at(0) + 1;
 
@@ -429,15 +446,14 @@ void movePlayer(string direction, vector< vector<int> >& intMap, vector< vector<
                 /* If Enemy, Start Battle */
                 if(interactionStatus == 666){
                     Spider spider1;
-                    int eLevel = spider1.returnLevel();
-                    int eHealth = spider1.returnHealth();
-                    cout << "YOU HAVE ENCOUNTERED A SPIDER OF LEVEL " << eLevel << " AND HEALTH " << eHealth << endl;
+                    enemyBattle(gamePlayer, spider1);
                 }
 
                 /* If Item/Puzzle, Announce/Pickup Item */
                 if(interactionStatus <= 100){
                     int ElementNumber = intMap.at(currentYPosition).at(futureXPosition);
-                    cout << "YOU HAVE ENCOUNTERED ITEM " << ElementNumber << endl;
+                    cout << "You Have Found: " << itemsList.at(ElementNumber - 1) << endl;
+                    gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
                 }
 
                 // After Interaction is Completed Mark the Player Position
@@ -460,5 +476,136 @@ void movePlayer(string direction, vector< vector<int> >& intMap, vector< vector<
         }
 
     }
+
+    else{
+
+        cout << "UNKNOWN DIRECTION \'" << direction << "\' " << endl;
+
+    }
+
+}
+
+void enemyBattle(Player& mainPlayer, Spider& enemySpider){
+
+    int eLevel = enemySpider.returnLevel();
+    string playerName = mainPlayer.getName();
+    bool fleeFailure = true;
+    vector<string> inventory = mainPlayer.returnInventory();
+
+    cout << "You Have Encountered a Level " << eLevel << " Spider! Get Ready to Battle!" << endl;
+    cout << endl;
+
+    while((enemySpider.returnHealth() > 0 || mainPlayer.returnHealth() > 0) && fleeFailure){
+
+        string userChoice;
+        string userWeaponChoice;
+
+        cout << "Player: " << playerName << endl;
+        cout << "Health: " << mainPlayer.returnHealth() << endl;
+        cout << "Inventory: " << printInventory(mainPlayer) << endl;
+        cout << endl;
+        cout << "Spider Level: " << enemySpider.returnLevel() << endl;
+        cout << "Spider Health: " << enemySpider.returnHealth() << endl;
+        cout << endl;
+        cout << endl;
+
+        cout << "Fight or Flee: ";
+        cin >> userChoice;
+        stringToUpper(userChoice);
+        clearScreen();
+
+        if(userChoice == "FIGHT"){
+
+            cout << "What Would You like to Use: ";
+            cin >> userWeaponChoice;
+            stringToUpper(userWeaponChoice);
+
+            // If the Weapon is in the Inventory or If the Item is a Fist
+            if(find(inventory.begin(), inventory.end(), userWeaponChoice) != inventory.end() || userWeaponChoice == "FIST"){
+
+                // If Attacked With a Fist Deal 5pts Damage
+                if(userWeaponChoice == "FIST"){
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 5pts in Damage!" << endl;
+                    enemySpider.dealDamage(5);
+
+                    cout << endl;
+
+                    // Spider Attack Turn
+                    int sAttackStrength = enemySpider.attack();
+                    cout << "Spider Attacks!" << endl;
+                    cout << "Spider Deals " << sAttackStrength << "pts in Damage!";
+                    mainPlayer.takeDamage(sAttackStrength);
+
+                }
+
+            }
+
+            else{
+
+                cout << "You Do Not Have That Item!" << endl;
+
+            }
+
+        }
+
+        // If the User Chooses to Flee, Calculate if Flee was Successful
+        else if(userChoice == "FLEE"){
+
+            // Random Seed
+            srand (time(NULL));
+
+            // Generate Random Level Between 1 and 10
+            int escapeChance = 1 + (rand() % (int)(10 - 1 + 1));
+
+            if(escapeChance >= eLevel){
+                cout << "You Managed to Escape Successfully!" << endl;
+                fleeFailure = false;
+            }
+
+            else{
+                cout << "You Try to Run, but the Spider Cuts You Off!" << endl;
+
+                if(escapeChance > 5){
+                    cout << "The Spider Chooses to Attack!" << endl;
+                    int sAttackStrength = enemySpider.attack();
+                    cout << "Spider Attacks!" << endl;
+                    cout << "Spider Deals " << sAttackStrength << "pts in Damage!";
+                    mainPlayer.takeDamage(sAttackStrength);
+                }
+
+                fleeFailure = true;
+            }
+
+        }
+
+        else{
+            cout << "Sorry, That's Not an Option!" << endl;
+        }
+
+    }
+}
+
+string printInventory(Player player){
+
+    vector<string> inventory = player.returnInventory();
+
+    string inventoryList = "";
+
+    if(inventory.size() == 0){
+        return "EMPTY";
+    }
+
+    else {
+
+        for (int i = 0; i < inventory.size(); i++) {
+
+            inventoryList += inventory.at(i) + ", ";
+
+        }
+
+    }
+
+    return inventoryList;
 
 }

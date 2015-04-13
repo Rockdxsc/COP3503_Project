@@ -7,7 +7,9 @@ using namespace std;
 
 int main() {
 
+    string userAction;
     string userDirection;
+    Player mainPlayer;
 
     vector<string> itemsList;
     itemsList.push_back("Item1");
@@ -17,19 +19,29 @@ int main() {
     itemsList.push_back("Item5");
     itemsList.push_back("Item6");
 
-    vector< vector<int> > integerMap = generateIntMap(itemsList, 10);
+    vector< vector<int> > integerMap = generateIntMap(itemsList, 20);
     vector< vector<string> > playerMap = generatePlayerMap(integerMap);
 
-    while (userDirection != "EXIT") {
+    while (userAction != "EXIT") {
 
-        printIntMap(integerMap);
         printPlayerMap(playerMap);
-        cout << "WHAT DIRECTION SHALL I MOVE: ";
-        cin >> userDirection;
-        stringToUpper(userDirection);
+        cout << "What Would You Like to Do: ";
+        cin >> userAction;
+        stringToUpper(userAction);
 
-        if(userDirection != "EXIT") {
-            movePlayer(userDirection, integerMap, playerMap);
+        if(userAction == "MOVE") {
+
+            cout << "What Direction Do You Wish to Move In: ";
+            cin >> userDirection;
+            stringToUpper(userDirection);
+            movePlayer(mainPlayer, userDirection, integerMap, playerMap, itemsList);
+
+        }
+
+        else{
+
+            cout << "Unknown Action \'" << userAction << "\'" << endl;
+
         }
 
     }

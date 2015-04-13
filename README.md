@@ -14,7 +14,7 @@ A text based puzzle adventure game that dynamically generates worlds with items/
 #### CODE OVERVIEW
 ~ To Be Filled In
 
-#### Checklist
+#### CHECKLIST
 - [ ] Develop Game/Puzzle Storyboard <b> **URGENT! </b>
 - [X] Create Dynamic Map Engine
 - [X] Create Player/Enemy Classes
@@ -26,3 +26,11 @@ A text based puzzle adventure game that dynamically generates worlds with items/
 - [ ] Implement Multiple Levels?
 - [ ] Testing
 - [ ] Deployment
+
+#### WHAT NEEDS TO BE DONE
+- <b>Develop Game/Puzzle Storyboard</b>
+  - Need someone to develop a storyline for the game, and how puzzles will work in the game. Basically need all the details as to how the gameplay will operate.
+- <b>Implement Puzzle Games</b>
+  - Need someone to actually implement the puzzle games that were outlined in the storyboard
+- <b>Develop Help Dialogues</b>
+  - In the current stage of user interactions, someone needs to create an output for the 'HELP'

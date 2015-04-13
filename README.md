@@ -21,10 +21,10 @@ A text based puzzle adventure game that dynamically generates worlds with items/
 - [X] Develop Movement Mechanics
 - [X] Develop Battle Sequences
 - [ ] Implement Puzzle Games
-- [ ] Develop Player Interactions <b> **IN PROGRESS </b>
+- [X] Develop Player Interactions
 - [ ] Develop Help Dialogues For User Actions
 - [ ] Implement Multiple Levels?
-- [ ] Save/Load Implementation
+- [X] Save/Load Implementation
 - [ ] Testing
 - [ ] Deployment
 

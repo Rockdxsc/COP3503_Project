@@ -9,16 +9,18 @@ int main() {
 
     string userAction;
     string userDirection;
+    string userUse;
+    string userCheck;
     Player mainPlayer;
 
     // Initialize the Items that are Available in the Level
     vector<string> itemsList;
-    itemsList.push_back("Item1");
-    itemsList.push_back("Item2");
-    itemsList.push_back("Item3");
-    itemsList.push_back("Item4");
-    itemsList.push_back("Item5");
-    itemsList.push_back("Item6");
+    itemsList.push_back("SWORD");
+    itemsList.push_back("HEALING SODA");
+    itemsList.push_back("HEALING SODA");
+    itemsList.push_back("KEY");
+    itemsList.push_back("MAP");
+    itemsList.push_back("HEALING SODA");
 
     // Generate an int Map Based on the Items in 'itemsList' and Create 40 Enemies
     vector< vector<int> > integerMap = generateIntMap(itemsList, 40);
@@ -29,6 +31,9 @@ int main() {
     // Game/Level Loop
     while (userAction != "EXIT") {
 
+        cout << endl;
+        printIntMap(integerMap);
+        printInventory(mainPlayer);
         printPlayerMap(playerMap);
         cout << "What Would You Like to Do: ";
         cin >> userAction;
@@ -38,8 +43,28 @@ int main() {
 
             cout << "What Direction Do You Wish to Move In: ";
             cin >> userDirection;
+            clearScreen();
             stringToUpper(userDirection);
             movePlayer(mainPlayer, userDirection, integerMap, playerMap, itemsList);
+
+        }
+
+        else if(userAction == "USE"){
+
+            printInventory(mainPlayer);
+            cout << "What Would You Like to Use: ";
+            getline(cin, userUse);
+            getline(cin, userUse);
+            stringToUpper(userUse);
+            clearScreen();
+            playerUse(mainPlayer, userUse, integerMap);
+
+        }
+
+        else if(userAction == "CHECK"){
+
+            cout << "What Would You Like to Check: ";
+            cin >> userCheck;
 
         }
 

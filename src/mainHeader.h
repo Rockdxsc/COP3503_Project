@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <string>
 #include <vector>
 #include <algorithm>
 #include <stdlib.h>
@@ -10,7 +11,7 @@
 #include "enemyClass.h"
 #include "playerClass.h"
 
-#define GRID_DIMENSION 20
+#define GRID_DIMENSION 10
 #endif //_TEXTGAME_MAINHEADER_H_
 
 /* FUNCTION PROTOTYPES */
@@ -21,9 +22,11 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider);
 void stringToUpper(string &s);
 void printIntMap(vector< vector<int> > inputVector);
 void printPlayerMap(vector< vector<string> > inputVector);
+void printItemMap(vector< vector<int> > inputVector);
 void clearScreen();
 void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& intMap, vector< vector<string> >& playerMap, vector<string> itemsList);
 void enemyBattle(Player& mainPlayer, Spider& enemySpider);
+void playerUse(Player& player, string usingItem);
 string printInventory(Player player);
 
 using namespace std;
@@ -154,7 +157,7 @@ vector< vector<string> > generatePlayerMap(vector< vector<int> > intMap){
             }
 
             else{
-                converted = "I";
+                converted = ".";
             }
 
             tempArray.push_back(converted);
@@ -452,7 +455,7 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                 /* If Item/Puzzle, Announce/Pickup Item */
                 if(interactionStatus <= 100){
                     int ElementNumber = intMap.at(currentYPosition).at(futureXPosition);
-                    cout << "You Have Found: " << itemsList.at(ElementNumber - 1) << endl;
+                    cout << "You Have Found a: " << itemsList.at(ElementNumber - 1) << endl;
                     gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
                 }
 
@@ -533,10 +536,29 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
                     cout << endl;
 
                     // Spider Attack Turn
-                    int sAttackStrength = enemySpider.attack();
-                    cout << "Spider Attacks!" << endl;
-                    cout << "Spider Deals " << sAttackStrength << "pts in Damage!" << endl;
-                    mainPlayer.takeDamage(sAttackStrength);
+                    if(enemySpider.returnHealth() > 0) {
+                        int sAttackStrength = enemySpider.attack();
+                        cout << "Spider Attacks!" << endl;
+                        cout << "Spider Deals " << sAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(sAttackStrength);
+                    }
+
+                }
+
+                else if(userWeaponChoice == "SWORD"){
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 20pts in Damage!" << endl;
+                    enemySpider.dealDamage(20);
+
+                    cout << endl;
+
+                    // Spider Attack Turn if Spider Still Alive
+                    if(enemySpider.returnHealth() > 0) {
+                        int sAttackStrength = enemySpider.attack();
+                        cout << "Spider Attacks!" << endl;
+                        cout << "Spider Deals " << sAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(sAttackStrength);
+                    }
 
                 }
 
@@ -632,5 +654,108 @@ string printInventory(Player player){
     }
 
     return inventoryList;
+
+}
+
+void playerUse(Player& player, string usingItem, vector< vector<int> > intMap){
+
+    vector<string> inventory = player.returnInventory();
+
+    if(find(inventory.begin(), inventory.end(), usingItem) != inventory.end()){
+
+        if(usingItem == "HEALING SODA"){
+
+            if(player.returnHealth() < 100) {
+
+                player.removeFromInventory("HEALING SODA");
+
+                cout << "HEALING..." << endl;
+
+                int playerHealthBefore = player.returnHealth();
+                int pointstoHeal = 1 + (rand() % (int) (30 - 1 + 1));
+                player.healDamage(pointstoHeal);
+                int playerHealthAfter = player.returnHealth();
+                int playerHealthDifference = playerHealthAfter - playerHealthBefore;
+
+                if (playerHealthAfter == 100) {
+                    cout << "The Soda Has Returned You to Full Health! Quite Refreshing!" << endl;
+                }
+
+                else {
+                    cout << "The Soda Has Healed You By " << playerHealthDifference << "pts!" << endl;
+                }
+
+            }
+
+            else{
+
+                cout << "You are Already at Full Health! No Need to Waste This..." << endl;
+
+            }
+
+        }
+
+        else if(usingItem == "MAP"){
+
+            cout << "You Look at the Map..." << endl;
+            cout << endl;
+
+            printItemMap(intMap);
+
+        }
+
+        else{
+
+            cout << "Sorry, You Can't Use that Right Now..." << endl;
+
+        }
+
+    }
+
+    else{
+
+        cout << "Sorry, You Don't Seem to Have that Item..." << endl;
+
+    }
+
+}
+
+void printItemMap(vector< vector<int> > inputVector){
+
+    vector< vector<string> > masterPlayerMap;
+    vector<string> tempArray;
+
+    for(int i = 0; i < inputVector.size(); i++){
+        for(int j = 0; j < inputVector.size(); j++){
+
+            int element = inputVector.at(i).at(j);
+            string converted;
+
+            if(element == 666 || element == 0){
+                converted = ".";
+            }
+
+            else if(element == 111){
+                converted = "D";
+            }
+
+            else if(element == 999){
+                converted = "P";
+            }
+
+            else{
+                converted = "I";
+            }
+
+            tempArray.push_back(converted);
+
+        }
+
+        masterPlayerMap.push_back(tempArray);
+        tempArray.clear();
+
+    }
+
+    printPlayerMap(masterPlayerMap);
 
 }

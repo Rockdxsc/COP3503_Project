@@ -24,6 +24,7 @@ A text based puzzle adventure game that dynamically generates worlds with items/
 - [ ] Develop Player Interactions <b> **IN PROGRESS </b>
 - [ ] Develop Help Dialogues For User Actions
 - [ ] Implement Multiple Levels?
+- [ ] Save/Load Implementation
 - [ ] Testing
 - [ ] Deployment
 

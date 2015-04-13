@@ -29,12 +29,15 @@ A text based puzzle adventure game that dynamically generates worlds with items/
 
 #### WHAT NEEDS TO BE DONE
 
-- <b>Develop Game/Puzzle Storyboard</b>
+- <b><i>Develop Game/Puzzle Storyboard</i></b>
   - Need someone to develop a storyline for the game, and how puzzles will work in the game. Basically need all the details as to how the gameplay will operate.
 
-- <b>Implement Puzzle Games</b>
+- <b><i>Implement Puzzle Games</i></b>
   - Need someone to actually implement the puzzle games that were outlined in the storyboard
 
-- <b>Develop Help Dialogues</b>
+- <b><i>Develop Help Dialogues</i></b>
   - In the current stage of user interactions, someone needs to create an output for the `HELP` command in the following situations:
-    - <b> Situation 1: </b> 
+    - <b> Main Game Loop: </b> `"What Would You Like to Do: "` The `HELP` command here should give an explaination of the following inputs: `MOVE`, `USE`, and `CHECK` 
+      - `MOVE` allows the player to move either `NORTH`, `SOUTH`, `EAST`, or `WEST`
+      - `USE` allows the player to use a `HEALING SODA` or the `MAP` if they are in the inventory
+      - `CHECK` allows the player to view their `HEALTH` or the contents of their `INVENTORY`

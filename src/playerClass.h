@@ -107,16 +107,28 @@ public:
     void displayInventory(){
 
         // Display Message
-        cout << "Here is Your Inventory: " << endl;
+        cout << "Here is Your Inventory: ";
 
         // Get Inventory Size
         int inventorySize = playerInventory.size();
 
-        // Iterate Through Inventory
-        for(int counter = 0; counter < inventorySize; counter++){
+        if(inventorySize > 0) {
 
-            // Display Item
-            cout << "Item " << (counter + 1) << ": " << playerInventory.at(counter) << endl;
+            // Iterate Through Inventory
+            for (int counter = 0; counter < inventorySize; counter++) {
+
+                // Display Item
+                cout << playerInventory.at(counter) << ", ";
+
+            }
+
+            cout << endl;
+
+        }
+
+        else{
+
+            cout << "EMPTY" << endl;
 
         }
 

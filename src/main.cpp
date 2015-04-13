@@ -62,6 +62,39 @@ int main() {
 
             cout << "What Would You Like to Check: ";
             cin >> userCheck;
+            stringToUpper(userCheck);
+            clearScreen();
+
+            if(userCheck == "INVENTORY"){
+
+                mainPlayer.displayInventory();
+
+            }
+
+            else if(userCheck == "HEALTH"){
+
+                int playerHealth = mainPlayer.returnHealth();
+                cout << "Your Current Health is: " << playerHealth << "pts" << endl;
+
+            }
+
+            else{
+
+                cout << "Sorry Unrecognized Command" << endl;
+
+            }
+
+        }
+
+        else if(userAction == "EXIT"){
+
+            string userExit;
+
+            cout << "Would You Like to Save the Game? (yes/no): ";
+            cin >> userExit;
+            stringToUpper(userExit);
+
+
 
         }
 

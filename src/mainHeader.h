@@ -27,6 +27,7 @@ void clearScreen();
 void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& intMap, vector< vector<string> >& playerMap, vector<string> itemsList);
 void enemyBattle(Player& mainPlayer, Spider& enemySpider);
 void playerUse(Player& player, string usingItem, vector< vector<int> > intMap);
+void gameExit(vector< vector<int> > integerMap, Player mainPlayer);
 string printInventory(Player player);
 
 using namespace std;
@@ -849,5 +850,11 @@ void printItemMap(vector< vector<int> > inputVector){
     }
 
     printPlayerMap(masterPlayerMap);
+
+}
+
+void gameExit(vector< vector<int> > integerMap, Player mainPlayer){
+
+    
 
 }

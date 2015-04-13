@@ -49,4 +49,6 @@ A text based puzzle adventure game that dynamically generates worlds with items/
       - `FIGHT` allows the user to choose either choose his/her `FIST` (in case that no weapons have been collected yet) or a weapon from his/her inventory such as a `SWORD` to fight the enemy.
       - `FLEE` allows the user a chance to run away from the enemy, however this is not always successful, especially with stronger enemeies
       - <b> `FIGHT` Command Help: </b> This should let the player know what items/commands are viable weapons
-    
+
+- <b><i>Save/Load Implementation</i></b>
+  - Need someone to develop a function to `SAVE` or `LOAD` the game.

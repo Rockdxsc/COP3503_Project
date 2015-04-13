@@ -28,9 +28,13 @@ A text based puzzle adventure game that dynamically generates worlds with items/
 - [ ] Deployment
 
 #### WHAT NEEDS TO BE DONE
+
 - <b>Develop Game/Puzzle Storyboard</b>
   - Need someone to develop a storyline for the game, and how puzzles will work in the game. Basically need all the details as to how the gameplay will operate.
+
 - <b>Implement Puzzle Games</b>
   - Need someone to actually implement the puzzle games that were outlined in the storyboard
+
 - <b>Develop Help Dialogues</b>
-  - In the current stage of user interactions, someone needs to create an output for the 'HELP'
+  - In the current stage of user interactions, someone needs to create an output for the `HELP` command in the following situations:
+    - <b> Situation 1: </b> 

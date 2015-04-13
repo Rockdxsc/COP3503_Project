@@ -11,7 +11,10 @@ int main() {
     string userDirection;
     string userUse;
     string userCheck;
+    string userLoadCheck;
+    string userName;
     Player mainPlayer;
+    bool gameLoaded = false;
 
     // Initialize the Items that are Available in the Level
     vector<string> itemsList;
@@ -22,11 +25,50 @@ int main() {
     itemsList.push_back("MAP");
     itemsList.push_back("HEALING SODA");
 
-    // Generate an int Map Based on the Items in 'itemsList' and Create 40 Enemies
-    vector< vector<int> > integerMap = generateIntMap(itemsList, 40);
+    vector< vector<int> > integerMap;
+    vector< vector<string> > playerMap;
+
+    cout << "Would You Like to Load the Game? (yes/no): ";
+    cin >> userLoadCheck;
+    stringToUpper(userLoadCheck);
+
+    // If Load File Can Successfully be Loaded, Use it
+    if(userLoadCheck == "YES"){
+
+        if(loadGame(integerMap, mainPlayer)){
+            gameLoaded = true;
+            cout << "Successfully Loaded Save!" << endl;
+            cout << "Welcome Back " << mainPlayer.getName() << "!" << endl;
+        }
+
+        else{
+
+            loadGame(integerMap, mainPlayer);
+
+            // Generate an int Map Based on the Items in 'itemsList' and Create 40 Enemies
+            integerMap = generateIntMap(itemsList, 40);
+
+        }
+
+    }
+
+    else{
+
+        // Generate an int Map Based on the Items in 'itemsList' and Create 40 Enemies
+        integerMap = generateIntMap(itemsList, 40);
+
+    }
 
     // Generate a Player Map Based on the Generated Integer Map
-    vector< vector<string> > playerMap = generatePlayerMap(integerMap);
+    playerMap = generatePlayerMap(integerMap);
+
+    if(!gameLoaded){
+
+        cout << "What Would You Like to be Called Adventurer?: ";
+        cin >> userName;
+        mainPlayer.setName(userName);
+        cout << "Thanks " << userName << ", Let's Get Started!" << endl;
+    }
 
     // Game/Level Loop
     while (userAction != "EXIT") {
@@ -94,7 +136,9 @@ int main() {
             cin >> userExit;
             stringToUpper(userExit);
 
-
+            if(userExit == "YES"){
+                gameSave(integerMap, mainPlayer);
+            }
 
         }
 

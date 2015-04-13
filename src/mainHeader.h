@@ -8,6 +8,8 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <time.h>
+#include <fstream>
+#include <sstream>
 #include "enemyClass.h"
 #include "playerClass.h"
 
@@ -27,7 +29,9 @@ void clearScreen();
 void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& intMap, vector< vector<string> >& playerMap, vector<string> itemsList);
 void enemyBattle(Player& mainPlayer, Spider& enemySpider);
 void playerUse(Player& player, string usingItem, vector< vector<int> > intMap);
-void gameExit(vector< vector<int> > integerMap, Player mainPlayer);
+void gameSave(vector< vector<int> > integerMap, Player mainPlayer);
+bool loadGame(vector< vector<int> >& integerMap, Player& mainPlayer);
+bool checkFileExists(string file);
 string printInventory(Player player);
 
 using namespace std;
@@ -853,8 +857,214 @@ void printItemMap(vector< vector<int> > inputVector){
 
 }
 
-void gameExit(vector< vector<int> > integerMap, Player mainPlayer){
+bool checkFileExists(string file){
+    ifstream file_to_check (file.c_str());
+    if(file_to_check.is_open())
+        return true;
+    return false;
+    file_to_check.close();
+}
 
-    
+void gameSave(vector< vector<int> > integerMap, Player mainPlayer){
+
+    if (checkFileExists("saveMapData.dat")){
+
+        string saveOverwrite;
+        cout << "Are You Sure You Want to Save? This Will Overwrite the Old Save (yes/no): ";
+        cin >> saveOverwrite;
+        stringToUpper(saveOverwrite);
+
+        if(saveOverwrite == "YES" || saveOverwrite == "NO") {
+
+            if(saveOverwrite == "YES") {
+
+                remove("saveMapData.dat");
+                ofstream mapfile;
+                mapfile.open("saveMapData.dat");
+
+                // Get Vector Size
+                int inputSize = integerMap.size();
+
+                // Print Every Element of Vector
+                for (int i = 0; i < inputSize; i++) {
+                    for (int j = 0; j < inputSize; j++) {
+                        mapfile << integerMap.at(i).at(j) << "\t";
+                    }
+                    mapfile << "\n";
+                }
+
+                mapfile.close();
+
+                remove("savePlayerData.dat");
+                ofstream playerFile;
+                playerFile.close();
+                playerFile.open("savePlayerData.dat");
+
+                vector<string> inventory = mainPlayer.returnInventory();
+                int inventorySize = inventory.size();
+
+                playerFile << mainPlayer.getName() << "\n";
+                playerFile << mainPlayer.returnHealth() << "\n";
+
+                for(int i = 0; i < inventorySize; i++){
+
+                    playerFile << inventory.at(i) << "\t";
+
+                }
+
+                playerFile << "\n";
+                playerFile.close();
+
+                cout << "Game Successfully Saved!" << endl;
+
+            }
+
+            else{
+
+                cout << "Game Not Saved" << endl;
+
+            }
+
+        }
+
+        else{
+
+            cout << "Invalid Command" << endl;
+            gameSave(integerMap, mainPlayer);
+
+        }
+
+    }
+
+    else{
+
+        ofstream mapfile;
+        mapfile.open("saveMapData.dat");
+
+        // Get Vector Size
+        int inputSize = integerMap.size();
+
+        // Print Every Element of Vector
+        for(int i = 0; i < inputSize; i++){
+            for(int j = 0; j < inputSize; j++){
+                mapfile << integerMap.at(i).at(j) << "\t";
+            }
+            mapfile << "\n";
+        }
+
+        mapfile.close();
+
+        ofstream playerFile;
+        playerFile.open("savePlayerData.dat");
+
+        vector<string> inventory = mainPlayer.returnInventory();
+        int inventorySize = inventory.size();
+
+        playerFile << mainPlayer.getName() << "\n";
+        playerFile << mainPlayer.returnHealth() << "\n";
+
+        for(int i = 0; i < inventorySize; i++){
+
+            playerFile << inventory.at(i) << "\t";
+
+        }
+
+        playerFile << "\n";
+        playerFile.close();
+
+        cout << "Game Successfully Saved!" << endl;
+
+    }
 
 }
+
+bool loadGame(vector< vector<int> >& integerMap, Player& mainPlayer){
+
+    vector<string> fileMapLines;
+    vector<string> filePlayerLines;
+    bool loadSuccess = false;
+
+    if(checkFileExists("saveMapData.dat") && checkFileExists("savePlayerData.dat")){
+
+        string line;
+        ifstream myfile ("saveMapData.dat");
+
+        if (myfile.is_open()){
+            while ( getline (myfile,line) )
+            {
+                fileMapLines.push_back(line);
+            }
+
+            myfile.close();
+        }
+
+        myfile.open("savePlayerData.dat");
+
+        if (myfile.is_open()){
+            while ( getline (myfile,line) )
+            {
+                filePlayerLines.push_back(line);
+            }
+
+            myfile.close();
+        }
+
+        for(int i = 0; i < fileMapLines.size(); i++){
+
+            string mapLine = fileMapLines.at(i);
+
+            istringstream iss(mapLine);
+            string token;
+            vector<int> tempTokens;
+
+            while(std::getline(iss, token, '\t')) {  // but we can specify a different one
+                int intToken = atoi(token.c_str());
+                tempTokens.push_back(intToken);
+            }
+
+            integerMap.push_back(tempTokens);
+            tempTokens.clear();
+
+        }
+
+        string playerName = filePlayerLines.at(0);
+        int playerHealth = atoi(filePlayerLines.at(1).c_str());
+        vector<string> playerInventory;
+
+        if(!filePlayerLines.at(2).empty()) {
+
+            istringstream iss(filePlayerLines.at(2));
+            string token;
+
+            while (std::getline(iss, token, '\t')) {  // but we can specify a different one
+                mainPlayer.addToInventory(token);
+            }
+
+        }
+
+        mainPlayer.setName(playerName);
+        mainPlayer.setHealth(playerHealth);
+
+        loadSuccess = true;
+
+    }
+
+    else if(checkFileExists("saveMapData.dat") != checkFileExists("savePlayerData.dat")){
+
+        cout << "Corrupted Files, Could Not Load Data" << endl;
+        loadSuccess = false;
+
+    }
+
+    else{
+
+        cout << "No Save Data Found!" << endl;
+        loadSuccess = false;
+
+    }
+
+    return loadSuccess;
+
+}
+
+

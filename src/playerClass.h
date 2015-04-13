@@ -57,6 +57,11 @@ public:
 
     /***** PLAYER HEALTH *****/
 
+    // Set Health
+    void setHealth(int health){
+        playerHealth = health;
+    }
+
     // Deals Damage to the playerHealth
     void takeDamage(int damagePoints){
         playerHealth = playerHealth - damagePoints;

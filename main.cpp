@@ -19,11 +19,11 @@ int main() {
     itemsList.push_back("Item5");
     itemsList.push_back("Item6");
 
-    vector< vector<int> > integerMap = generateIntMap(itemsList, 20);
+    vector< vector<int> > integerMap = generateIntMap(itemsList, 40);
     vector< vector<string> > playerMap = generatePlayerMap(integerMap);
 
     while (userAction != "EXIT") {
-
+        
         printPlayerMap(playerMap);
         cout << "What Would You Like to Do: ";
         cin >> userAction;

@@ -495,11 +495,12 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
     cout << "You Have Encountered a Level " << eLevel << " Spider! Get Ready to Battle!" << endl;
     cout << endl;
 
-    while((enemySpider.returnHealth() > 0 || mainPlayer.returnHealth() > 0) && fleeFailure){
+    while((enemySpider.returnHealth() > 0 && mainPlayer.returnHealth() > 0) && fleeFailure){
 
         string userChoice;
         string userWeaponChoice;
 
+        cout << endl;
         cout << "Player: " << playerName << endl;
         cout << "Health: " << mainPlayer.returnHealth() << endl;
         cout << "Inventory: " << printInventory(mainPlayer) << endl;
@@ -512,13 +513,13 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
         cout << "Fight or Flee: ";
         cin >> userChoice;
         stringToUpper(userChoice);
-        clearScreen();
 
         if(userChoice == "FIGHT"){
 
             cout << "What Would You like to Use: ";
             cin >> userWeaponChoice;
             stringToUpper(userWeaponChoice);
+            clearScreen();
 
             // If the Weapon is in the Inventory or If the Item is a Fist
             if(find(inventory.begin(), inventory.end(), userWeaponChoice) != inventory.end() || userWeaponChoice == "FIST"){
@@ -534,7 +535,7 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
                     // Spider Attack Turn
                     int sAttackStrength = enemySpider.attack();
                     cout << "Spider Attacks!" << endl;
-                    cout << "Spider Deals " << sAttackStrength << "pts in Damage!";
+                    cout << "Spider Deals " << sAttackStrength << "pts in Damage!" << endl;
                     mainPlayer.takeDamage(sAttackStrength);
 
                 }
@@ -551,6 +552,8 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
 
         // If the User Chooses to Flee, Calculate if Flee was Successful
         else if(userChoice == "FLEE"){
+
+            clearScreen();
 
             // Random Seed
             srand (time(NULL));
@@ -570,7 +573,7 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
                     cout << "The Spider Chooses to Attack!" << endl;
                     int sAttackStrength = enemySpider.attack();
                     cout << "Spider Attacks!" << endl;
-                    cout << "Spider Deals " << sAttackStrength << "pts in Damage!";
+                    cout << "Spider Deals " << sAttackStrength << "pts in Damage!" << endl;
                     mainPlayer.takeDamage(sAttackStrength);
                 }
 
@@ -584,6 +587,28 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
         }
 
     }
+
+    if(enemySpider.returnHealth() <= 0 && mainPlayer.returnHealth() > 0){
+
+        cout << endl;
+        cout << "Enemy Spider Defeated!" << endl;
+        cout << endl;
+
+    }
+
+    else if(mainPlayer.returnHealth() > 0){
+        //Nothing Happens
+    }
+
+    else{
+
+        cout << endl;
+        cout << "You Have Been Killed in Battle. GAME OVER." << endl;
+        exit(1);
+
+    }
+
+
 }
 
 string printInventory(Player player){

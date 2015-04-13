@@ -26,7 +26,7 @@ void printItemMap(vector< vector<int> > inputVector);
 void clearScreen();
 void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& intMap, vector< vector<string> >& playerMap, vector<string> itemsList);
 void enemyBattle(Player& mainPlayer, Spider& enemySpider);
-void playerUse(Player& player, string usingItem);
+void playerUse(Player& player, string usingItem, vector< vector<int> > intMap);
 string printInventory(Player player);
 
 using namespace std;
@@ -268,43 +268,66 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
         int futureYPosition = playerPosition.at(1) - 1;
 
-        if(futureYPosition <= maxSize && futureYPosition >= 0){
+        if(futureYPosition <= maxSize && futureYPosition >= 0 ){
 
-            // Mark Old Space as Walked On
-            if(intMap.at(currentYPosition).at(currentXPosition) != 111) {
-                intMap.at(currentYPosition).at(currentXPosition) = 0;
-                playerMap.at(currentYPosition).at(currentXPosition) = "*";
-            }
+            if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
 
-            // Mark New Player Position
-            playerMap.at(futureYPosition).at(currentXPosition) = "P";
-
-            // Check for Items/Events
-            if(intMap.at(futureYPosition).at(currentXPosition) != 0){
-
-                int interactionStatus = intMap.at(futureYPosition).at(currentXPosition);
-
-                /* If Enemy, Start Battle */
-                if(interactionStatus == 666){
-                    Spider spider1;
-                    enemyBattle(gamePlayer, spider1);
+                // Mark Old Space as Walked On
+                if (intMap.at(currentYPosition).at(currentXPosition) != 111) {
+                    intMap.at(currentYPosition).at(currentXPosition) = 0;
+                    playerMap.at(currentYPosition).at(currentXPosition) = "*";
                 }
 
-                /* If Item/Puzzle, Announce/Pickup Item */
-                if(interactionStatus <= 100){
-                    int ElementNumber = intMap.at(futureYPosition).at(currentXPosition);
-                    cout << "You Have Found: " << itemsList.at(ElementNumber - 1) << endl;
-                    gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
+                // Mark New Player Position
+                playerMap.at(futureYPosition).at(currentXPosition) = "P";
+
+                // Check for Items/Events
+                if (intMap.at(futureYPosition).at(currentXPosition) != 0) {
+
+                    int interactionStatus = intMap.at(futureYPosition).at(currentXPosition);
+
+                    /* If Enemy, Start Battle */
+                    if (interactionStatus == 666) {
+                        Spider spider1;
+                        enemyBattle(gamePlayer, spider1);
+                    }
+
+                    /* If Item/Puzzle, Announce/Pickup Item */
+                    if (interactionStatus <= 100) {
+                        int ElementNumber = intMap.at(futureYPosition).at(currentXPosition);
+                        cout << "You Have Found: " << itemsList.at(ElementNumber - 1) << endl;
+                        gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
+                    }
+
+                    // After Interaction is Completed Mark the Player Position
+                    intMap.at(futureYPosition).at(currentXPosition) = 999;
+
                 }
 
-                // After Interaction is Completed Mark the Player Position
-                intMap.at(futureYPosition).at(currentXPosition) = 999;
+                else {
+
+                    intMap.at(futureYPosition).at(currentXPosition) = 999;
+
+                }
 
             }
 
-            else{
+            else if(playerMap.at(futureYPosition).at(currentXPosition) == "D"){
 
-                intMap.at(futureYPosition).at(currentXPosition) = 999;
+                vector<string> pInventory = gamePlayer.returnInventory();
+
+                if(find(pInventory.begin(), pInventory.end(), "KEY") != pInventory.end()){
+
+                    cout << "You Have Successfully Completed the Level!" << endl;
+                    exit(1);
+
+                }
+
+                else{
+
+                    cout << "The Door Won't Budge..." << endl;
+
+                }
 
             }
 
@@ -324,41 +347,64 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
         if(futureYPosition <= maxSize && futureYPosition >= 0){
 
-            // Mark Old Space as Walked On
-            if(intMap.at(currentYPosition).at(currentXPosition) != 111) {
-                intMap.at(currentYPosition).at(currentXPosition) = 0;
-                playerMap.at(currentYPosition).at(currentXPosition) = "*";
-            }
+            if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
 
-            // Mark New Player Position
-            playerMap.at(futureYPosition).at(currentXPosition) = "P";
-
-            // Check for Items/Events
-            if(intMap.at(futureYPosition).at(currentXPosition) != 0){
-
-                int interactionStatus = intMap.at(futureYPosition).at(currentXPosition);
-
-                /* If Enemy, Start Battle */
-                if(interactionStatus == 666){
-                    Spider spider1;
-                    enemyBattle(gamePlayer, spider1);
+                // Mark Old Space as Walked On
+                if (intMap.at(currentYPosition).at(currentXPosition) != 111) {
+                    intMap.at(currentYPosition).at(currentXPosition) = 0;
+                    playerMap.at(currentYPosition).at(currentXPosition) = "*";
                 }
 
-                /* If Item/Puzzle, Announce/Pickup Item */
-                if(interactionStatus <= 100){
-                    int ElementNumber = intMap.at(futureYPosition).at(currentXPosition);
-                    cout << "You Have Found: " << itemsList.at(ElementNumber - 1) << endl;
-                    gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
+                // Mark New Player Position
+                playerMap.at(futureYPosition).at(currentXPosition) = "P";
+
+                // Check for Items/Events
+                if (intMap.at(futureYPosition).at(currentXPosition) != 0) {
+
+                    int interactionStatus = intMap.at(futureYPosition).at(currentXPosition);
+
+                    /* If Enemy, Start Battle */
+                    if (interactionStatus == 666) {
+                        Spider spider1;
+                        enemyBattle(gamePlayer, spider1);
+                    }
+
+                    /* If Item/Puzzle, Announce/Pickup Item */
+                    if (interactionStatus <= 100) {
+                        int ElementNumber = intMap.at(futureYPosition).at(currentXPosition);
+                        cout << "You Have Found: " << itemsList.at(ElementNumber - 1) << endl;
+                        gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
+                    }
+
+                    // After Interaction is Completed Mark the Player Position
+                    intMap.at(futureYPosition).at(currentXPosition) = 999;
+
                 }
 
-                // After Interaction is Completed Mark the Player Position
-                intMap.at(futureYPosition).at(currentXPosition) = 999;
+                else {
+
+                    intMap.at(futureYPosition).at(currentXPosition) = 999;
+
+                }
 
             }
 
-            else{
+            else if(playerMap.at(futureYPosition).at(currentXPosition) == "D"){
 
-                intMap.at(futureYPosition).at(currentXPosition) = 999;
+                vector<string> pInventory = gamePlayer.returnInventory();
+
+                if(find(pInventory.begin(), pInventory.end(), "KEY") != pInventory.end()){
+
+                    cout << "You Have Successfully Completed the Level!" << endl;
+                    exit(1);
+
+                }
+
+                else{
+
+                    cout << "The Door Won't Budge..." << endl;
+
+                }
 
             }
 
@@ -378,41 +424,64 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
         if(futureXPosition <= maxSize && futureXPosition >= 0){
 
-            // Mark Old Space as Walked On
-            if(intMap.at(currentYPosition).at(currentXPosition) != 111) {
-                intMap.at(currentYPosition).at(currentXPosition) = 0;
-                playerMap.at(currentYPosition).at(currentXPosition) = "*";
-            }
+            if(playerMap.at(currentYPosition).at(futureXPosition) != "D") {
 
-            // Mark New Player Position
-            playerMap.at(currentYPosition).at(futureXPosition) = "P";
-
-            // Check for Items/Events
-            if(intMap.at(currentYPosition).at(futureXPosition) != 0){
-
-                int interactionStatus = intMap.at(currentYPosition).at(futureXPosition);
-
-                /* If Enemy, Start Battle */
-                if(interactionStatus == 666){
-                    Spider spider1;
-                    enemyBattle(gamePlayer, spider1);
+                // Mark Old Space as Walked On
+                if (intMap.at(currentYPosition).at(currentXPosition) != 111) {
+                    intMap.at(currentYPosition).at(currentXPosition) = 0;
+                    playerMap.at(currentYPosition).at(currentXPosition) = "*";
                 }
 
-                /* If Item/Puzzle, Announce/Pickup Item */
-                if(interactionStatus <= 100){
-                    int ElementNumber = intMap.at(currentYPosition).at(futureXPosition);
-                    cout << "You Have Found: " << itemsList.at(ElementNumber - 1) << endl;
-                    gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
+                // Mark New Player Position
+                playerMap.at(currentYPosition).at(futureXPosition) = "P";
+
+                // Check for Items/Events
+                if (intMap.at(currentYPosition).at(futureXPosition) != 0) {
+
+                    int interactionStatus = intMap.at(currentYPosition).at(futureXPosition);
+
+                    /* If Enemy, Start Battle */
+                    if (interactionStatus == 666) {
+                        Spider spider1;
+                        enemyBattle(gamePlayer, spider1);
+                    }
+
+                    /* If Item/Puzzle, Announce/Pickup Item */
+                    if (interactionStatus <= 100) {
+                        int ElementNumber = intMap.at(currentYPosition).at(futureXPosition);
+                        cout << "You Have Found: " << itemsList.at(ElementNumber - 1) << endl;
+                        gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
+                    }
+
+                    // After Interaction is Completed Mark the Player Position
+                    intMap.at(currentYPosition).at(futureXPosition) = 999;
+
                 }
 
-                // After Interaction is Completed Mark the Player Position
-                intMap.at(currentYPosition).at(futureXPosition) = 999;
+                else {
+
+                    intMap.at(currentYPosition).at(futureXPosition) = 999;
+
+                }
 
             }
 
-            else{
+            else if(playerMap.at(currentYPosition).at(futureXPosition) == "D"){
 
-                intMap.at(currentYPosition).at(futureXPosition) = 999;
+                vector<string> pInventory = gamePlayer.returnInventory();
+
+                if(find(pInventory.begin(), pInventory.end(), "KEY") != pInventory.end()){
+
+                    cout << "You Have Successfully Completed the Level!" << endl;
+                    exit(1);
+
+                }
+
+                else{
+
+                    cout << "The Door Won't Budge..." << endl;
+
+                }
 
             }
 
@@ -432,41 +501,64 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
         if(futureXPosition <= maxSize && futureXPosition >= 0){
 
-            // Mark Old Space as Walked On
-            if(intMap.at(currentYPosition).at(currentXPosition) != 111) {
-                intMap.at(currentYPosition).at(currentXPosition) = 0;
-                playerMap.at(currentYPosition).at(currentXPosition) = "*";
-            }
+            if(playerMap.at(currentYPosition).at(futureXPosition) != "D") {
 
-            // Mark New Player Position
-            playerMap.at(currentYPosition).at(futureXPosition) = "P";
-
-            // Check for Items/Events
-            if(intMap.at(currentYPosition).at(futureXPosition) != 0){
-
-                int interactionStatus = intMap.at(currentYPosition).at(futureXPosition);
-
-                /* If Enemy, Start Battle */
-                if(interactionStatus == 666){
-                    Spider spider1;
-                    enemyBattle(gamePlayer, spider1);
+                // Mark Old Space as Walked On
+                if (intMap.at(currentYPosition).at(currentXPosition) != 111) {
+                    intMap.at(currentYPosition).at(currentXPosition) = 0;
+                    playerMap.at(currentYPosition).at(currentXPosition) = "*";
                 }
 
-                /* If Item/Puzzle, Announce/Pickup Item */
-                if(interactionStatus <= 100){
-                    int ElementNumber = intMap.at(currentYPosition).at(futureXPosition);
-                    cout << "You Have Found a: " << itemsList.at(ElementNumber - 1) << endl;
-                    gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
+                // Mark New Player Position
+                playerMap.at(currentYPosition).at(futureXPosition) = "P";
+
+                // Check for Items/Events
+                if (intMap.at(currentYPosition).at(futureXPosition) != 0) {
+
+                    int interactionStatus = intMap.at(currentYPosition).at(futureXPosition);
+
+                    /* If Enemy, Start Battle */
+                    if (interactionStatus == 666) {
+                        Spider spider1;
+                        enemyBattle(gamePlayer, spider1);
+                    }
+
+                    /* If Item/Puzzle, Announce/Pickup Item */
+                    if (interactionStatus <= 100) {
+                        int ElementNumber = intMap.at(currentYPosition).at(futureXPosition);
+                        cout << "You Have Found a: " << itemsList.at(ElementNumber - 1) << endl;
+                        gamePlayer.addToInventory(itemsList.at(ElementNumber - 1));
+                    }
+
+                    // After Interaction is Completed Mark the Player Position
+                    intMap.at(currentYPosition).at(futureXPosition) = 999;
+
                 }
 
-                // After Interaction is Completed Mark the Player Position
-                intMap.at(currentYPosition).at(futureXPosition) = 999;
+                else {
+
+                    intMap.at(currentYPosition).at(futureXPosition) = 999;
+
+                }
 
             }
 
-            else{
+            else if(playerMap.at(currentYPosition).at(futureXPosition) == "D"){
 
-                intMap.at(currentYPosition).at(futureXPosition) = 999;
+                vector<string> pInventory = gamePlayer.returnInventory();
+
+                if(find(pInventory.begin(), pInventory.end(), "KEY") != pInventory.end()){
+
+                    cout << "You Have Successfully Completed the Level!" << endl;
+                    exit(1);
+
+                }
+
+                else{
+
+                    cout << "The Door Won't Budge..." << endl;
+
+                }
 
             }
 

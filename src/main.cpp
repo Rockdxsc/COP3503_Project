@@ -32,7 +32,6 @@ int main() {
     while (userAction != "EXIT") {
 
         cout << endl;
-        printIntMap(integerMap);
         printInventory(mainPlayer);
         printPlayerMap(playerMap);
         cout << "What Would You Like to Do: ";
@@ -43,7 +42,6 @@ int main() {
 
             cout << "What Direction Do You Wish to Move In: ";
             cin >> userDirection;
-            clearScreen();
             stringToUpper(userDirection);
             movePlayer(mainPlayer, userDirection, integerMap, playerMap, itemsList);
 
@@ -56,7 +54,6 @@ int main() {
             getline(cin, userUse);
             getline(cin, userUse);
             stringToUpper(userUse);
-            clearScreen();
             playerUse(mainPlayer, userUse, integerMap);
 
         }

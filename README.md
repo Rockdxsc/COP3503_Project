@@ -41,6 +41,7 @@ vector< vector<string> > playerMap = generatePlayerMap(integerMap);
 
 #### CHECKLIST
 - [ ] Develop Game/Puzzle Storyboard <b> **URGENT! </b>
+- [ ] Develop Introduction Output
 - [X] Create Dynamic Map Engine
 - [X] Create Player/Enemy Classes
 - [X] Develop Movement Mechanics
@@ -57,5 +58,8 @@ vector< vector<string> > playerMap = generatePlayerMap(integerMap);
 - <b><i>Develop Game/Puzzle Storyboard</i></b>
   - Need someone to develop a storyline for the game, and how puzzles will work in the game. Basically need all the details as to how the gameplay will operate.
 
+- <b><i>Develop Introduction Output</i></b>
+  - Need someone to create an introduction to the game using `cout`.
+
 - <b><i>Implement Puzzle Games</i></b>
-  - Need someone to actually implement the puzzle games that were outlined in the storyboard
+  - Need someone to actually implement the puzzle games that were outlined in the storyboard.

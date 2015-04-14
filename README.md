@@ -12,7 +12,32 @@ A text based puzzle adventure game that dynamically generates worlds with items/
 - <b>Kevin Wong:</b> @KWong1996
 
 #### CODE OVERVIEW
-~ To Be Filled In
+
+Initializing a list of items that will be randomly placed into the game:
+
+```
+// Initialize the Items that are Available in the Level
+vector<string> itemsList;
+itemsList.push_back("SWORD");
+itemsList.push_back("HEALING SODA");
+itemsList.push_back("HEALING SODA");
+itemsList.push_back("KEY");
+itemsList.push_back("MAP");
+itemsList.push_back("HEALING SODA");
+```
+
+Generate a random map that incorporates the items that you listed as well as the number of enemies that you specify:
+
+```
+// Generate an int Map Based on the Items in 'itemsList' and Create 40 Enemies
+vector< vector<int> > integerMap = generateIntMap(itemsList, 40);
+``` 
+
+Finally, generate the map that the player sees, by passing in the created integerMap
+
+```
+vector< vector<string> > playerMap = generatePlayerMap(integerMap);
+```
 
 #### CHECKLIST
 - [ ] Develop Game/Puzzle Storyboard <b> **URGENT! </b>
@@ -23,7 +48,6 @@ A text based puzzle adventure game that dynamically generates worlds with items/
 - [ ] Implement Puzzle Games
 - [X] Develop Player Interactions
 - [X] Develop Help Dialogues For User Actions
-- [ ] Implement Multiple Levels?
 - [X] Save/Load Implementation
 - [ ] Testing
 - [ ] Deployment

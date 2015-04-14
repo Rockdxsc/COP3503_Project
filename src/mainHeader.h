@@ -323,7 +323,9 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
                 if(find(pInventory.begin(), pInventory.end(), "KEY") != pInventory.end()){
 
-                    cout << "You Have Successfully Completed the Level!" << endl;
+                    cout << "You Have Successfully Completed the Game!" << endl;
+                    remove("saveMapData.dat");
+                    remove("savePlayerData.dat");
                     exit(1);
 
                 }
@@ -400,7 +402,9 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
                 if(find(pInventory.begin(), pInventory.end(), "KEY") != pInventory.end()){
 
-                    cout << "You Have Successfully Completed the Level!" << endl;
+                    cout << "You Have Successfully Completed the Game!" << endl;
+                    remove("saveMapData.dat");
+                    remove("savePlayerData.dat");
                     exit(1);
 
                 }
@@ -477,7 +481,9 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
                 if(find(pInventory.begin(), pInventory.end(), "KEY") != pInventory.end()){
 
-                    cout << "You Have Successfully Completed the Level!" << endl;
+                    cout << "You Have Successfully Completed the Game!" << endl;
+                    remove("saveMapData.dat");
+                    remove("savePlayerData.dat");
                     exit(1);
 
                 }
@@ -554,7 +560,9 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
                 if(find(pInventory.begin(), pInventory.end(), "KEY") != pInventory.end()){
 
-                    cout << "You Have Successfully Completed the Level!" << endl;
+                    cout << "You Have Successfully Completed the Game!" << endl;
+                    remove("saveMapData.dat");
+                    remove("savePlayerData.dat");
                     exit(1);
 
                 }
@@ -574,6 +582,17 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
             cout << "Cannot Move Further East!" << endl;
 
         }
+
+    }
+
+    else if(direction == "HELP"){
+
+        cout << endl;
+        cout << "Type \'NORTH\' to Move Your Character North" << endl;
+        cout << "Type \'SOUTH\' to Move Your Character South" << endl;
+        cout << "Type \'EAST\' to Move Your Character East" << endl;
+        cout << "Type \'WEST\' to Move Your Character West" << endl;
+        cout << endl;
 
     }
 
@@ -659,6 +678,21 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
 
                 }
 
+                else{
+
+                    cout << "Sorry, That Item Cannot Be Used Here!" << endl;
+
+                }
+
+            }
+
+            else if(userWeaponChoice == "HELP"){
+
+                clearScreen();
+
+                cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
+                cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
+                cout << endl;
             }
 
             else{
@@ -701,7 +735,17 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
 
         }
 
+        else if(userChoice == "HELP"){
+
+            clearScreen();
+
+            cout << "Type \'FIGHT\' to Engage the Enemy" << endl;
+            cout << "Type \'FLEE\' to Attempt to Run Away From the Enemy" << endl;
+            cout << endl;
+        }
+
         else{
+            clearScreen();
             cout << "Sorry, That's Not an Option!" << endl;
         }
 
@@ -807,6 +851,13 @@ void playerUse(Player& player, string usingItem, vector< vector<int> > intMap){
 
         }
 
+    }
+
+    else if(usingItem == "HELP"){
+        cout << endl;
+        cout << "Type \'HEALING SODA\' if You Have Some in Your Inventory to Use a Soda to Heal Some of Your Damage" << endl;
+        cout << "Type \'MAP\' if You Have One in Your Inventory to View Where Items are on the Map" << endl;
+        cout << endl;
     }
 
     else{
@@ -1066,5 +1117,3 @@ bool loadGame(vector< vector<int> >& integerMap, Player& mainPlayer){
     return loadSuccess;
 
 }
-
-

@@ -52,7 +52,19 @@ int main() {
 
     }
 
+    else if(userLoadCheck == "NO"){
+
+        cout << "Generating New Map" << endl;
+
+        // Generate an int Map Based on the Items in 'itemsList' and Create 40 Enemies
+        integerMap = generateIntMap(itemsList, 40);
+
+    }
+
     else{
+
+        cout << "Sorry, that isn't an Option" << endl;
+        cout << "Generating New Map Instead..." << endl;
 
         // Generate an int Map Based on the Items in 'itemsList' and Create 40 Enemies
         integerMap = generateIntMap(itemsList, 40);
@@ -85,6 +97,7 @@ int main() {
             cout << "What Direction Do You Wish to Move In: ";
             cin >> userDirection;
             stringToUpper(userDirection);
+            clearScreen();
             movePlayer(mainPlayer, userDirection, integerMap, playerMap, itemsList);
 
         }
@@ -96,6 +109,9 @@ int main() {
             getline(cin, userUse);
             getline(cin, userUse);
             stringToUpper(userUse);
+
+            clearScreen();
+
             playerUse(mainPlayer, userUse, integerMap);
 
         }
@@ -105,6 +121,7 @@ int main() {
             cout << "What Would You Like to Check: ";
             cin >> userCheck;
             stringToUpper(userCheck);
+
             clearScreen();
 
             if(userCheck == "INVENTORY"){
@@ -118,6 +135,13 @@ int main() {
                 int playerHealth = mainPlayer.returnHealth();
                 cout << "Your Current Health is: " << playerHealth << "pts" << endl;
 
+            }
+
+            else if(userCheck == "HELP"){
+                cout << endl;
+                cout << "Type \'INVENTORY\' to View Your Inventory" << endl;
+                cout << "Type \'HEALTH\' to View Your Current Health" << endl;
+                cout << endl;
             }
 
             else{
@@ -140,11 +164,30 @@ int main() {
                 gameSave(integerMap, mainPlayer);
             }
 
+            else{
+
+                cout << "Game Not Saved" << endl;
+
+            }
+
+        }
+
+        else if(userAction == "HELP"){
+
+            clearScreen();
+
+            cout << "Type \'MOVE\' to Move Your Character Across the Map" << endl;
+            cout << "Type \'USE\' to Use Healing Sodas or View the Item Map if they are in Your Inventory" << endl;
+            cout << "Type \'CHECK\' to be Given the Option to Check Properties Like Your Inventory and Health" << endl;
+            cout << "Type \'EXIT\' to Quit the Game and be Given the Option to Save Your Progress" << endl;
+            cout << endl;
+
         }
 
         else{
 
             cout << "Unknown Action \'" << userAction << "\'" << endl;
+            cout << "Please use the \'HELP\' Command for a List of Actions" << endl;
 
         }
 

@@ -13,6 +13,12 @@ A text based puzzle adventure game that dynamically generates worlds with items/
 
 #### CODE OVERVIEW
 
+Initialize a player with the command:
+
+```c++
+Player mainPlayer
+```
+
 Initializing a list of items that will be randomly placed into the game:
 
 ```c++
@@ -39,7 +45,38 @@ Finally, generate the map that the player sees, by passing in the created intege
 vector< vector<string> > playerMap = generatePlayerMap(integerMap);
 ```
 
+Movement across the map is done through issuing after querying (string) the user's intended direction:
 
+```c++
+movePlayer(mainPlayer, userDirection, integerMap, playerMap, itemsList);
+```
+
+Saving the game is done by invoking the command:
+
+```c++
+gameSave(integerMap, mainPlayer);
+```
+
+Loading is done by passing through empty integerMap and player vectors. The player map can then be generated off of this integerMap
+
+```c++
+// Initializing player, integerMap, and playerMap
+Player mainPlayer;
+vector< vector<int> > integerMap;
+vector< vector<string> > playerMap;
+
+// Passing in to the loadGame() function
+loadGame(integerMap, mainPlayer)
+
+// Generating playerMap from the loaded integerMap
+playerMap = generatePlayerMap(integerMap);
+```
+
+To print the playerMap for the player, simply invoke:
+
+```c++
+printPlayerMap(playerMap);
+```
 
 #### CHECKLIST
 - [ ] Develop Game/Puzzle Storyboard <b> **URGENT! </b>

@@ -86,7 +86,6 @@ int main() {
     while (userAction != "EXIT") {
 
         cout << endl;
-        printInventory(mainPlayer);
         printPlayerMap(playerMap);
         cout << "What Would You Like to Do: ";
         cin >> userAction;
@@ -132,8 +131,7 @@ int main() {
 
             else if(userCheck == "HEALTH"){
 
-                int playerHealth = mainPlayer.returnHealth();
-                cout << "Your Current Health is: " << playerHealth << "pts" << endl;
+                mainPlayer.displayHealth();
 
             }
 

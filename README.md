@@ -13,13 +13,13 @@ A text based puzzle adventure game that dynamically generates worlds with items/
 
 #### CODE OVERVIEW
 
-Initialize a player with the command:
+- Initialize a player with the command:
 
 ```c++
 Player mainPlayer
 ```
 
-Initializing a list of items that will be randomly placed into the game:
+- Initializing a list of items that will be randomly placed into the game:
 
 ```c++
 // Initialize the Items that are Available in the Level
@@ -32,32 +32,32 @@ itemsList.push_back("MAP");
 itemsList.push_back("HEALING SODA");
 ```
 
-Generate a random map that incorporates the items that you listed as well as the number of enemies that you specify:
+- Generate a random map that incorporates the items that you listed as well as the number of enemies that you specify:
 
 ```c++
 // Generate an int Map Based on the Items in 'itemsList' and Create 40 Enemies
 vector< vector<int> > integerMap = generateIntMap(itemsList, 40);
 ``` 
 
-Finally, generate the map that the player sees, by passing in the created integerMap
+- Finally, generate the map that the player sees, by passing in the created integerMap
 
 ```c++
 vector< vector<string> > playerMap = generatePlayerMap(integerMap);
 ```
 
-Movement across the map is done through issuing after querying (string) the user's intended direction:
+- Movement across the map is done through issuing after querying (string) the user's intended direction:
 
 ```c++
 movePlayer(mainPlayer, userDirection, integerMap, playerMap, itemsList);
 ```
 
-Saving the game is done by invoking the command:
+- Saving the game is done by invoking the command:
 
 ```c++
 gameSave(integerMap, mainPlayer);
 ```
 
-Loading is done by passing through empty integerMap and player vectors. The player map can then be generated off of this integerMap
+- Loading is done by passing through empty integerMap and player vectors. The player map can then be generated off of this integerMap
 
 ```c++
 // Initializing player, integerMap, and playerMap
@@ -72,7 +72,7 @@ loadGame(integerMap, mainPlayer)
 playerMap = generatePlayerMap(integerMap);
 ```
 
-To print the playerMap for the player, simply invoke:
+- To print the playerMap for the player, simply invoke:
 
 ```c++
 printPlayerMap(playerMap);

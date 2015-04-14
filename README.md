@@ -15,7 +15,7 @@ A text based puzzle adventure game that dynamically generates worlds with items/
 
 Initializing a list of items that will be randomly placed into the game:
 
-```
+```c++
 // Initialize the Items that are Available in the Level
 vector<string> itemsList;
 itemsList.push_back("SWORD");
@@ -28,14 +28,14 @@ itemsList.push_back("HEALING SODA");
 
 Generate a random map that incorporates the items that you listed as well as the number of enemies that you specify:
 
-```
+```c++
 // Generate an int Map Based on the Items in 'itemsList' and Create 40 Enemies
 vector< vector<int> > integerMap = generateIntMap(itemsList, 40);
 ``` 
 
 Finally, generate the map that the player sees, by passing in the created integerMap
 
-```
+```c++
 vector< vector<string> > playerMap = generatePlayerMap(integerMap);
 ```
 

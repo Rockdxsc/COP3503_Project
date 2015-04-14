@@ -13,7 +13,7 @@
 #include "enemyClass.h"
 #include "playerClass.h"
 
-#define GRID_DIMENSION 10
+#define GRID_DIMENSION 20
 #endif //_TEXTGAME_MAINHEADER_H_
 
 /* FUNCTION PROTOTYPES */

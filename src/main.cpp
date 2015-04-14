@@ -138,7 +138,7 @@ int main() {
             }
 
             else if(userCheck == "HELP"){
-                cout << endl;
+
                 cout << "Type \'INVENTORY\' to View Your Inventory" << endl;
                 cout << "Type \'HEALTH\' to View Your Current Health" << endl;
                 cout << endl;
@@ -185,6 +185,8 @@ int main() {
         }
 
         else{
+
+            clearScreen();
 
             cout << "Unknown Action \'" << userAction << "\'" << endl;
             cout << "Please use the \'HELP\' Command for a List of Actions" << endl;

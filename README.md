@@ -91,6 +91,12 @@ printPlayerMap(playerMap);
 - [X] Save/Load Implementation
 - [ ] Testing
 - [ ] Deployment
+- [ ] Different Floors *Priority*
+- [ ] Add text based events (active and passive)
+- [ ] What to have in town 
+- [ ] Enemy variations
+- [ ] Enemy Scaling and Player Scaling
+- [ ] More items
 
 #### WHAT NEEDS TO BE DONE
 

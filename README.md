@@ -89,14 +89,14 @@ printPlayerMap(playerMap);
 - [X] Develop Player Interactions
 - [X] Develop Help Dialogues For User Actions
 - [X] Save/Load Implementation
-- [ ] Testing
-- [ ] Deployment
 - [ ] Different Floors *Priority*
 - [ ] Add text based events (active and passive)
 - [ ] What to have in town 
 - [ ] Enemy variations
 - [ ] Enemy Scaling and Player Scaling
 - [ ] More items
+- [ ] Testing
+- [ ] Deployment
 
 #### WHAT NEEDS TO BE DONE
 

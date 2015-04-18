@@ -26,16 +26,18 @@ int main() {
     itemsList.push_back("HEALING SODA");
 
     vector< vector<int> > integerMap;
+    vector< vector<int> > integerMap2;     //added another integermap for floor two
     vector< vector<string> > playerMap;
+    vector< vector<string> > playerMap2;   //added another playermap as well
 
     cout << "Would You Like to Load the Game? (yes/no): ";
     cin >> userLoadCheck;
     stringToUpper(userLoadCheck);
 
     // If Load File Can Successfully be Loaded, Use it
-    if(userLoadCheck == "YES"){
+    if(userLoadCheck == "YES" || userLoadCheck == "Y"){
 
-        if(loadGame(integerMap, mainPlayer)){
+        if(loadGame(integerMap, integerMap2, mainPlayer)){   //now also load with a second integermap for floor 2
             gameLoaded = true;
             cout << "Successfully Loaded Save!" << endl;
             cout << "Welcome Back " << mainPlayer.getName() << "!" << endl;
@@ -43,21 +45,23 @@ int main() {
 
         else{
 
-            loadGame(integerMap, mainPlayer);
+            loadGame(integerMap, integerMap2, mainPlayer);
 
             // Generate an int Map Based on the Items in 'itemsList' and Create 40 Enemies
-            integerMap = generateIntMap(itemsList, 40);
+            integerMap = generateIntMap(itemsList, 20);
+	    integerMap2 = generateIntMap(itemsList, 20);
 
         }
 
     }
 
-    else if(userLoadCheck == "NO"){
+    else if(userLoadCheck == "NO" || userLoadCheck == "N"){
 
         cout << "Generating New Map" << endl;
 
         // Generate an int Map Based on the Items in 'itemsList' and Create 40 Enemies
-        integerMap = generateIntMap(itemsList, 40);
+        integerMap = generateIntMap(itemsList, 20);
+	integerMap2 = generateIntMap2(itemsList, 20);
 
     }
 
@@ -67,12 +71,14 @@ int main() {
         cout << "Generating New Map Instead..." << endl;
 
         // Generate an int Map Based on the Items in 'itemsList' and Create 40 Enemies
-        integerMap = generateIntMap(itemsList, 40);
+        integerMap = generateIntMap(itemsList, 20);
+	integerMap2 = generateIntMap2(itemsList, 20);
 
     }
 
     // Generate a Player Map Based on the Generated Integer Map
     playerMap = generatePlayerMap(integerMap);
+    playerMap2 = generatePlayerMap(integerMap2);          //second playermap created from the 2nd integermap created
 
     if(!gameLoaded){
 
@@ -86,7 +92,12 @@ int main() {
     while (userAction != "EXIT") {
 
         cout << endl;
-        printPlayerMap(playerMap);
+	if(mapCheck() == 1){    //added mapCheck to see which floor the player was on
+	        printPlayerMap(playerMap);
+	}
+	else{
+		printPlayerMap(playerMap2);
+	}
         cout << "What Would You Like to Do: ";
         cin >> userAction;
         stringToUpper(userAction);
@@ -97,7 +108,12 @@ int main() {
             cin >> userDirection;
             stringToUpper(userDirection);
             clearScreen();
-            movePlayer(mainPlayer, userDirection, integerMap, playerMap, itemsList);
+		if(mapCheck() == 1){     //again, checks which floor the player is on before performing the move action
+           		 movePlayer(mainPlayer, userDirection, integerMap, playerMap, itemsList);
+		}
+		else{
+			movePlayer(mainPlayer, userDirection, integerMap2, playerMap2, itemsList);
+		}
 
         }
 
@@ -110,9 +126,12 @@ int main() {
             stringToUpper(userUse);
 
             clearScreen();
-
-            playerUse(mainPlayer, userUse, integerMap);
-
+		if(mapCheck() == 1){
+	            playerUse(mainPlayer, userUse, integerMap);
+		}
+		else{
+			playerUse(mainPlayer, userUse, integerMap2);
+		}
         }
 
         else if(userAction == "CHECK"){
@@ -159,7 +178,12 @@ int main() {
             stringToUpper(userExit);
 
             if(userExit == "YES"){
-                gameSave(integerMap, mainPlayer);
+		if(mapCheck() == 1){
+	                gameSave(integerMap, integerMap2, mainPlayer);
+		}
+		else{
+			gameSave(integerMap, integerMap2, mainPlayer);
+		}
             }
 
             else{

@@ -17,6 +17,7 @@ private:
     string playerName;                  // Player Name
     int playerHealth;                   // Player Health
     vector<string> playerInventory;     // Stores Elements in the Player's Inventory
+    int currentFloor;                       //added a field for current floor
 
 public:
 
@@ -84,6 +85,14 @@ public:
     // Returns Player Health
     int returnHealth(){
         return playerHealth;
+    }
+
+    void setCurrentFloor(int x){    //sets the current floor
+	currentFloor = x;
+    }
+
+    int getCurrentFloor(){       //returns the current floor
+	return currentFloor;
     }
 
     // Displays Current Health

@@ -13,7 +13,8 @@
 #include "enemyClass.h"
 #include "playerClass.h"
 
-#define GRID_DIMENSION 20
+#define GRID_DIMENSION 10
+#define GRID_DIMENSION2 9               //added a seond grid dimension for floor 2
 #endif //_TEXTGAME_MAINHEADER_H_
 
 /* FUNCTION PROTOTYPES */
@@ -33,6 +34,7 @@ void gameSave(vector< vector<int> > integerMap, Player mainPlayer);
 bool loadGame(vector< vector<int> >& integerMap, Player& mainPlayer);
 bool checkFileExists(string file);
 string printInventory(Player player);
+int floor = 1;                   //added floor int to keep track of floor placement
 
 using namespace std;
 
@@ -72,6 +74,10 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
     // Add Player (999) to Map
     int playerLocation = (int)(GRID_DIMENSION/2);
     mapOverlay[playerLocation][(GRID_DIMENSION - 1)] = 999;
+
+    //added "X" far a test floor change location
+    int XLocation  = (int)(GRID_DIMENSION/2);
+    mapOverlay[0][XLocation] = 888;
 
     // While There are Still Items in 'itemIntList'
     while(itemIntList.size() > 0){
@@ -137,6 +143,116 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
 
 }
 
+
+
+
+
+// Generate second Integer Level Map
+vector< vector<int> > generateIntMap2(vector<string> itemsList, int numEnemies){
+
+    // Random Seed
+    srand (time(NULL));
+
+    // Numeric Item Vector
+    vector<int> itemIntList;
+    vector< vector<int> > masterVector;
+
+    // Error Checking
+    if(itemsList.size() + numEnemies > (GRID_DIMENSION2 * GRID_DIMENSION2)){
+
+        cout << "Too Many Items on Map!" << endl;
+        exit(1);
+
+    }
+
+    // Iterate Through List and Assign a Number to Each Item
+    for(int counter = 1; (counter - 1) < itemsList.size(); counter++){
+
+        // Append the Item Number to the 'itemIntList' Vector
+        itemIntList.push_back(counter);
+
+    }
+
+    // Initialize 2D int Matrix to Map Items
+    int mapOverlay[GRID_DIMENSION2][GRID_DIMENSION2] = {0};
+
+    // Add Door (111) to Map
+    int doorLocation = (int)(GRID_DIMENSION2/2);
+    mapOverlay[doorLocation][0] = 111;
+
+    // Add Player (999) to Map
+    int playerLocation = (int)(GRID_DIMENSION2/2);
+    mapOverlay[playerLocation][(GRID_DIMENSION2 - 2)] = 999;
+
+    //added a square to get back to "dungeon 1"
+    int D1Location  = (int)(GRID_DIMENSION2/2);
+    mapOverlay[D1Location][(GRID_DIMENSION2-1)] = 1000;
+
+    // While There are Still Items in 'itemIntList'
+    while(itemIntList.size() > 0){
+
+        // Generate Two Random Seeds for Each Matrix Dimension
+        int random1 = rand() % GRID_DIMENSION2;
+        int random2 = rand() % GRID_DIMENSION2;
+
+        // Generate a New Random if Both Digits are the Same
+        while(random1 == random2){
+            random2 = rand() % GRID_DIMENSION2;
+        }
+
+        // If Map Position is Empty, Fill it With an Item
+        if(mapOverlay[random1][random2] == 0){
+            mapOverlay[random1][random2] = itemIntList.back();
+            itemIntList.pop_back();
+        }
+
+    }
+
+    // While There are Still Enemies to Place
+    while(numEnemies > 0){
+
+        // Generate Two Random Seeds for Each Matrix Dimension
+        int randomE1 = rand() % GRID_DIMENSION2;
+        int randomE2 = rand() % GRID_DIMENSION2;
+
+        // Generate a New Random if Both Digits are the Same
+        while(randomE1 == randomE2){
+            randomE2 = rand() % GRID_DIMENSION2;
+        }
+
+        // If Map Position is Empty, Fill it With an Enemy
+        if(mapOverlay[randomE1][randomE2] == 0){
+            mapOverlay[randomE1][randomE2] = 666;
+            numEnemies = numEnemies - 1;
+        }
+
+    }
+
+    // Stores the Temporary Vector to Push into the Master Vector
+    vector<int> tempVector;
+
+    // Iterator of the mapOverlay
+    for(int i = 0; i < GRID_DIMENSION2; i++){
+
+        for(int j = 0; j < GRID_DIMENSION2; j++){
+
+            // Push Contents into the Temp Vector
+            tempVector.push_back(mapOverlay[i][j]);
+
+        }
+
+        // Push the Temp Vector into the Master Vector and then Clear the Temp Vector
+        masterVector.push_back(tempVector);
+        tempVector.clear();
+
+    }
+
+    // Returns the Master Vector
+    return masterVector;
+
+}
+
+
 // Generate Player Level Map
 vector< vector<string> > generatePlayerMap(vector< vector<int> > intMap){
 
@@ -161,6 +277,14 @@ vector< vector<string> > generatePlayerMap(vector< vector<int> > intMap){
                 converted = "P";
             }
 
+	    else if(element == 888){    //element for floor 1 to floor 2 square
+		converted = "X";
+	    }
+
+	    else if(element == 1000){  //element for floor 2 to floor 1 square
+		converted = "D1";
+ 	    }
+
             else{
                 converted = ".";
             }
@@ -183,6 +307,15 @@ void stringToUpper(string &s){
     for(unsigned int l = 0; l < s.length(); l++){
         s[l] = toupper(s[l]);
     }
+}
+
+int mapCheck(){                //added function for checking current floor
+	if (floor == 1){
+		return 1;
+	}
+	else{
+		return 0;
+	}
 }
 
 // Outputs the Integer Map
@@ -269,13 +402,25 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
     int currentXPosition = playerPosition.at(0);
 
     // Direction Control
-    if(direction == "NORTH"){
+    if(direction == "NORTH" || direction == "N"){
 
         int futureYPosition = playerPosition.at(1) - 1;
 
         if(futureYPosition <= maxSize && futureYPosition >= 0 ){
 
-            if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
+		//checks if the square being moved onto is element "X" and marks the player as on floor 2 now
+	    if(playerMap.at(futureYPosition).at(currentXPosition) == "X"){
+			gamePlayer.setCurrentFloor(2);
+			floor = 2;
+	    }
+
+		//same but marks the player on floor 1 now
+	    else if(playerMap.at(futureYPosition).at(currentXPosition) == "D1"){
+			gamePlayer.setCurrentFloor(1);
+			floor = 1;
+	    }
+
+            else if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
 
                 // Mark Old Space as Walked On
                 if (intMap.at(currentYPosition).at(currentXPosition) != 111) {
@@ -348,13 +493,23 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
     }
 
-    else if(direction == "SOUTH"){
+    else if(direction == "SOUTH" || direction == "S"){
 
         int futureYPosition = playerPosition.at(1) + 1;
 
-        if(futureYPosition <= maxSize && futureYPosition >= 0){
+        if(futureYPosition <= maxSize && futureYPosition >=0){
 
-            if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
+	    if(playerMap.at(futureYPosition).at(currentXPosition) == "X"){
+			gamePlayer.setCurrentFloor(2);
+                        floor = 2;
+            }
+
+            else if(playerMap.at(futureYPosition).at(currentXPosition) == "D1"){
+                        gamePlayer.setCurrentFloor(1);
+			floor = 1;
+            }
+
+            else  if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
 
                 // Mark Old Space as Walked On
                 if (intMap.at(currentYPosition).at(currentXPosition) != 111) {
@@ -427,13 +582,25 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
     }
 
-    else if(direction == "WEST"){
+    else if(direction == "WEST" || direction == "W"){
 
         int futureXPosition = playerPosition.at(0) - 1;
 
         if(futureXPosition <= maxSize && futureXPosition >= 0){
 
-            if(playerMap.at(currentYPosition).at(futureXPosition) != "D") {
+	    if(playerMap.at(currentYPosition).at(futureXPosition) == "X"){
+                        gamePlayer.setCurrentFloor(2);
+			floor = 2;
+            }
+
+            else if(playerMap.at(currentYPosition).at(futureXPosition) == "D1"){
+                        gamePlayer.setCurrentFloor(1);
+			floor = 1;
+            }
+
+
+            else if(playerMap.at(currentYPosition).at(futureXPosition) != "D") {
+
 
                 // Mark Old Space as Walked On
                 if (intMap.at(currentYPosition).at(currentXPosition) != 111) {
@@ -506,13 +673,23 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
     }
 
-    else if(direction == "EAST"){
+    else if(direction == "EAST" || direction == "E"){
 
         int futureXPosition = playerPosition.at(0) + 1;
 
         if(futureXPosition <= maxSize && futureXPosition >= 0){
 
-            if(playerMap.at(currentYPosition).at(futureXPosition) != "D") {
+	    if(playerMap.at(currentYPosition).at(futureXPosition) == "X"){
+                        gamePlayer.setCurrentFloor(2);
+			floor = 2;
+            }
+
+            else if(playerMap.at(currentYPosition).at(futureXPosition) == "D1"){
+                        gamePlayer.setCurrentFloor(1);
+			floor = 1;
+            }
+
+            else if(playerMap.at(currentYPosition).at(futureXPosition) != "D") {
 
                 // Mark Old Space as Walked On
                 if (intMap.at(currentYPosition).at(currentXPosition) != 111) {
@@ -916,7 +1093,7 @@ bool checkFileExists(string file){
     file_to_check.close();
 }
 
-void gameSave(vector< vector<int> > integerMap, Player mainPlayer){
+void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerMap2, Player mainPlayer){   //added the second integermap to the parameters
 
     if (checkFileExists("saveMapData.dat")){
 
@@ -930,11 +1107,13 @@ void gameSave(vector< vector<int> > integerMap, Player mainPlayer){
             if(saveOverwrite == "YES") {
 
                 remove("saveMapData.dat");
+		remove("saveMap2Data.dat");
                 ofstream mapfile;
                 mapfile.open("saveMapData.dat");
 
                 // Get Vector Size
                 int inputSize = integerMap.size();
+		int inputSize2 = integerMap2.size();
 
                 // Print Every Element of Vector
                 for (int i = 0; i < inputSize; i++) {
@@ -944,7 +1123,19 @@ void gameSave(vector< vector<int> > integerMap, Player mainPlayer){
                     mapfile << "\n";
                 }
 
-                mapfile.close();
+		mapfile.close();
+
+		ofstream mapfile2;        //added same process for floor 2
+		mapfile2.open("saveMap2Data.dat");
+
+		for (int i = 0; i < inputSize2; i++) {
+                    for (int j = 0; j < inputSize2; j++) {
+                        mapfile2 << integerMap2.at(i).at(j) << "\t";
+                    }
+                    mapfile2 << "\n";
+                }
+
+                mapfile2.close();
 
                 remove("savePlayerData.dat");
                 ofstream playerFile;
@@ -981,7 +1172,7 @@ void gameSave(vector< vector<int> > integerMap, Player mainPlayer){
         else{
 
             cout << "Invalid Command" << endl;
-            gameSave(integerMap, mainPlayer);
+            gameSave(integerMap, integerMap2, mainPlayer);
 
         }
 
@@ -994,6 +1185,7 @@ void gameSave(vector< vector<int> > integerMap, Player mainPlayer){
 
         // Get Vector Size
         int inputSize = integerMap.size();
+	int inputSize2 = integerMap2.size();
 
         // Print Every Element of Vector
         for(int i = 0; i < inputSize; i++){
@@ -1003,7 +1195,20 @@ void gameSave(vector< vector<int> > integerMap, Player mainPlayer){
             mapfile << "\n";
         }
 
-        mapfile.close();
+	mapfile.close();
+
+	ofstream mapfile2;
+        mapfile2.open("saveMap2Data.dat");
+
+        for (int i = 0; i < inputSize2; i++) {
+            for (int j = 0; j < inputSize2; j++) {
+                   mapfile2 << integerMap2.at(i).at(j) << "\t";
+            }
+            mapfile2 << "\n";
+        }
+
+        mapfile2.close();
+
 
         ofstream playerFile;
         playerFile.open("savePlayerData.dat");
@@ -1029,13 +1234,14 @@ void gameSave(vector< vector<int> > integerMap, Player mainPlayer){
 
 }
 
-bool loadGame(vector< vector<int> >& integerMap, Player& mainPlayer){
+bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integerMap2, Player& mainPlayer){
 
     vector<string> fileMapLines;
+    vector<string> fileMap2Lines;  //added vector for floor 2
     vector<string> filePlayerLines;
     bool loadSuccess = false;
 
-    if(checkFileExists("saveMapData.dat") && checkFileExists("savePlayerData.dat")){
+    if(checkFileExists("saveMapData.dat") && checkFileExists("savePlayerData.dat") && checkFileExists("saveMap2Data.dat")){  //now also checks for data of floor 2
 
         string line;
         ifstream myfile ("saveMapData.dat");
@@ -1048,6 +1254,15 @@ bool loadGame(vector< vector<int> >& integerMap, Player& mainPlayer){
 
             myfile.close();
         }
+
+	myfile.open("saveMap2Data.dat");
+
+	if(myfile.is_open()){                   //fills floor 2 vector the same way
+	    while (getline (myfile, line) ){
+		fileMap2Lines.push_back(line);
+	    }
+	    myfile.close();
+	}
 
         myfile.open("savePlayerData.dat");
 
@@ -1078,6 +1293,24 @@ bool loadGame(vector< vector<int> >& integerMap, Player& mainPlayer){
 
         }
 
+	for(int i = 0; i < fileMap2Lines.size(); i++){  //fills the map of floor 2 the same way
+
+            string mapLine = fileMap2Lines.at(i);
+
+            istringstream iss(mapLine);
+            string token;
+            vector<int> tempTokens;
+
+            while(std::getline(iss, token, '\t')) {  // but we can specify a different one
+                int intToken = atoi(token.c_str());
+                tempTokens.push_back(intToken);
+            }
+
+            integerMap2.push_back(tempTokens);
+            tempTokens.clear();
+
+        }
+
         string playerName = filePlayerLines.at(0);
         int playerHealth = atoi(filePlayerLines.at(1).c_str());
         vector<string> playerInventory;
@@ -1095,6 +1328,12 @@ bool loadGame(vector< vector<int> >& integerMap, Player& mainPlayer){
 
         mainPlayer.setName(playerName);
         mainPlayer.setHealth(playerHealth);
+        if(mainPlayer.getCurrentFloor() == 1){
+		floor = 1;
+	}
+	else{
+		floor = 2;
+	}
 
         loadSuccess = true;
 

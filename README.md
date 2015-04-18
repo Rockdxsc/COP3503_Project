@@ -89,7 +89,7 @@ printPlayerMap(playerMap);
 - [X] Develop Player Interactions
 - [X] Develop Help Dialogues For User Actions
 - [X] Save/Load Implementation
-- [ ] Different Floors *Priority*
+- [X] Different Floors *Priority*  I've got it working but please double check me and a third floor is definently possible if you want it (if I have time ill try to make it a differnt shaped floor)
 - [ ] Add text based events (active and passive)
 - [ ] What to have in town 
 - [ ] Enemy variations

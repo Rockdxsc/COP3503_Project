@@ -131,7 +131,7 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
                 mapOverlay[randomE1][randomE2] = 666;
             }
 
-            else (i >= 70 && i < 100){
+            else if (i >= 70 && i < 100){
                 mapOverlay[randomE1][randomE2] = 667;
             }
             
@@ -249,7 +249,7 @@ vector< vector<int> > generateIntMap2(vector<string> itemsList, int numEnemies){
                 mapOverlay[randomE1][randomE2] = 667;
             }
 
-            else (i >= 70 && i < 100){
+            else if (i >= 70 && i < 100){
                 mapOverlay[randomE1][randomE2] = 668;
             }
 

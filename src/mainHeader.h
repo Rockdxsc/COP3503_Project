@@ -74,14 +74,18 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
     // Initialize 2D int Matrix to Map Items
     int mapOverlay[GRID_DIMENSION][GRID_DIMENSION] = {0};
 
-    // Add Door (111) to Map
-    int doorLocation = (int)(GRID_DIMENSION/2);
-    mapOverlay[doorLocation][0] = 111;
-
     // Add Player (999) to Map
     int playerLocation = (int)(GRID_DIMENSION/2);
     mapOverlay[playerLocation][(GRID_DIMENSION - 1)] = 999;
+    
+	// Add Inn to the map
+	int innLocation = playerLocation - 2;
+	mapOverlay[innLocation][(GRID_DIMENSION - 1)] = 777;
 
+	// Add Shop to the map
+	int shopLocation = innLocation - 2;
+	mapOverlay[shopLocation][(GRID_DIMENSION - 1)] = 778;
+	
     //added "X" far a test floor change location
     int XLocation  = (int)(GRID_DIMENSION/2);
     mapOverlay[0][XLocation] = 888;
@@ -200,16 +204,10 @@ vector< vector<int> > generateIntMap2(vector<string> itemsList, int numEnemies){
     // Add Player (999) to Map
     int playerLocation = (int)(GRID_DIMENSION2/2);
     mapOverlay[playerLocation][(GRID_DIMENSION2 - 2)] = 999;
-	// Add Inn to the map
-	int innLocation = playerLocation - 2;
-	mapOverlay[innLocation][(GRID_DIMENSION - 1)] = 777;
 
-	// Add Shop to the map
-	int shopLocation = innLocation - 2;
-	mapOverlay[shopLocation][(GRID_DIMENSION - 1)] = 778;
 
 	// Add Boss to map
-	mapOverlay[2][(int)(GRID_DIMENSION/2)] = 42069;
+	mapOverlay[(int)(GRID_DIMENSION/2)][2] = 42069;
     //added a square to get back to "dungeon 1"
     int D1Location  = (int)(GRID_DIMENSION2/2);
     mapOverlay[D1Location][(GRID_DIMENSION2-1)] = 1000;

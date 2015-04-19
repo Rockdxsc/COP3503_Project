@@ -113,7 +113,16 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
 
         // If Map Position is Empty, Fill it With an Enemy
         if(mapOverlay[randomE1][randomE2] == 0){
-            mapOverlay[randomE1][randomE2] = 666;
+            int i = rand()%100;
+		if (i >= 0 && i < 50){
+		mapOverlay[randomE1][randomE2] = 666;
+		}
+		else if (i >= 50 && i < 80){
+		mapOverlay[randomE1][randomE2] = 667;
+		}
+		else {
+		mapOverlay[randomE1][randomE2] = 668;
+		}
             numEnemies = numEnemies - 1;
         }
 

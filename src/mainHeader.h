@@ -31,8 +31,8 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 void enemyBattle(Player& mainPlayer, Spider& enemySpider);
 void enemybossBattle(Player& mainPlayer, Boss& enemyBoss);
 void playerUse(Player& player, string usingItem, vector< vector<int> > intMap);
-void gameSave(vector< vector<int> > integerMap, Player mainPlayer);
-bool loadGame(vector< vector<int> >& integerMap, Player& mainPlayer);
+void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerMap2, Player mainPlayer);
+bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integerMap2, Player& mainPlayer);
 bool checkFileExists(string file);
 string printInventory(Player player);
 
@@ -1289,6 +1289,10 @@ void printItemMap(vector< vector<int> > inputVector){
 
             else if(element == 999){
                 converted = "P";
+            }
+
+            else if(element == 1000){
+                converted = "D1";
             }
 
             else{

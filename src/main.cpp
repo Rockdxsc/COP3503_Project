@@ -21,7 +21,6 @@ int main() {
     itemsList.push_back("SWORD");
     itemsList.push_back("HEALING SODA");
     itemsList.push_back("HEALING SODA");
-    itemsList.push_back("KEY");
     itemsList.push_back("MAP");
     itemsList.push_back("HEALING SODA");
 

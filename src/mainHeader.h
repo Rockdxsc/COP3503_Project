@@ -29,11 +29,13 @@ void printItemMap(vector< vector<int> > inputVector);
 void clearScreen();
 void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& intMap, vector< vector<string> >& playerMap, vector<string> itemsList);
 void enemyBattle(Player& mainPlayer, Spider& enemySpider);
+void enemybossBattle(Player& mainPlayer, Boss& enemyBoss);
 void playerUse(Player& player, string usingItem, vector< vector<int> > intMap);
 void gameSave(vector< vector<int> > integerMap, Player mainPlayer);
 bool loadGame(vector< vector<int> >& integerMap, Player& mainPlayer);
 bool checkFileExists(string file);
 string printInventory(Player player);
+
 int floor = 1;                   //added floor int to keep track of floor placement
 
 using namespace std;
@@ -1006,7 +1008,7 @@ void enemybossBattle(Player& mainPlayer, Boss& enemyBoss){
 					extra += 30;
 					cout << playerName << " Attacks!" << endl;
 					cout << playerName << " Deals "<<damage<<"pts in Damage!" << endl;
-					enemyBoss.dealDamage(d);
+					enemyBoss.dealDamage(damage);
 
 					cout << endl;
 

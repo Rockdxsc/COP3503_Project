@@ -960,6 +960,218 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
 
 }
 
+void enemybossBattle(Player& mainPlayer, Boss& enemyBoss){
+
+	int eLevel = enemyBoss.returnLevel();
+	string playerName = mainPlayer.getName();
+	bool fleeFailure = true;
+	vector<string> inventory = mainPlayer.returnInventory();
+
+	cout << "You Have Encountered a Level " << eLevel << " Hydra! Get Ready to Battle!" << endl;
+	cout << endl;
+
+	while ((enemyBoss.returnHealth() > 0 && mainPlayer.returnHealth() > 0) && fleeFailure){
+
+		string userChoice;
+		string userWeaponChoice;
+		int extra = 0; //attacks will get stronger
+
+		cout << endl;
+		cout << "Player: " << playerName << endl;
+		cout << "Health: " << mainPlayer.returnHealth() << endl;
+		cout << "Inventory: " << printInventory(mainPlayer) << endl;
+		cout << endl;
+		cout << "Hydra Level: " << enemyBoss.returnLevel() << endl;
+		cout << "Hydra Health: " << enemyBoss.returnHealth() << endl;
+		cout << endl;
+		cout << endl;
+
+		cout << "Fight or Flee: ";
+		cin >> userChoice;
+		stringToUpper(userChoice);
+
+		if (userChoice == "FIGHT"){
+
+			cout << "What Would You like to Use: ";
+			cin >> userWeaponChoice;
+			stringToUpper(userWeaponChoice);
+			clearScreen();
+
+			
+			if (find(inventory.begin(), inventory.end(), userWeaponChoice) != inventory.end() || userWeaponChoice == "FIST"){
+
+				
+				if (userWeaponChoice == "FIST"){
+					int damage = extra + 50;
+					extra += 30;
+					cout << playerName << " Attacks!" << endl;
+					cout << playerName << " Deals "<<damage<<"pts in Damage!" << endl;
+					enemyBoss.dealDamage(d);
+
+					cout << endl;
+
+					if (enemyBoss.returnHealth() > 0) {
+						int sAttackStrength = enemyBoss.attack();
+						cout << "Hydra Attacks!" << endl;
+						cout << "Hydra Deals " << sAttackStrength << "pts in Damage!" << endl;
+						mainPlayer.takeDamage(sAttackStrength);
+					}
+
+				}
+
+				else if (userWeaponChoice == "SWORD"){
+					int damage = extra + 200;
+					extra += 30;
+					cout << playerName << " Attacks!" << endl;
+					cout << playerName << " Deals "<<damage<<"pts in Damage!" << endl;
+					enemyBoss.dealDamage(damage);
+
+					cout << endl;
+
+					if (enemyBoss.returnHealth() > 0) {
+						int sAttackStrength = enemyBoss.attack();
+						cout << "Hydra Attacks!" << endl;
+						cout << "Hydra Deals " << sAttackStrength << "pts in Damage!" << endl;
+						mainPlayer.takeDamage(sAttackStrength);
+					}
+
+				}
+
+				else{
+
+					cout << "Sorry, That Item Cannot Be Used Here!" << endl;
+
+				}
+
+			}
+
+			else if (userWeaponChoice == "HELP"){
+
+				clearScreen();
+
+				cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
+				cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
+				cout << endl;
+			}
+
+			else{
+
+				cout << "You Do Not Have That Item!" << endl;
+
+			}
+
+		}
+
+		//User can always flee from the boss
+		else if (userChoice == "FLEE"){
+
+			clearScreen();
+			fleeFailure = false;
+			
+
+		}
+
+		else if (userChoice == "HELP"){
+
+			clearScreen();
+
+			cout << "Type \'FIGHT\' to Engage the Enemy" << endl;
+			cout << "Type \'FLEE\' to Attempt to Run Away From the Enemy" << endl;
+			cout << endl;
+		}
+
+		else{
+			clearScreen();
+			cout << "Sorry, That's Not an Option!" << endl;
+		}
+
+	}
+
+	if (enemyBoss.returnHealth() <= 0 && mainPlayer.returnHealth() > 0){
+
+		cout << endl;
+		cout << "Boss Enemy Hydra Defeated!" << endl;
+		cout << "You Have Found the Key" << endl;
+		cout << endl;
+		mainPlayer.addToInventory("KEY");
+
+	}
+
+	else if (mainPlayer.returnHealth() > 0){
+		//Nothing Happens
+	}
+
+	else{
+
+		cout << endl;
+		cout << "You Have Been Killed in Battle. GAME OVER." << endl;
+		exit(1);
+
+	}
+
+
+}
+
+void inn(Player& mainPlayer){
+	clearScreen();
+	int exit = 0;
+	string innchoice;
+
+	while (exit == 0){
+		cout << "Would you like to stay in the inn for the night for 10 gold? (Y/N)" << endl;
+		cin >> innchoice;
+		stringToUpper(innchoice);
+		if (innchoice == "Y" || innchoice == "YES"){
+			if (mainPlayer.getGold() >= 10){
+				cout << "You rest in the inn for a night. Your health has been fully restored." << endl;
+				cout << "Current gold: " << mainPlayer.getGold() << endl;
+				mainPlayer.setHealth(100);
+				mainPlayer.removeGold(10);
+				exit = 1;
+			}
+			else{
+				cout << "You do not have enough gold." << endl;
+				cout << "Current gold: " << mainPlayer.getGold() << endl;
+			}
+		}
+		else if (innchoice == "N" || innchoice == "NO"){
+			exit = 1;
+		}
+		else{
+			cout << "Statement not recognised" << endl;
+		}
+	}
+}
+
+void shop(Player& P){
+	clearScreen();
+	string c;
+	cout << "You enter the shop." << endl;
+	cout << "\nShop Inventory:\n\nSword - 50 gold\n" << endl;
+	while (c != "EXIT"){
+		cout << "What would you like to buy? Type 'exit' to exit the shop." << endl;
+		cin >> c;
+		stringToUpper(c);
+		if (c == "SWORD" && P.getGold() >= 50){
+			cout << "You bought a sword." << endl;
+			P.addToInventory("SWORD");
+			P.removeGold(50);
+
+		}
+		else if (c == "SWORD" && P.getGold() < 50){
+			cout << "Not enough gold." << endl;
+		}
+		else{
+			cout << "Statement not recognised." << endl;
+		}
+	}
+}
+
+
+
+
+
+
 string printInventory(Player player){
 
     vector<string> inventory = player.returnInventory();

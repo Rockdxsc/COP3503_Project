@@ -1103,6 +1103,62 @@ void enemybossBattle(Player& mainPlayer, Boss& enemyBoss){
 
 }
 
+void inn(Player& mainPlayer){
+	clearScreen();
+	int exit = 0;
+	string innchoice;
+
+	while (exit == 0){
+		cout << "Would you like to stay in the inn for the night for 10 gold? (Y/N)" << endl;
+		cin >> innchoice;
+		stringToUpper(innchoice);
+		if (innchoice == "Y" || innchoice == "YES"){
+			if (mainPlayer.getGold() >= 10){
+				cout << "You rest in the inn for a night. Your health has been fully restored." << endl;
+				cout << "Current gold: " << mainPlayer.getGold() << endl;
+				mainPlayer.setHealth(100);
+				mainPlayer.removeGold(10);
+				exit = 1;
+			}
+			else{
+				cout << "You do not have enough gold." << endl;
+				cout << "Current gold: " << mainPlayer.getGold() << endl;
+			}
+		}
+		else if (innchoice == "N" || innchoice == "NO"){
+			exit = 1;
+		}
+		else{
+			cout << "Statement not recognised" << endl;
+		}
+	}
+}
+
+void shop(Player& P){
+	clearScreen();
+	string c;
+	cout << "You enter the shop." << endl;
+	cout << "\nShop Inventory:\n\nSword - 50 gold\n" << endl;
+	while (c != "EXIT"){
+		cout << "What would you like to buy? Type 'exit' to exit the shop." << endl;
+		cin >> c;
+		stringToUpper(c);
+		if (c == "SWORD" && P.getGold() >= 50){
+			cout << "You bought a sword." << endl;
+			P.addToInventory("SWORD");
+			P.removeGold(50);
+
+		}
+		else if (c == "SWORD" && P.getGold() < 50){
+			cout << "Not enough gold." << endl;
+		}
+		else{
+			cout << "Statement not recognised." << endl;
+		}
+	}
+}
+
+
 
 
 

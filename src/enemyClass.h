@@ -71,3 +71,48 @@ public:
     }
 
 };
+
+class Boss{
+
+private:
+
+	int Health;
+	int Level;
+
+public:
+
+	// Default Constructor
+	Boss(){
+	
+		srand(time(NULL));
+		Health = 1000000;
+
+	}
+
+	// Deal Damage to Spider's Health
+	void dealDamage(int damageDealt){
+		Health -= damageDealt;
+	}
+
+	// Returns the Spider's Health
+	int returnHealth(){
+		return Health;
+	}
+
+	// Returns the Spider's Level
+	int returnLevel(){
+		return Level;
+	}
+
+	// Randomly Generated Attack Strength
+	int attack(){
+
+		// Generate Random Seed
+		srand(time(NULL));
+
+		int attackPower = 4 + (int)(rand() % 3);
+		return attackPower;
+
+	}
+
+};

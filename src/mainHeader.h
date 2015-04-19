@@ -1715,7 +1715,7 @@ void enemyBattle(Player& mainPlayer, Goblin& enemyGoblin) {
             srand(time(NULL));
 
             // Generate Random Level Between 1 and 10
-            int escapeChance = 1 + (rand() % (int) (10 - 1 + 1));
+            int escapeChance = 2 + (rand() % (int) (10 - 1 + 1));
 
             if (escapeChance >= eLevel-6) {
                 cout << "You Managed to Escape Successfully!" << endl;
@@ -1888,7 +1888,7 @@ void enemyBattle(Player& mainPlayer, Orc& enemyOrc) {
             srand(time(NULL));
 
             // Generate Random Level Between 1 and 10
-            int escapeChance = 1 + (rand() % (int) (10 - 1 + 1));
+            int escapeChance = 4 + (rand() % (int) (10 - 1 + 1));
 
             if (escapeChance >= eLevel-7) {
                 cout << "You Managed to Escape Successfully!" << endl;

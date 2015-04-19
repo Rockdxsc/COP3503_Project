@@ -192,15 +192,24 @@ vector< vector<int> > generateIntMap2(vector<string> itemsList, int numEnemies){
 
     // Initialize 2D int Matrix to Map Items
     int mapOverlay[GRID_DIMENSION2][GRID_DIMENSION2] = {0};
-
+    
     // Add Door (111) to Map
     int doorLocation = (int)(GRID_DIMENSION2/2);
     mapOverlay[doorLocation][0] = 111;
-
+    
     // Add Player (999) to Map
     int playerLocation = (int)(GRID_DIMENSION2/2);
     mapOverlay[playerLocation][(GRID_DIMENSION2 - 2)] = 999;
+	// Add Inn to the map
+	int innLocation = playerLocation - 2;
+	mapOverlay[innLocation][(GRID_DIMENSION - 1)] = 777;
 
+	// Add Shop to the map
+	int shopLocation = innLocation - 2;
+	mapOverlay[shopLocation][(GRID_DIMENSION - 1)] = 778;
+
+	// Add Boss to map
+	mapOverlay[2][(int)(GRID_DIMENSION/2)] = 42069;
     //added a square to get back to "dungeon 1"
     int D1Location  = (int)(GRID_DIMENSION2/2);
     mapOverlay[D1Location][(GRID_DIMENSION2-1)] = 1000;
@@ -301,7 +310,15 @@ vector< vector<string> > generatePlayerMap(vector< vector<int> > intMap){
             else if(element == 1000){  //element for floor 2 to floor 1 square
                 converted = "D1";
             }
-
+            else if (element == 42069){
+				converted = "B";
+			}
+			else if (element == 777){
+				converted = "I";
+			}
+			else if (element == 778){
+				converted = "S";
+			}
             else{
                 converted = ".";
             }
@@ -458,7 +475,21 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                         Spider spider1;
                         enemyBattle(gamePlayer, spider1);
                     }
+                    //boss event
+					if (interactionStatus == 42069) {
+						Boss boss1;
+						enemybossBattle(gamePlayer, boss1);
+					}
 
+					//inn event
+					if (interactionStatus == 777) {
+						inn(gamePlayer);
+					}
+
+					//shop event
+					if (interactionStatus == 778) {
+						shop(gamePlayer);
+					}
                     /* If Item/Puzzle, Announce/Pickup Item */
                     if (interactionStatus <= 100) {
                         int ElementNumber = intMap.at(futureYPosition).at(currentXPosition);
@@ -547,7 +578,21 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                         Spider spider1;
                         enemyBattle(gamePlayer, spider1);
                     }
+                    //boss event
+					if (interactionStatus == 42069) {
+						Boss boss1;
+						enemybossBattle(gamePlayer, boss1);
+					}
 
+					//inn event
+					if (interactionStatus == 777) {
+						inn(gamePlayer);
+					}
+
+					//shop event
+					if (interactionStatus == 778) {
+						shop(gamePlayer);
+					}
                     /* If Item/Puzzle, Announce/Pickup Item */
                     if (interactionStatus <= 100) {
                         int ElementNumber = intMap.at(futureYPosition).at(currentXPosition);
@@ -638,7 +683,21 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                         Spider spider1;
                         enemyBattle(gamePlayer, spider1);
                     }
+                    //boss event
+					if (interactionStatus == 42069) {
+						Boss boss1;
+						enemybossBattle(gamePlayer, boss1);
+					}
 
+					//inn event
+					if (interactionStatus == 777) {
+						inn(gamePlayer);
+					}
+
+					//shop event
+					if (interactionStatus == 778) {
+						shop(gamePlayer);
+					}
                     /* If Item/Puzzle, Announce/Pickup Item */
                     if (interactionStatus <= 100) {
                         int ElementNumber = intMap.at(currentYPosition).at(futureXPosition);
@@ -727,7 +786,21 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                         Spider spider1;
                         enemyBattle(gamePlayer, spider1);
                     }
+                    //boss event
+					if (interactionStatus == 42069) {
+						Boss boss1;
+						enemybossBattle(gamePlayer, boss1);
+					}
 
+					//inn event
+					if (interactionStatus == 777) {
+						inn(gamePlayer);
+					}
+
+					//shop event
+					if (interactionStatus == 778) {
+						shop(gamePlayer);
+					}
                     /* If Item/Puzzle, Announce/Pickup Item */
                     if (interactionStatus <= 100) {
                         int ElementNumber = intMap.at(currentYPosition).at(futureXPosition);

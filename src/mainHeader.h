@@ -19,10 +19,13 @@
 
 /* FUNCTION PROTOTYPES */
 vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies);
+vector< vector<int> > generateIntMap2(vector<string> itemsList, int numEnemies);
 vector< vector<string> > generatePlayerMap(vector< vector<int> > intMap);
 vector<int> getPlayerPosition(vector< vector<string> >& playerMap);
 void enemyBattle(Player& mainPlayer, Spider& enemySpider);
 void stringToUpper(string &s);
+void inn(Player& mainPlayer);
+void shop(Player& P);
 void printIntMap(vector< vector<int> > inputVector);
 void printPlayerMap(vector< vector<string> > inputVector);
 void printItemMap(vector< vector<int> > inputVector);
@@ -35,6 +38,7 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
 bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integerMap2, Player& mainPlayer);
 bool checkFileExists(string file);
 string printInventory(Player player);
+int mapCheck();
 
 int gameFloor = 1;                   //added floor int to keep track of floor placement
 
@@ -116,15 +120,19 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
         // If Map Position is Empty, Fill it With an Enemy
         if(mapOverlay[randomE1][randomE2] == 0){
             int i = rand()%100;
+
             if (i >= 0 && i < 50){
                 mapOverlay[randomE1][randomE2] = 666;
             }
+
             else if (i >= 50 && i < 80){
                 mapOverlay[randomE1][randomE2] = 667;
             }
+
             else {
                 mapOverlay[randomE1][randomE2] = 668;
             }
+
             numEnemies = numEnemies - 1;
         }
 
@@ -153,9 +161,6 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
     return masterVector;
 
 }
-
-
-
 
 
 // Generate second Integer Level Map
@@ -1168,10 +1173,6 @@ void shop(Player& P){
         }
     }
 }
-
-
-
-
 
 
 string printInventory(Player player){

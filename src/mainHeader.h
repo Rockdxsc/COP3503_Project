@@ -116,15 +116,15 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
         // If Map Position is Empty, Fill it With an Enemy
         if(mapOverlay[randomE1][randomE2] == 0){
             int i = rand()%100;
-		if (i >= 0 && i < 50){
-		mapOverlay[randomE1][randomE2] = 666;
-		}
-		else if (i >= 50 && i < 80){
-		mapOverlay[randomE1][randomE2] = 667;
-		}
-		else {
-		mapOverlay[randomE1][randomE2] = 668;
-		}
+            if (i >= 0 && i < 50){
+                mapOverlay[randomE1][randomE2] = 666;
+            }
+            else if (i >= 50 && i < 80){
+                mapOverlay[randomE1][randomE2] = 667;
+            }
+            else {
+                mapOverlay[randomE1][randomE2] = 668;
+            }
             numEnemies = numEnemies - 1;
         }
 
@@ -288,13 +288,13 @@ vector< vector<string> > generatePlayerMap(vector< vector<int> > intMap){
                 converted = "P";
             }
 
-	    else if(element == 888){    //element for floor 1 to floor 2 square
-		converted = "X";
-	    }
+            else if(element == 888){    //element for floor 1 to floor 2 square
+                converted = "X";
+            }
 
-	    else if(element == 1000){  //element for floor 2 to floor 1 square
-		converted = "D1";
- 	    }
+            else if(element == 1000){  //element for floor 2 to floor 1 square
+                converted = "D1";
+            }
 
             else{
                 converted = ".";
@@ -321,12 +321,12 @@ void stringToUpper(string &s){
 }
 
 int mapCheck(){                //added function for checking current floor
-	if (gameFloor == 1){
-		return 1;
-	}
-	else{
-		return 0;
-	}
+    if (gameFloor == 1){
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 // Outputs the Integer Map
@@ -419,17 +419,17 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
         if(futureYPosition <= maxSize && futureYPosition >= 0 ){
 
-		//checks if the square being moved onto is element "X" and marks the player as on floor 2 now
-	    if(playerMap.at(futureYPosition).at(currentXPosition) == "X"){
-			gamePlayer.setCurrentFloor(2);
-            gameFloor = 2;
-	    }
+            //checks if the square being moved onto is element "X" and marks the player as on floor 2 now
+            if(playerMap.at(futureYPosition).at(currentXPosition) == "X"){
+                gamePlayer.setCurrentFloor(2);
+                gameFloor = 2;
+            }
 
-		//same but marks the player on floor 1 now
-	    else if(playerMap.at(futureYPosition).at(currentXPosition) == "D1"){
-			gamePlayer.setCurrentFloor(1);
-            gameFloor = 1;
-	    }
+                //same but marks the player on floor 1 now
+            else if(playerMap.at(futureYPosition).at(currentXPosition) == "D1"){
+                gamePlayer.setCurrentFloor(1);
+                gameFloor = 1;
+            }
 
             else if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
 
@@ -510,14 +510,14 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
         if(futureYPosition <= maxSize && futureYPosition >=0){
 
-	    if(playerMap.at(futureYPosition).at(currentXPosition) == "X"){
-			gamePlayer.setCurrentFloor(2);
+            if(playerMap.at(futureYPosition).at(currentXPosition) == "X"){
+                gamePlayer.setCurrentFloor(2);
                 gameFloor = 2;
             }
 
             else if(playerMap.at(futureYPosition).at(currentXPosition) == "D1"){
-                        gamePlayer.setCurrentFloor(1);
-            gameFloor = 1;
+                gamePlayer.setCurrentFloor(1);
+                gameFloor = 1;
             }
 
             else  if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
@@ -599,14 +599,14 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
         if(futureXPosition <= maxSize && futureXPosition >= 0){
 
-	    if(playerMap.at(currentYPosition).at(futureXPosition) == "X"){
-                        gamePlayer.setCurrentFloor(2);
-            gameFloor = 2;
+            if(playerMap.at(currentYPosition).at(futureXPosition) == "X"){
+                gamePlayer.setCurrentFloor(2);
+                gameFloor = 2;
             }
 
             else if(playerMap.at(currentYPosition).at(futureXPosition) == "D1"){
-                        gamePlayer.setCurrentFloor(1);
-            gameFloor = 1;
+                gamePlayer.setCurrentFloor(1);
+                gameFloor = 1;
             }
 
 
@@ -690,14 +690,14 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
         if(futureXPosition <= maxSize && futureXPosition >= 0){
 
-	    if(playerMap.at(currentYPosition).at(futureXPosition) == "X"){
-                        gamePlayer.setCurrentFloor(2);
-            gameFloor = 2;
+            if(playerMap.at(currentYPosition).at(futureXPosition) == "X"){
+                gamePlayer.setCurrentFloor(2);
+                gameFloor = 2;
             }
 
             else if(playerMap.at(currentYPosition).at(futureXPosition) == "D1"){
-                        gamePlayer.setCurrentFloor(1);
-            gameFloor = 1;
+                gamePlayer.setCurrentFloor(1);
+                gameFloor = 1;
             }
 
             else if(playerMap.at(currentYPosition).at(futureXPosition) != "D") {
@@ -891,7 +891,7 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
 
         }
 
-        // If the User Chooses to Flee, Calculate if Flee was Successful
+            // If the User Chooses to Flee, Calculate if Flee was Successful
         else if(userChoice == "FLEE"){
 
             clearScreen();
@@ -964,209 +964,209 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
 
 void enemybossBattle(Player& mainPlayer, Boss& enemyBoss){
 
-	int eLevel = enemyBoss.returnLevel();
-	string playerName = mainPlayer.getName();
-	bool fleeFailure = true;
-	vector<string> inventory = mainPlayer.returnInventory();
+    int eLevel = enemyBoss.returnLevel();
+    string playerName = mainPlayer.getName();
+    bool fleeFailure = true;
+    vector<string> inventory = mainPlayer.returnInventory();
 
-	cout << "You Have Encountered a Level " << eLevel << " Hydra! Get Ready to Battle!" << endl;
-	cout << endl;
+    cout << "You Have Encountered a Level " << eLevel << " Hydra! Get Ready to Battle!" << endl;
+    cout << endl;
 
-	while ((enemyBoss.returnHealth() > 0 && mainPlayer.returnHealth() > 0) && fleeFailure){
+    while ((enemyBoss.returnHealth() > 0 && mainPlayer.returnHealth() > 0) && fleeFailure){
 
-		string userChoice;
-		string userWeaponChoice;
-		int extra = 0; //attacks will get stronger
+        string userChoice;
+        string userWeaponChoice;
+        int extra = 0; //attacks will get stronger
 
-		cout << endl;
-		cout << "Player: " << playerName << endl;
-		cout << "Health: " << mainPlayer.returnHealth() << endl;
-		cout << "Inventory: " << printInventory(mainPlayer) << endl;
-		cout << endl;
-		cout << "Hydra Level: " << enemyBoss.returnLevel() << endl;
-		cout << "Hydra Health: " << enemyBoss.returnHealth() << endl;
-		cout << endl;
-		cout << endl;
+        cout << endl;
+        cout << "Player: " << playerName << endl;
+        cout << "Health: " << mainPlayer.returnHealth() << endl;
+        cout << "Inventory: " << printInventory(mainPlayer) << endl;
+        cout << endl;
+        cout << "Hydra Level: " << enemyBoss.returnLevel() << endl;
+        cout << "Hydra Health: " << enemyBoss.returnHealth() << endl;
+        cout << endl;
+        cout << endl;
 
-		cout << "Fight or Flee: ";
-		cin >> userChoice;
-		stringToUpper(userChoice);
+        cout << "Fight or Flee: ";
+        cin >> userChoice;
+        stringToUpper(userChoice);
 
-		if (userChoice == "FIGHT"){
+        if (userChoice == "FIGHT"){
 
-			cout << "What Would You like to Use: ";
-			cin >> userWeaponChoice;
-			stringToUpper(userWeaponChoice);
-			clearScreen();
+            cout << "What Would You like to Use: ";
+            cin >> userWeaponChoice;
+            stringToUpper(userWeaponChoice);
+            clearScreen();
 
-			
-			if (find(inventory.begin(), inventory.end(), userWeaponChoice) != inventory.end() || userWeaponChoice == "FIST"){
 
-				
-				if (userWeaponChoice == "FIST"){
-					int damage = extra + 50;
-					extra += 30;
-					cout << playerName << " Attacks!" << endl;
-					cout << playerName << " Deals "<<damage<<"pts in Damage!" << endl;
-					enemyBoss.dealDamage(damage);
+            if (find(inventory.begin(), inventory.end(), userWeaponChoice) != inventory.end() || userWeaponChoice == "FIST"){
 
-					cout << endl;
 
-					if (enemyBoss.returnHealth() > 0) {
-						int sAttackStrength = enemyBoss.attack();
-						cout << "Hydra Attacks!" << endl;
-						cout << "Hydra Deals " << sAttackStrength << "pts in Damage!" << endl;
-						mainPlayer.takeDamage(sAttackStrength);
-					}
+                if (userWeaponChoice == "FIST"){
+                    int damage = extra + 50;
+                    extra += 30;
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals "<<damage<<"pts in Damage!" << endl;
+                    enemyBoss.dealDamage(damage);
 
-				}
+                    cout << endl;
 
-				else if (userWeaponChoice == "SWORD"){
-					int damage = extra + 200;
-					extra += 30;
-					cout << playerName << " Attacks!" << endl;
-					cout << playerName << " Deals "<<damage<<"pts in Damage!" << endl;
-					enemyBoss.dealDamage(damage);
+                    if (enemyBoss.returnHealth() > 0) {
+                        int sAttackStrength = enemyBoss.attack();
+                        cout << "Hydra Attacks!" << endl;
+                        cout << "Hydra Deals " << sAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(sAttackStrength);
+                    }
 
-					cout << endl;
+                }
 
-					if (enemyBoss.returnHealth() > 0) {
-						int sAttackStrength = enemyBoss.attack();
-						cout << "Hydra Attacks!" << endl;
-						cout << "Hydra Deals " << sAttackStrength << "pts in Damage!" << endl;
-						mainPlayer.takeDamage(sAttackStrength);
-					}
+                else if (userWeaponChoice == "SWORD"){
+                    int damage = extra + 200;
+                    extra += 30;
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals "<<damage<<"pts in Damage!" << endl;
+                    enemyBoss.dealDamage(damage);
 
-				}
+                    cout << endl;
 
-				else{
+                    if (enemyBoss.returnHealth() > 0) {
+                        int sAttackStrength = enemyBoss.attack();
+                        cout << "Hydra Attacks!" << endl;
+                        cout << "Hydra Deals " << sAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(sAttackStrength);
+                    }
 
-					cout << "Sorry, That Item Cannot Be Used Here!" << endl;
+                }
 
-				}
+                else{
 
-			}
+                    cout << "Sorry, That Item Cannot Be Used Here!" << endl;
 
-			else if (userWeaponChoice == "HELP"){
+                }
 
-				clearScreen();
+            }
 
-				cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
-				cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
-				cout << endl;
-			}
+            else if (userWeaponChoice == "HELP"){
 
-			else{
+                clearScreen();
 
-				cout << "You Do Not Have That Item!" << endl;
+                cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
+                cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
+                cout << endl;
+            }
 
-			}
+            else{
 
-		}
+                cout << "You Do Not Have That Item!" << endl;
 
-		//User can always flee from the boss
-		else if (userChoice == "FLEE"){
+            }
 
-			clearScreen();
-			fleeFailure = false;
-			
+        }
 
-		}
+            //User can always flee from the boss
+        else if (userChoice == "FLEE"){
 
-		else if (userChoice == "HELP"){
+            clearScreen();
+            fleeFailure = false;
 
-			clearScreen();
 
-			cout << "Type \'FIGHT\' to Engage the Enemy" << endl;
-			cout << "Type \'FLEE\' to Attempt to Run Away From the Enemy" << endl;
-			cout << endl;
-		}
+        }
 
-		else{
-			clearScreen();
-			cout << "Sorry, That's Not an Option!" << endl;
-		}
+        else if (userChoice == "HELP"){
 
-	}
+            clearScreen();
 
-	if (enemyBoss.returnHealth() <= 0 && mainPlayer.returnHealth() > 0){
+            cout << "Type \'FIGHT\' to Engage the Enemy" << endl;
+            cout << "Type \'FLEE\' to Attempt to Run Away From the Enemy" << endl;
+            cout << endl;
+        }
 
-		cout << endl;
-		cout << "Boss Enemy Hydra Defeated!" << endl;
-		cout << "You Have Found the Key" << endl;
-		cout << endl;
-		mainPlayer.addToInventory("KEY");
+        else{
+            clearScreen();
+            cout << "Sorry, That's Not an Option!" << endl;
+        }
 
-	}
+    }
 
-	else if (mainPlayer.returnHealth() > 0){
-		//Nothing Happens
-	}
+    if (enemyBoss.returnHealth() <= 0 && mainPlayer.returnHealth() > 0){
 
-	else{
+        cout << endl;
+        cout << "Boss Enemy Hydra Defeated!" << endl;
+        cout << "You Have Found the Key" << endl;
+        cout << endl;
+        mainPlayer.addToInventory("KEY");
 
-		cout << endl;
-		cout << "You Have Been Killed in Battle. GAME OVER." << endl;
-		exit(1);
+    }
 
-	}
+    else if (mainPlayer.returnHealth() > 0){
+        //Nothing Happens
+    }
+
+    else{
+
+        cout << endl;
+        cout << "You Have Been Killed in Battle. GAME OVER." << endl;
+        exit(1);
+
+    }
 
 
 }
 
 void inn(Player& mainPlayer){
-	clearScreen();
-	int exit = 0;
-	string innchoice;
+    clearScreen();
+    int exit = 0;
+    string innchoice;
 
-	while (exit == 0){
-		cout << "Would you like to stay in the inn for the night for 10 gold? (Y/N)" << endl;
-		cin >> innchoice;
-		stringToUpper(innchoice);
-		if (innchoice == "Y" || innchoice == "YES"){
-			if (mainPlayer.getGold() >= 10){
-				cout << "You rest in the inn for a night. Your health has been fully restored." << endl;
-				cout << "Current gold: " << mainPlayer.getGold() << endl;
-				mainPlayer.setHealth(100);
-				mainPlayer.removeGold(10);
-				exit = 1;
-			}
-			else{
-				cout << "You do not have enough gold." << endl;
-				cout << "Current gold: " << mainPlayer.getGold() << endl;
-			}
-		}
-		else if (innchoice == "N" || innchoice == "NO"){
-			exit = 1;
-		}
-		else{
-			cout << "Statement not recognised" << endl;
-		}
-	}
+    while (exit == 0){
+        cout << "Would you like to stay in the inn for the night for 10 gold? (Y/N)" << endl;
+        cin >> innchoice;
+        stringToUpper(innchoice);
+        if (innchoice == "Y" || innchoice == "YES"){
+            if (mainPlayer.getGold() >= 10){
+                cout << "You rest in the inn for a night. Your health has been fully restored." << endl;
+                cout << "Current gold: " << mainPlayer.getGold() << endl;
+                mainPlayer.setHealth(100);
+                mainPlayer.removeGold(10);
+                exit = 1;
+            }
+            else{
+                cout << "You do not have enough gold." << endl;
+                cout << "Current gold: " << mainPlayer.getGold() << endl;
+            }
+        }
+        else if (innchoice == "N" || innchoice == "NO"){
+            exit = 1;
+        }
+        else{
+            cout << "Statement not recognised" << endl;
+        }
+    }
 }
 
 void shop(Player& P){
-	clearScreen();
-	string c;
-	cout << "You enter the shop." << endl;
-	cout << "\nShop Inventory:\n\nSword - 50 gold\n" << endl;
-	while (c != "EXIT"){
-		cout << "What would you like to buy? Type 'exit' to exit the shop." << endl;
-		cin >> c;
-		stringToUpper(c);
-		if (c == "SWORD" && P.getGold() >= 50){
-			cout << "You bought a sword." << endl;
-			P.addToInventory("SWORD");
-			P.removeGold(50);
+    clearScreen();
+    string c;
+    cout << "You enter the shop." << endl;
+    cout << "\nShop Inventory:\n\nSword - 50 gold\n" << endl;
+    while (c != "EXIT"){
+        cout << "What would you like to buy? Type 'exit' to exit the shop." << endl;
+        cin >> c;
+        stringToUpper(c);
+        if (c == "SWORD" && P.getGold() >= 50){
+            cout << "You bought a sword." << endl;
+            P.addToInventory("SWORD");
+            P.removeGold(50);
 
-		}
-		else if (c == "SWORD" && P.getGold() < 50){
-			cout << "Not enough gold." << endl;
-		}
-		else{
-			cout << "Statement not recognised." << endl;
-		}
-	}
+        }
+        else if (c == "SWORD" && P.getGold() < 50){
+            cout << "Not enough gold." << endl;
+        }
+        else{
+            cout << "Statement not recognised." << endl;
+        }
+    }
 }
 
 
@@ -1330,13 +1330,13 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
             if(saveOverwrite == "YES") {
 
                 remove("saveMapData.dat");
-		remove("saveMap2Data.dat");
+                remove("saveMap2Data.dat");
                 ofstream mapfile;
                 mapfile.open("saveMapData.dat");
 
                 // Get Vector Size
                 int inputSize = integerMap.size();
-		int inputSize2 = integerMap2.size();
+                int inputSize2 = integerMap2.size();
 
                 // Print Every Element of Vector
                 for (int i = 0; i < inputSize; i++) {
@@ -1346,12 +1346,12 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
                     mapfile << "\n";
                 }
 
-		mapfile.close();
+                mapfile.close();
 
-		ofstream mapfile2;        //added same process for floor 2
-		mapfile2.open("saveMap2Data.dat");
+                ofstream mapfile2;        //added same process for floor 2
+                mapfile2.open("saveMap2Data.dat");
 
-		for (int i = 0; i < inputSize2; i++) {
+                for (int i = 0; i < inputSize2; i++) {
                     for (int j = 0; j < inputSize2; j++) {
                         mapfile2 << integerMap2.at(i).at(j) << "\t";
                     }
@@ -1408,7 +1408,7 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
 
         // Get Vector Size
         int inputSize = integerMap.size();
-	int inputSize2 = integerMap2.size();
+        int inputSize2 = integerMap2.size();
 
         // Print Every Element of Vector
         for(int i = 0; i < inputSize; i++){
@@ -1418,14 +1418,14 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
             mapfile << "\n";
         }
 
-	mapfile.close();
+        mapfile.close();
 
-	ofstream mapfile2;
+        ofstream mapfile2;
         mapfile2.open("saveMap2Data.dat");
 
         for (int i = 0; i < inputSize2; i++) {
             for (int j = 0; j < inputSize2; j++) {
-                   mapfile2 << integerMap2.at(i).at(j) << "\t";
+                mapfile2 << integerMap2.at(i).at(j) << "\t";
             }
             mapfile2 << "\n";
         }
@@ -1478,14 +1478,14 @@ bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integer
             myfile.close();
         }
 
-	myfile.open("saveMap2Data.dat");
+        myfile.open("saveMap2Data.dat");
 
-	if(myfile.is_open()){                   //fills floor 2 vector the same way
-	    while (getline (myfile, line) ){
-		fileMap2Lines.push_back(line);
-	    }
-	    myfile.close();
-	}
+        if(myfile.is_open()){                   //fills floor 2 vector the same way
+            while (getline (myfile, line) ){
+                fileMap2Lines.push_back(line);
+            }
+            myfile.close();
+        }
 
         myfile.open("savePlayerData.dat");
 
@@ -1516,7 +1516,7 @@ bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integer
 
         }
 
-	for(int i = 0; i < fileMap2Lines.size(); i++){  //fills the map of floor 2 the same way
+        for(int i = 0; i < fileMap2Lines.size(); i++){  //fills the map of floor 2 the same way
 
             string mapLine = fileMap2Lines.at(i);
 
@@ -1553,10 +1553,10 @@ bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integer
         mainPlayer.setHealth(playerHealth);
         if(mainPlayer.getCurrentFloor() == 1){
             gameFloor = 1;
-	}
-	else{
+        }
+        else{
             gameFloor = 2;
-	}
+        }
 
         loadSuccess = true;
 

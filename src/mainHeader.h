@@ -1737,7 +1737,7 @@ void enemyBattle(Player& mainPlayer, Goblin& enemyGoblin) {
             // Generate Random Level Between 1 and 10
             int escapeChance = 1 + (rand() % (int) (10 - 1 + 1));
 
-            if (escapeChance >= eLevel) {
+            if (escapeChance >= eLevel-6) {
                 cout << "You Managed to Escape Successfully!" << endl;
                 fleeFailure = false;
             }
@@ -1910,7 +1910,7 @@ void enemyBattle(Player& mainPlayer, Orc& enemyOrc) {
             // Generate Random Level Between 1 and 10
             int escapeChance = 1 + (rand() % (int) (10 - 1 + 1));
 
-            if (escapeChance >= eLevel) {
+            if (escapeChance >= eLevel-7) {
                 cout << "You Managed to Escape Successfully!" << endl;
                 fleeFailure = false;
             }

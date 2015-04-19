@@ -465,16 +465,11 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
             else if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
 
                 // Mark Old Space as Walked On
-                if (intMap.at(currentYPosition).at(currentXPosition) != 111 && intMap.at(currentYPosition).at(currentXPosition) != 777 && intMap.at(currentYPosition).at(currentXPosition) != 778) {
+                if (intMap.at(currentYPosition).at(currentXPosition) != 111) {
                     intMap.at(currentYPosition).at(currentXPosition) = 0;
                     playerMap.at(currentYPosition).at(currentXPosition) = "*";
                 }
-		if (intMap.at(currentYPosition).at(currentXPosition) == 777){
-			playerMap.at(currentYPosition).at(currentXPosition) = "I";
-		}
-		if (intMap.at(currentYPosition).at(currentXPosition) == 778){
-			playerMap.at(currentYPosition).at(currentXPosition) = "S";
-		}
+
                 // Mark New Player Position
                 playerMap.at(futureYPosition).at(currentXPosition) = "P";
 
@@ -585,16 +580,11 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
             else  if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
 
                 // Mark Old Space as Walked On
-                if (intMap.at(currentYPosition).at(currentXPosition) != 111 && intMap.at(currentYPosition).at(currentXPosition) != 777 && intMap.at(currentYPosition).at(currentXPosition) != 778) {
+                if (intMap.at(currentYPosition).at(currentXPosition) != 111) {
                     intMap.at(currentYPosition).at(currentXPosition) = 0;
                     playerMap.at(currentYPosition).at(currentXPosition) = "*";
                 }
-		if (intMap.at(currentYPosition).at(currentXPosition) == 777){
-			playerMap.at(currentYPosition).at(currentXPosition) = "I";
-		}
-		if (intMap.at(currentYPosition).at(currentXPosition) == 778){
-			playerMap.at(currentYPosition).at(currentXPosition) = "S";
-		}
+
                 // Mark New Player Position
                 playerMap.at(futureYPosition).at(currentXPosition) = "P";
 
@@ -707,16 +697,11 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
 
                 // Mark Old Space as Walked On
-                if (intMap.at(currentYPosition).at(currentXPosition) != 111 && intMap.at(currentYPosition).at(currentXPosition) != 777 && intMap.at(currentYPosition).at(currentXPosition) != 778) {
+                if (intMap.at(currentYPosition).at(currentXPosition) != 111) {
                     intMap.at(currentYPosition).at(currentXPosition) = 0;
                     playerMap.at(currentYPosition).at(currentXPosition) = "*";
                 }
-		if (intMap.at(currentYPosition).at(currentXPosition) == 777){
-			playerMap.at(currentYPosition).at(currentXPosition) = "I";
-		}
-		if (intMap.at(currentYPosition).at(currentXPosition) == 778){
-			playerMap.at(currentYPosition).at(currentXPosition) = "S";
-		}
+
                 // Mark New Player Position
                 playerMap.at(currentYPosition).at(futureXPosition) = "P";
 
@@ -827,16 +812,11 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
             else if(playerMap.at(currentYPosition).at(futureXPosition) != "D") {
 
                 // Mark Old Space as Walked On
-                if (intMap.at(currentYPosition).at(currentXPosition) != 111 && intMap.at(currentYPosition).at(currentXPosition) != 777 && intMap.at(currentYPosition).at(currentXPosition) != 778) {
+                if (intMap.at(currentYPosition).at(currentXPosition) != 111) {
                     intMap.at(currentYPosition).at(currentXPosition) = 0;
                     playerMap.at(currentYPosition).at(currentXPosition) = "*";
                 }
-		if (intMap.at(currentYPosition).at(currentXPosition) == 777){
-			playerMap.at(currentYPosition).at(currentXPosition) = "I";
-		}
-		if (intMap.at(currentYPosition).at(currentXPosition) == 778){
-			playerMap.at(currentYPosition).at(currentXPosition) = "S";
-		}
+
                 // Mark New Player Position
                 playerMap.at(currentYPosition).at(futureXPosition) = "P";
 

@@ -71,3 +71,47 @@ public:
     }
 
 };
+
+class Boss{
+
+private:
+
+	int Health;
+	int Level;
+
+public:
+
+	// Default Constructor
+	Boss(){
+	
+		Health = 1000;
+		Level = 15
+	}
+
+	// Deal Damage
+	void dealDamage(int damageDealt){
+		Health -= damageDealt;
+	}
+
+	// Returns Health
+	int returnHealth(){
+		return Health;
+	}
+
+	// Returns Level
+	int returnLevel(){
+		return Level;
+	}
+
+	// Randomly Generated Attack Strength
+	int attack(){
+
+		// Generate Random Seed
+		srand(time(NULL));
+
+		int attackPower = 4 + (int)(rand() % 3);
+		return attackPower;
+
+	}
+
+};

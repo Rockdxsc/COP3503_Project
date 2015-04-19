@@ -84,22 +84,21 @@ public:
 	// Default Constructor
 	Boss(){
 	
-		srand(time(NULL));
-		Health = 1000000;
-
+		Health = 1000;
+		Level = 15
 	}
 
-	// Deal Damage to Spider's Health
+	// Deal Damage
 	void dealDamage(int damageDealt){
 		Health -= damageDealt;
 	}
 
-	// Returns the Spider's Health
+	// Returns Health
 	int returnHealth(){
 		return Health;
 	}
 
-	// Returns the Spider's Level
+	// Returns Level
 	int returnLevel(){
 		return Level;
 	}

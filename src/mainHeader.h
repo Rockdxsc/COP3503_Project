@@ -123,18 +123,14 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
         if(mapOverlay[randomE1][randomE2] == 0){
             int i = rand()%100;
 
-            if (i >= 0 && i < 50){
+            if (i >= 0 && i < 70){
                 mapOverlay[randomE1][randomE2] = 666;
             }
 
-            else if (i >= 50 && i < 80){
+            else (i >= 70 && i < 100){
                 mapOverlay[randomE1][randomE2] = 667;
             }
-
-            else {
-                mapOverlay[randomE1][randomE2] = 668;
-            }
-
+            
             numEnemies = numEnemies - 1;
         }
 
@@ -240,10 +236,19 @@ vector< vector<int> > generateIntMap2(vector<string> itemsList, int numEnemies){
 
         // If Map Position is Empty, Fill it With an Enemy
         if(mapOverlay[randomE1][randomE2] == 0){
-            mapOverlay[randomE1][randomE2] = 666;
+         int i = rand()%100;
+
+            if (i >= 0 && i < 70){
+                mapOverlay[randomE1][randomE2] = 667;
+            }
+
+            else (i >= 70 && i < 100){
+                mapOverlay[randomE1][randomE2] = 668;
+            }
+
             numEnemies = numEnemies - 1;
         }
-
+        
     }
 
     // Stores the Temporary Vector to Push into the Master Vector

@@ -40,6 +40,7 @@ bool checkFileExists(string file);
 string printInventory(Player player);
 int mapCheck();
 
+// Game Floor Number
 int gameFloor = 1;                   //added floor int to keep track of floor placement
 
 using namespace std;

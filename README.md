@@ -79,21 +79,19 @@ printPlayerMap(playerMap);
 ```
 
 #### CHECKLIST
-- [ ] Develop Game/Puzzle Storyboard <b> **URGENT! </b>
-- [ ] Develop Introduction Output
+- [X] Develop Introduction Output
 - [X] Create Dynamic Map Engine
 - [X] Create Player/Enemy Classes
 - [X] Develop Movement Mechanics
 - [X] Develop Battle Sequences
-- [ ] Implement Puzzle Games
 - [X] Develop Player Interactions
 - [X] Develop Help Dialogues For User Actions
 - [X] Save/Load Implementation
 - [X] Different Floors *Priority*  I've got it working but please double check me and a third floor is definently possible if you want it (if I have time ill try to make it a differnt shaped floor)
-- [ ] Add text based events (active and passive)
-- [ ] What to have in town 
-- [ ] Enemy variations
-- [ ] Enemy Scaling and Player Scaling
+- [ ] Add text based events (active and [X]passive)
+- [X] What to have in town 
+- [X] Enemy variations
+- [X] Enemy Scaling and Player Scaling
 - [ ] More items
 - [ ] Testing
 - [ ] Deployment

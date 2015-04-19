@@ -990,6 +990,9 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
 
         cout << endl;
         cout << "Enemy Spider Defeated!" << endl;
+        int goldDrop = enemySpider.returnLevel() * 5;
+        cout <<"You got "<<goldDrop<<" gold."<< endl;
+		mainPlayer.addGold(goldDrop);
         cout << endl;
 
     }
@@ -1196,7 +1199,7 @@ void shop(Player& P){
     clearScreen();
     string c;
     cout << "You enter the shop." << endl;
-    cout << "\nShop Inventory:\n\nSword - 50 gold\n" << endl;
+    cout << "\nShop Inventory:\n\nSword - 50 gold\nHealing Soda - 15 gold" << endl;
     while (c != "EXIT"){
         cout << "What would you like to buy? Type 'exit' to exit the shop." << endl;
         cin >> c;
@@ -1208,6 +1211,15 @@ void shop(Player& P){
 
         }
         else if (c == "SWORD" && P.getGold() < 50){
+            cout << "Not enough gold." << endl;
+        }
+        else if (c == "HEALING SODA" && P.getGold() >= 15){
+            cout << "You bought a healing soda." << endl;
+            P.addToInventory("HEALING SODA");
+            P.removeGold(15);
+
+        }
+        else if (c == "HEALING SODA" && P.getGold() < 15){
             cout << "Not enough gold." << endl;
         }
         else{
@@ -1658,6 +1670,9 @@ void enemyBattle(Player& mainPlayer, Goblin& enemyGoblin) {
 
         cout << endl;
         cout << "Enemy Goblin Defeated!" << endl;
+        int goldDrop = enemySpider.returnLevel() * 5;
+        cout <<"You got "<<goldDrop<<" gold."<< endl;
+		mainPlayer.addGold(goldDrop);
         cout << endl;
 
     }
@@ -1828,6 +1843,9 @@ void enemyBattle(Player& mainPlayer, Orc& enemyOrc) {
 
         cout << endl;
         cout << "Enemy Orc Defeated!" << endl;
+        int goldDrop = enemySpider.returnLevel() * 5;
+        cout <<"You got "<<goldDrop<<" gold."<< endl;
+		mainPlayer.addGold(goldDrop);
         cout << endl;
 
     }

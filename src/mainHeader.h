@@ -1422,7 +1422,7 @@ void printItemMap(vector< vector<int> > inputVector){
             int element = inputVector.at(i).at(j);
             string converted;
 
-            if(element == 666 || element == 0){
+            if(element == 666 || element == 0 || element == 667 || element == 668 || element == 42096){
                 converted = ".";
             }
 
@@ -1436,6 +1436,14 @@ void printItemMap(vector< vector<int> > inputVector){
 
             else if(element == 1000){
                 converted = "D1";
+            }
+
+            else if(element == 777){
+                converted = "INN";
+            }
+
+            else if(element == 778){
+                converted = "SHP";
             }
 
             else{

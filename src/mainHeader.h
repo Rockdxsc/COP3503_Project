@@ -36,7 +36,7 @@ bool loadGame(vector< vector<int> >& integerMap, Player& mainPlayer);
 bool checkFileExists(string file);
 string printInventory(Player player);
 
-int floor = 1;                   //added floor int to keep track of floor placement
+int gameFloor = 1;                   //added floor int to keep track of floor placement
 
 using namespace std;
 
@@ -321,7 +321,7 @@ void stringToUpper(string &s){
 }
 
 int mapCheck(){                //added function for checking current floor
-	if (floor == 1){
+	if (gameFloor == 1){
 		return 1;
 	}
 	else{
@@ -422,13 +422,13 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 		//checks if the square being moved onto is element "X" and marks the player as on floor 2 now
 	    if(playerMap.at(futureYPosition).at(currentXPosition) == "X"){
 			gamePlayer.setCurrentFloor(2);
-			floor = 2;
+            gameFloor = 2;
 	    }
 
 		//same but marks the player on floor 1 now
 	    else if(playerMap.at(futureYPosition).at(currentXPosition) == "D1"){
 			gamePlayer.setCurrentFloor(1);
-			floor = 1;
+            gameFloor = 1;
 	    }
 
             else if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
@@ -512,12 +512,12 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
 	    if(playerMap.at(futureYPosition).at(currentXPosition) == "X"){
 			gamePlayer.setCurrentFloor(2);
-                        floor = 2;
+                gameFloor = 2;
             }
 
             else if(playerMap.at(futureYPosition).at(currentXPosition) == "D1"){
                         gamePlayer.setCurrentFloor(1);
-			floor = 1;
+            gameFloor = 1;
             }
 
             else  if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
@@ -601,12 +601,12 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
 	    if(playerMap.at(currentYPosition).at(futureXPosition) == "X"){
                         gamePlayer.setCurrentFloor(2);
-			floor = 2;
+            gameFloor = 2;
             }
 
             else if(playerMap.at(currentYPosition).at(futureXPosition) == "D1"){
                         gamePlayer.setCurrentFloor(1);
-			floor = 1;
+            gameFloor = 1;
             }
 
 
@@ -692,12 +692,12 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
 
 	    if(playerMap.at(currentYPosition).at(futureXPosition) == "X"){
                         gamePlayer.setCurrentFloor(2);
-			floor = 2;
+            gameFloor = 2;
             }
 
             else if(playerMap.at(currentYPosition).at(futureXPosition) == "D1"){
                         gamePlayer.setCurrentFloor(1);
-			floor = 1;
+            gameFloor = 1;
             }
 
             else if(playerMap.at(currentYPosition).at(futureXPosition) != "D") {
@@ -1552,10 +1552,10 @@ bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integer
         mainPlayer.setName(playerName);
         mainPlayer.setHealth(playerHealth);
         if(mainPlayer.getCurrentFloor() == 1){
-		floor = 1;
+            gameFloor = 1;
 	}
 	else{
-		floor = 2;
+            gameFloor = 2;
 	}
 
         loadSuccess = true;

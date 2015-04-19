@@ -1753,7 +1753,7 @@ void enemyBattle(Player& mainPlayer, Goblin& enemyGoblin) {
 
         cout << endl;
         cout << "Enemy Goblin Defeated!" << endl;
-        int goldDrop = enemySpider.returnLevel() * 5;
+        int goldDrop = enemyGoblin.returnLevel() * 5;
         cout <<"You got "<<goldDrop<<" gold."<< endl;
 		mainPlayer.addGold(goldDrop);
         cout << endl;
@@ -1926,7 +1926,7 @@ void enemyBattle(Player& mainPlayer, Orc& enemyOrc) {
 
         cout << endl;
         cout << "Enemy Orc Defeated!" << endl;
-        int goldDrop = enemySpider.returnLevel() * 5;
+        int goldDrop = enemyOrc.returnLevel() * 5;
         cout <<"You got "<<goldDrop<<" gold."<< endl;
 		mainPlayer.addGold(goldDrop);
         cout << endl;

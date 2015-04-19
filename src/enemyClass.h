@@ -85,7 +85,7 @@ public:
 	Boss(){
 	
 		Health = 1000;
-		Level = 15
+		Level = 15;
 	}
 
 	// Deal Damage

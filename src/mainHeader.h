@@ -465,7 +465,7 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                         enemyBattle(gamePlayer, goblin1);
                     }
 
-                     if (interactionStatus == 668) {
+                    if (interactionStatus == 668) {
                         Orc orc1;
                         enemyBattle(gamePlayer, orc1);
                     }
@@ -1006,341 +1006,8 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
 
     }
 
+
 }
-
-void enemyBattle(Player& mainPlayer, Goblin& enemyGoblin){
-
-    int eLevel = enemyGoblin.returnLevel();
-    string playerName = mainPlayer.getName();
-    bool fleeFailure = true;
-    vector<string> inventory = mainPlayer.returnInventory();
-
-    cout << "You Have Encountered a Level " << eLevel << " Goblin! Get Ready to Battle!" << endl;
-    cout << endl;
-
-    while((enemyGoblin.returnHealth() > 0 && mainPlayer.returnHealth() > 0) && fleeFailure){
-
-        string userChoice;
-        string userWeaponChoice;
-
-        cout << endl;
-        cout << "Player: " << playerName << endl;
-        cout << "Health: " << mainPlayer.returnHealth() << endl;
-        cout << "Inventory: " << printInventory(mainPlayer) << endl;
-        cout << endl;
-        cout << "Goblin Level: " << enemyGoblin.returnLevel() << endl;
-        cout << "Goblin Health: " << enemyGoblin.returnHealth() << endl;
-        cout << endl;
-        cout << endl;
-
-        cout << "Fight or Flee: ";
-        cin >> userChoice;
-        stringToUpper(userChoice);
-
-        if(userChoice == "FIGHT"){
-
-            cout << "What Would You like to Use: ";
-            cin >> userWeaponChoice;
-            stringToUpper(userWeaponChoice);
-            clearScreen();
-
-            // If the Weapon is in the Inventory or If the Item is a Fist
-            if(find(inventory.begin(), inventory.end(), userWeaponChoice) != inventory.end() || userWeaponChoice == "FIST"){
-
-                // If Attacked With a Fist Deal 5pts Damage
-                if(userWeaponChoice == "FIST"){
-                    cout << playerName << " Attacks!" << endl;
-                    cout << playerName << " Deals 5pts in Damage!" << endl;
-                    enemyGoblin.dealDamage(5);
-
-                    cout << endl;
-
-                    // Goblin Attack Turn
-                    if(enemyGoblin.returnHealth() > 0) {
-                        int gAttackStrength = enemyGoblin.attack();
-                        cout << "Goblin Attacks!" << endl;
-                        cout << "Goblin Deals " << gAttackStrength << "pts in Damage!" << endl;
-                        mainPlayer.takeDamage(gAttackStrength);
-                    }
-
-                }
-
-                else if(userWeaponChoice == "SWORD"){
-                    cout << playerName << " Attacks!" << endl;
-                    cout << playerName << " Deals 20pts in Damage!" << endl;
-                    enemyGoblin.dealDamage(20);
-
-                    cout << endl;
-
-                    // Goblin Attack Turn if Goblin Still Alive
-                    if(enemyGoblin.returnHealth() > 0) {
-                        int gAttackStrength = enemyGoblin.attack();
-                        cout << "Goblin Attacks!" << endl;
-                        cout << "Goblin Deals " << gAttackStrength << "pts in Damage!" << endl;
-                        mainPlayer.takeDamage(gAttackStrength);
-                    }
-
-                }
-
-                else{
-
-                    cout << "Sorry, That Item Cannot Be Used Here!" << endl;
-
-                }
-
-            }
-
-            else if(userWeaponChoice == "HELP"){
-
-                clearScreen();
-
-                cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
-                cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
-                cout << endl;
-            }
-
-            else{
-
-                cout << "You Do Not Have That Item!" << endl;
-
-            }
-
-        }
-
-            // If the User Chooses to Flee, Calculate if Flee was Successful
-        else if(userChoice == "FLEE"){
-
-            clearScreen();
-
-            // Random Seed
-            srand (time(NULL));
-
-            // Generate Random Level Between 1 and 10
-            int escapeChance = 1 + (rand() % (int)(10 - 1 + 1));
-
-            if(escapeChance >= eLevel){
-                cout << "You Managed to Escape Successfully!" << endl;
-                fleeFailure = false;
-            }
-
-            else{
-                cout << "You Try to Run, but the Goblin Cuts You Off!" << endl;
-
-                if(escapeChance > 5){
-                    cout << "The Goblin Chooses to Attack!" << endl;
-                    int gAttackStrength = enemyGoblin.attack();
-                    cout << "Goblin Attacks!" << endl;
-                    cout << "Goblin Deals " << gAttackStrength << "pts in Damage!" << endl;
-                    mainPlayer.takeDamage(gAttackStrength);
-                }
-
-                fleeFailure = true;
-            }
-
-        }
-
-        else if(userChoice == "HELP"){
-
-            clearScreen();
-
-            cout << "Type \'FIGHT\' to Engage the Enemy" << endl;
-            cout << "Type \'FLEE\' to Attempt to Run Away From the Enemy" << endl;
-            cout << endl;
-        }
-
-        else{
-            clearScreen();
-            cout << "Sorry, That's Not an Option!" << endl;
-        }
-
-    }
-
-    if(enemyGoblin.returnHealth() <= 0 && mainPlayer.returnHealth() > 0){
-
-        cout << endl;
-        cout << "Enemy Goblin Defeated!" << endl;
-        cout << endl;
-
-    }
-
-    else if(mainPlayer.returnHealth() > 0){
-        //Nothing Happens
-    }
-
-    else{
-
-        cout << endl;
-        cout << "You Have Been Killed in Battle. GAME OVER." << endl;
-        exit(1);
-
-    }
-
-void enemyBattle(Player& mainPlayer, Orc& enemyOrc){
-
-    int eLevel = enemyOrc.returnLevel();
-    string playerName = mainPlayer.getName();
-    bool fleeFailure = true;
-    vector<string> inventory = mainPlayer.returnInventory();
-
-    cout << "You Have Encountered a Level " << eLevel << " Orc! Get Ready to Battle!" << endl;
-    cout << endl;
-
-    while((enemyOrc.returnHealth() > 0 && mainPlayer.returnHealth() > 0) && fleeFailure){
-
-        string userChoice;
-        string userWeaponChoice;
-
-        cout << endl;
-        cout << "Player: " << playerName << endl;
-        cout << "Health: " << mainPlayer.returnHealth() << endl;
-        cout << "Inventory: " << printInventory(mainPlayer) << endl;
-        cout << endl;
-        cout << "Orc Level: " << enemyOrc.returnLevel() << endl;
-        cout << "Orc Health: " << enemyOrc.returnHealth() << endl;
-        cout << endl;
-        cout << endl;
-
-        cout << "Fight or Flee: ";
-        cin >> userChoice;
-        stringToUpper(userChoice);
-
-        if(userChoice == "FIGHT"){
-
-            cout << "What Would You like to Use: ";
-            cin >> userWeaponChoice;
-            stringToUpper(userWeaponChoice);
-            clearScreen();
-
-            // If the Weapon is in the Inventory or If the Item is a Fist
-            if(find(inventory.begin(), inventory.end(), userWeaponChoice) != inventory.end() || userWeaponChoice == "FIST"){
-
-                // If Attacked With a Fist Deal 5pts Damage
-                if(userWeaponChoice == "FIST"){
-                    cout << playerName << " Attacks!" << endl;
-                    cout << playerName << " Deals 5pts in Damage!" << endl;
-                    enemyOrc.dealDamage(5);
-
-                    cout << endl;
-
-                    // Orc Attack Turn
-                    if(enemyOrc.returnHealth() > 0) {
-                        int oAttackStrength = enemyOrc.attack();
-                        cout << "Orc Attacks!" << endl;
-                        cout << "Orc Deals " << oAttackStrength << "pts in Damage!" << endl;
-                        mainPlayer.takeDamage(oAttackStrength);
-                    }
-
-                }
-
-                else if(userWeaponChoice == "SWORD"){
-                    cout << playerName << " Attacks!" << endl;
-                    cout << playerName << " Deals 20pts in Damage!" << endl;
-                    enemyOrc.dealDamage(20);
-
-                    cout << endl;
-
-                    // Orc Attack Turn if Orc Still Alive
-                    if(enemyOrc.returnHealth() > 0) {
-                        int oAttackStrength = enemyOrc.attack();
-                        cout << "Orc Attacks!" << endl;
-                        cout << "Orc Deals " << oAttackStrength << "pts in Damage!" << endl;
-                        mainPlayer.takeDamage(oAttackStrength);
-                    }
-
-                }
-
-                else{
-
-                    cout << "Sorry, That Item Cannot Be Used Here!" << endl;
-
-                }
-
-            }
-
-            else if(userWeaponChoice == "HELP"){
-
-                clearScreen();
-
-                cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
-                cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
-                cout << endl;
-            }
-
-            else{
-
-                cout << "You Do Not Have That Item!" << endl;
-
-            }
-
-        }
-
-            // If the User Chooses to Flee, Calculate if Flee was Successful
-        else if(userChoice == "FLEE"){
-
-            clearScreen();
-
-            // Random Seed
-            srand (time(NULL));
-
-            // Generate Random Level Between 1 and 10
-            int escapeChance = 1 + (rand() % (int)(10 - 1 + 1));
-
-            if(escapeChance >= eLevel){
-                cout << "You Managed to Escape Successfully!" << endl;
-                fleeFailure = false;
-            }
-
-            else{
-                cout << "You Try to Run, but the Orc Cuts You Off!" << endl;
-
-                if(escapeChance > 5){
-                    cout << "The Orc Chooses to Attack!" << endl;
-                    int oAttackStrength = enemyOrc.attack();
-                    cout << "Orc Attacks!" << endl;
-                    cout << "Orc Deals " << oAttackStrength << "pts in Damage!" << endl;
-                    mainPlayer.takeDamage(oAttackStrength);
-                }
-
-                fleeFailure = true;
-            }
-
-        }
-
-        else if(userChoice == "HELP"){
-
-            clearScreen();
-
-            cout << "Type \'FIGHT\' to Engage the Enemy" << endl;
-            cout << "Type \'FLEE\' to Attempt to Run Away From the Enemy" << endl;
-            cout << endl;
-        }
-
-        else{
-            clearScreen();
-            cout << "Sorry, That's Not an Option!" << endl;
-        }
-
-    }
-
-    if(enemyOrc.returnHealth() <= 0 && mainPlayer.returnHealth() > 0){
-
-        cout << endl;
-        cout << "Enemy Orc Defeated!" << endl;
-        cout << endl;
-
-    }
-
-    else if(mainPlayer.returnHealth() > 0){
-        //Nothing Happens
-    }
-
-    else{
-
-        cout << endl;
-        cout << "You Have Been Killed in Battle. GAME OVER." << endl;
-        exit(1);
-
-    }    
 
 void enemybossBattle(Player& mainPlayer, Boss& enemyBoss){
 
@@ -1758,6 +1425,7 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
                 }
 
                 playerFile << "\n";
+                playerFile << mainPlayer.getGold() << "\n";
                 playerFile.close();
 
                 cout << "Game Successfully Saved!" << endl;
@@ -1829,9 +1497,350 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
         }
 
         playerFile << "\n";
+        playerFile << mainPlayer.getGold() << "\n";
         playerFile.close();
 
         cout << "Game Successfully Saved!" << endl;
+
+    }
+
+}
+
+void enemyBattle(Player& mainPlayer, Goblin& enemyGoblin) {
+
+    int eLevel = enemyGoblin.returnLevel();
+    string playerName = mainPlayer.getName();
+    bool fleeFailure = true;
+    vector<string> inventory = mainPlayer.returnInventory();
+
+    cout << "You Have Encountered a Level " << eLevel << " Goblin! Get Ready to Battle!" << endl;
+    cout << endl;
+
+    while ((enemyGoblin.returnHealth() > 0 && mainPlayer.returnHealth() > 0) && fleeFailure) {
+
+        string userChoice;
+        string userWeaponChoice;
+
+        cout << endl;
+        cout << "Player: " << playerName << endl;
+        cout << "Health: " << mainPlayer.returnHealth() << endl;
+        cout << "Inventory: " << printInventory(mainPlayer) << endl;
+        cout << endl;
+        cout << "Goblin Level: " << enemyGoblin.returnLevel() << endl;
+        cout << "Goblin Health: " << enemyGoblin.returnHealth() << endl;
+        cout << endl;
+        cout << endl;
+
+        cout << "Fight or Flee: ";
+        cin >> userChoice;
+        stringToUpper(userChoice);
+
+        if (userChoice == "FIGHT") {
+
+            cout << "What Would You like to Use: ";
+            cin >> userWeaponChoice;
+            stringToUpper(userWeaponChoice);
+            clearScreen();
+
+            // If the Weapon is in the Inventory or If the Item is a Fist
+            if (find(inventory.begin(), inventory.end(), userWeaponChoice) != inventory.end() ||
+                userWeaponChoice == "FIST") {
+
+                // If Attacked With a Fist Deal 5pts Damage
+                if (userWeaponChoice == "FIST") {
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 5pts in Damage!" << endl;
+                    enemyGoblin.dealDamage(5);
+
+                    cout << endl;
+
+                    // Goblin Attack Turn
+                    if (enemyGoblin.returnHealth() > 0) {
+                        int gAttackStrength = enemyGoblin.attack();
+                        cout << "Goblin Attacks!" << endl;
+                        cout << "Goblin Deals " << gAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(gAttackStrength);
+                    }
+
+                }
+
+                else if (userWeaponChoice == "SWORD") {
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 20pts in Damage!" << endl;
+                    enemyGoblin.dealDamage(20);
+
+                    cout << endl;
+
+                    // Goblin Attack Turn if Goblin Still Alive
+                    if (enemyGoblin.returnHealth() > 0) {
+                        int gAttackStrength = enemyGoblin.attack();
+                        cout << "Goblin Attacks!" << endl;
+                        cout << "Goblin Deals " << gAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(gAttackStrength);
+                    }
+
+                }
+
+                else {
+
+                    cout << "Sorry, That Item Cannot Be Used Here!" << endl;
+
+                }
+
+            }
+
+            else if (userWeaponChoice == "HELP") {
+
+                clearScreen();
+
+                cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
+                cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
+                cout << endl;
+            }
+
+            else {
+
+                cout << "You Do Not Have That Item!" << endl;
+
+            }
+
+        }
+
+            // If the User Chooses to Flee, Calculate if Flee was Successful
+        else if (userChoice == "FLEE") {
+
+            clearScreen();
+
+            // Random Seed
+            srand(time(NULL));
+
+            // Generate Random Level Between 1 and 10
+            int escapeChance = 1 + (rand() % (int) (10 - 1 + 1));
+
+            if (escapeChance >= eLevel) {
+                cout << "You Managed to Escape Successfully!" << endl;
+                fleeFailure = false;
+            }
+
+            else {
+                cout << "You Try to Run, but the Goblin Cuts You Off!" << endl;
+
+                if (escapeChance > 5) {
+                    cout << "The Goblin Chooses to Attack!" << endl;
+                    int gAttackStrength = enemyGoblin.attack();
+                    cout << "Goblin Attacks!" << endl;
+                    cout << "Goblin Deals " << gAttackStrength << "pts in Damage!" << endl;
+                    mainPlayer.takeDamage(gAttackStrength);
+                }
+
+                fleeFailure = true;
+            }
+
+        }
+
+        else if (userChoice == "HELP") {
+
+            clearScreen();
+
+            cout << "Type \'FIGHT\' to Engage the Enemy" << endl;
+            cout << "Type \'FLEE\' to Attempt to Run Away From the Enemy" << endl;
+            cout << endl;
+        }
+
+        else {
+            clearScreen();
+            cout << "Sorry, That's Not an Option!" << endl;
+        }
+
+    }
+
+    if (enemyGoblin.returnHealth() <= 0 && mainPlayer.returnHealth() > 0) {
+
+        cout << endl;
+        cout << "Enemy Goblin Defeated!" << endl;
+        cout << endl;
+
+    }
+
+    else if (mainPlayer.returnHealth() > 0) {
+        //Nothing Happens
+    }
+
+    else {
+
+        cout << endl;
+        cout << "You Have Been Killed in Battle. GAME OVER." << endl;
+        exit(1);
+
+    }
+
+}
+
+void enemyBattle(Player& mainPlayer, Orc& enemyOrc) {
+
+    int eLevel = enemyOrc.returnLevel();
+    string playerName = mainPlayer.getName();
+    bool fleeFailure = true;
+    vector<string> inventory = mainPlayer.returnInventory();
+
+    cout << "You Have Encountered a Level " << eLevel << " Orc! Get Ready to Battle!" << endl;
+    cout << endl;
+
+    while ((enemyOrc.returnHealth() > 0 && mainPlayer.returnHealth() > 0) && fleeFailure) {
+
+        string userChoice;
+        string userWeaponChoice;
+
+        cout << endl;
+        cout << "Player: " << playerName << endl;
+        cout << "Health: " << mainPlayer.returnHealth() << endl;
+        cout << "Inventory: " << printInventory(mainPlayer) << endl;
+        cout << endl;
+        cout << "Orc Level: " << enemyOrc.returnLevel() << endl;
+        cout << "Orc Health: " << enemyOrc.returnHealth() << endl;
+        cout << endl;
+        cout << endl;
+
+        cout << "Fight or Flee: ";
+        cin >> userChoice;
+        stringToUpper(userChoice);
+
+        if (userChoice == "FIGHT") {
+
+            cout << "What Would You like to Use: ";
+            cin >> userWeaponChoice;
+            stringToUpper(userWeaponChoice);
+            clearScreen();
+
+            // If the Weapon is in the Inventory or If the Item is a Fist
+            if (find(inventory.begin(), inventory.end(), userWeaponChoice) != inventory.end() ||
+                userWeaponChoice == "FIST") {
+
+                // If Attacked With a Fist Deal 5pts Damage
+                if (userWeaponChoice == "FIST") {
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 5pts in Damage!" << endl;
+                    enemyOrc.dealDamage(5);
+
+                    cout << endl;
+
+                    // Orc Attack Turn
+                    if (enemyOrc.returnHealth() > 0) {
+                        int oAttackStrength = enemyOrc.attack();
+                        cout << "Orc Attacks!" << endl;
+                        cout << "Orc Deals " << oAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(oAttackStrength);
+                    }
+
+                }
+
+                else if (userWeaponChoice == "SWORD") {
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 20pts in Damage!" << endl;
+                    enemyOrc.dealDamage(20);
+
+                    cout << endl;
+
+                    // Orc Attack Turn if Orc Still Alive
+                    if (enemyOrc.returnHealth() > 0) {
+                        int oAttackStrength = enemyOrc.attack();
+                        cout << "Orc Attacks!" << endl;
+                        cout << "Orc Deals " << oAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(oAttackStrength);
+                    }
+
+                }
+
+                else {
+
+                    cout << "Sorry, That Item Cannot Be Used Here!" << endl;
+
+                }
+
+            }
+
+            else if (userWeaponChoice == "HELP") {
+
+                clearScreen();
+
+                cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
+                cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
+                cout << endl;
+            }
+
+            else {
+
+                cout << "You Do Not Have That Item!" << endl;
+
+            }
+
+        }
+
+            // If the User Chooses to Flee, Calculate if Flee was Successful
+        else if (userChoice == "FLEE") {
+
+            clearScreen();
+
+            // Random Seed
+            srand(time(NULL));
+
+            // Generate Random Level Between 1 and 10
+            int escapeChance = 1 + (rand() % (int) (10 - 1 + 1));
+
+            if (escapeChance >= eLevel) {
+                cout << "You Managed to Escape Successfully!" << endl;
+                fleeFailure = false;
+            }
+
+            else {
+                cout << "You Try to Run, but the Orc Cuts You Off!" << endl;
+
+                if (escapeChance > 5) {
+                    cout << "The Orc Chooses to Attack!" << endl;
+                    int oAttackStrength = enemyOrc.attack();
+                    cout << "Orc Attacks!" << endl;
+                    cout << "Orc Deals " << oAttackStrength << "pts in Damage!" << endl;
+                    mainPlayer.takeDamage(oAttackStrength);
+                }
+
+                fleeFailure = true;
+            }
+
+        }
+
+        else if (userChoice == "HELP") {
+
+            clearScreen();
+
+            cout << "Type \'FIGHT\' to Engage the Enemy" << endl;
+            cout << "Type \'FLEE\' to Attempt to Run Away From the Enemy" << endl;
+            cout << endl;
+        }
+
+        else {
+            clearScreen();
+            cout << "Sorry, That's Not an Option!" << endl;
+        }
+
+    }
+
+    if (enemyOrc.returnHealth() <= 0 && mainPlayer.returnHealth() > 0) {
+
+        cout << endl;
+        cout << "Enemy Orc Defeated!" << endl;
+        cout << endl;
+
+    }
+
+    else if (mainPlayer.returnHealth() > 0) {
+        //Nothing Happens
+    }
+
+    else {
+
+        cout << endl;
+        cout << "You Have Been Killed in Battle. GAME OVER." << endl;
+        exit(1);
 
     }
 
@@ -1915,6 +1924,7 @@ bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integer
         }
 
         string playerName = filePlayerLines.at(0);
+        int playerGold = atoi(filePlayerLines.at(3).c_str());
         int playerHealth = atoi(filePlayerLines.at(1).c_str());
         vector<string> playerInventory;
 

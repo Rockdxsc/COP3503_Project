@@ -63,10 +63,9 @@ int main() {
 	integerMap2 = generateIntMap2(itemsList, 20);
 	
 	//Intro Text
-	cout<<"A great hydra has emerged from its slumber and has stolen the key to the supplies for the land.
-		It is now up to you to slay the mighty beast and retrieve the key that will save the people. 
-		Your adventure begins now"<<endl;
 
+        cout<< "A great hydra has emerged from its slumber and has stolen the key to the supplies for the land. It is now up to you to slay the mighty beast and retrieve the key that will save the people. Your adventure begins now" << endl;
+        cout << endl;
     }
 
     else{

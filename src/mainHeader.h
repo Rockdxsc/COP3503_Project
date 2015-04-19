@@ -22,7 +22,6 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies);
 vector< vector<int> > generateIntMap2(vector<string> itemsList, int numEnemies);
 vector< vector<string> > generatePlayerMap(vector< vector<int> > intMap);
 vector<int> getPlayerPosition(vector< vector<string> >& playerMap);
-void enemyBattle(Player& mainPlayer, Spider& enemySpider);
 void stringToUpper(string &s);
 void inn(Player& mainPlayer);
 void shop(Player& P);
@@ -32,6 +31,8 @@ void printItemMap(vector< vector<int> > inputVector);
 void clearScreen();
 void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& intMap, vector< vector<string> >& playerMap, vector<string> itemsList);
 void enemyBattle(Player& mainPlayer, Spider& enemySpider);
+void enemyBattle(Player& mainplayer, Goblin& enemyGoblin);
+void enemyBattle(Player& mainplayer, Orc& enemyOrc);
 void enemybossBattle(Player& mainPlayer, Boss& enemyBoss);
 void playerUse(Player& player, string usingItem, vector< vector<int> > intMap);
 void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerMap2, Player mainPlayer);
@@ -77,15 +78,15 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
     // Add Player (999) to Map
     int playerLocation = (int)(GRID_DIMENSION/2);
     mapOverlay[playerLocation][(GRID_DIMENSION - 1)] = 999;
-    
-	// Add Inn to the map
-	int innLocation = playerLocation - 2;
-	mapOverlay[innLocation][(GRID_DIMENSION - 1)] = 777;
 
-	// Add Shop to the map
-	int shopLocation = innLocation - 2;
-	mapOverlay[shopLocation][(GRID_DIMENSION - 1)] = 778;
-	
+    // Add Inn to the map
+    int innLocation = playerLocation - 2;
+    mapOverlay[innLocation][(GRID_DIMENSION - 1)] = 777;
+
+    // Add Shop to the map
+    int shopLocation = innLocation - 2;
+    mapOverlay[shopLocation][(GRID_DIMENSION - 1)] = 778;
+
     //added "X" far a test floor change location
     int XLocation  = (int)(GRID_DIMENSION/2);
     mapOverlay[0][XLocation] = 888;
@@ -196,18 +197,18 @@ vector< vector<int> > generateIntMap2(vector<string> itemsList, int numEnemies){
 
     // Initialize 2D int Matrix to Map Items
     int mapOverlay[GRID_DIMENSION2][GRID_DIMENSION2] = {0};
-    
+
     // Add Door (111) to Map
     int doorLocation = (int)(GRID_DIMENSION2/2);
     mapOverlay[doorLocation][0] = 111;
-    
+
     // Add Player (999) to Map
     int playerLocation = (int)(GRID_DIMENSION2/2);
     mapOverlay[playerLocation][(GRID_DIMENSION2 - 2)] = 999;
 
+    // Add Boss to map
+    mapOverlay[(int)(GRID_DIMENSION/2)][2] = 42069;
 
-	// Add Boss to map
-	mapOverlay[(int)(GRID_DIMENSION/2)][2] = 42069;
     //added a square to get back to "dungeon 1"
     int D1Location  = (int)(GRID_DIMENSION2/2);
     mapOverlay[D1Location][(GRID_DIMENSION2-1)] = 1000;
@@ -308,15 +309,19 @@ vector< vector<string> > generatePlayerMap(vector< vector<int> > intMap){
             else if(element == 1000){  //element for floor 2 to floor 1 square
                 converted = "D1";
             }
+
             else if (element == 42069){
-				converted = "B";
-			}
-			else if (element == 777){
-				converted = "I";
-			}
-			else if (element == 778){
-				converted = "S";
-			}
+                converted = "B";
+            }
+
+            else if (element == 777){
+                converted = "I";
+            }
+
+            else if (element == 778){
+                converted = "S";
+            }
+
             else{
                 converted = ".";
             }
@@ -473,21 +478,33 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                         Spider spider1;
                         enemyBattle(gamePlayer, spider1);
                     }
+
+                    if (interactionStatus == 667) {
+                        Goblin goblin1;
+                        enemyBattle(gamePlayer, goblin1);
+                    }
+
+                    if (interactionStatus == 668) {
+                        Orc orc1;
+                        enemyBattle(gamePlayer, orc1);
+                    }
+
                     //boss event
-					if (interactionStatus == 42069) {
-						Boss boss1;
-						enemybossBattle(gamePlayer, boss1);
-					}
+                    if (interactionStatus == 42069) {
+                        Boss boss1;
+                        enemybossBattle(gamePlayer, boss1);
+                    }
 
-					//inn event
-					if (interactionStatus == 777) {
-						inn(gamePlayer);
-					}
+                    //inn event
+                    if (interactionStatus == 777) {
+                        inn(gamePlayer);
+                    }
 
-					//shop event
-					if (interactionStatus == 778) {
-						shop(gamePlayer);
-					}
+                    //shop event
+                    if (interactionStatus == 778) {
+                        shop(gamePlayer);
+                    }
+
                     /* If Item/Puzzle, Announce/Pickup Item */
                     if (interactionStatus <= 100) {
                         int ElementNumber = intMap.at(futureYPosition).at(currentXPosition);
@@ -576,21 +593,33 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                         Spider spider1;
                         enemyBattle(gamePlayer, spider1);
                     }
+
+                    if (interactionStatus == 667) {
+                        Goblin goblin1;
+                        enemyBattle(gamePlayer, goblin1);
+                    }
+
+                    if (interactionStatus == 668) {
+                        Orc orc1;
+                        enemyBattle(gamePlayer, orc1);
+                    }
+
                     //boss event
-					if (interactionStatus == 42069) {
-						Boss boss1;
-						enemybossBattle(gamePlayer, boss1);
-					}
+                    if (interactionStatus == 42069) {
+                        Boss boss1;
+                        enemybossBattle(gamePlayer, boss1);
+                    }
 
-					//inn event
-					if (interactionStatus == 777) {
-						inn(gamePlayer);
-					}
+                    //inn event
+                    if (interactionStatus == 777) {
+                        inn(gamePlayer);
+                    }
 
-					//shop event
-					if (interactionStatus == 778) {
-						shop(gamePlayer);
-					}
+                    //shop event
+                    if (interactionStatus == 778) {
+                        shop(gamePlayer);
+                    }
+
                     /* If Item/Puzzle, Announce/Pickup Item */
                     if (interactionStatus <= 100) {
                         int ElementNumber = intMap.at(futureYPosition).at(currentXPosition);
@@ -681,21 +710,33 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                         Spider spider1;
                         enemyBattle(gamePlayer, spider1);
                     }
+
+                    if (interactionStatus == 667) {
+                        Goblin goblin1;
+                        enemyBattle(gamePlayer, goblin1);
+                    }
+
+                    if (interactionStatus == 668) {
+                        Orc orc1;
+                        enemyBattle(gamePlayer, orc1);
+                    }
+
                     //boss event
-					if (interactionStatus == 42069) {
-						Boss boss1;
-						enemybossBattle(gamePlayer, boss1);
-					}
+                    if (interactionStatus == 42069) {
+                        Boss boss1;
+                        enemybossBattle(gamePlayer, boss1);
+                    }
 
-					//inn event
-					if (interactionStatus == 777) {
-						inn(gamePlayer);
-					}
+                    //inn event
+                    if (interactionStatus == 777) {
+                        inn(gamePlayer);
+                    }
 
-					//shop event
-					if (interactionStatus == 778) {
-						shop(gamePlayer);
-					}
+                    //shop event
+                    if (interactionStatus == 778) {
+                        shop(gamePlayer);
+                    }
+
                     /* If Item/Puzzle, Announce/Pickup Item */
                     if (interactionStatus <= 100) {
                         int ElementNumber = intMap.at(currentYPosition).at(futureXPosition);
@@ -784,21 +825,33 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                         Spider spider1;
                         enemyBattle(gamePlayer, spider1);
                     }
+
+                    if (interactionStatus == 667) {
+                        Goblin goblin1;
+                        enemyBattle(gamePlayer, goblin1);
+                    }
+
+                    if (interactionStatus == 668) {
+                        Orc orc1;
+                        enemyBattle(gamePlayer, orc1);
+                    }
+
                     //boss event
-					if (interactionStatus == 42069) {
-						Boss boss1;
-						enemybossBattle(gamePlayer, boss1);
-					}
+                    if (interactionStatus == 42069) {
+                        Boss boss1;
+                        enemybossBattle(gamePlayer, boss1);
+                    }
 
-					//inn event
-					if (interactionStatus == 777) {
-						inn(gamePlayer);
-					}
+                    //inn event
+                    if (interactionStatus == 777) {
+                        inn(gamePlayer);
+                    }
 
-					//shop event
-					if (interactionStatus == 778) {
-						shop(gamePlayer);
-					}
+                    //shop event
+                    if (interactionStatus == 778) {
+                        shop(gamePlayer);
+                    }
+
                     /* If Item/Puzzle, Announce/Pickup Item */
                     if (interactionStatus <= 100) {
                         int ElementNumber = intMap.at(currentYPosition).at(futureXPosition);
@@ -1455,6 +1508,7 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
                 }
 
                 playerFile << "\n";
+                playerFile << mainPlayer.getGold() << "\n";
                 playerFile.close();
 
                 cout << "Game Successfully Saved!" << endl;
@@ -1526,9 +1580,350 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
         }
 
         playerFile << "\n";
+        playerFile << mainPlayer.getGold() << "\n";
         playerFile.close();
 
         cout << "Game Successfully Saved!" << endl;
+
+    }
+
+}
+
+void enemyBattle(Player& mainPlayer, Goblin& enemyGoblin) {
+
+    int eLevel = enemyGoblin.returnLevel();
+    string playerName = mainPlayer.getName();
+    bool fleeFailure = true;
+    vector<string> inventory = mainPlayer.returnInventory();
+
+    cout << "You Have Encountered a Level " << eLevel << " Goblin! Get Ready to Battle!" << endl;
+    cout << endl;
+
+    while ((enemyGoblin.returnHealth() > 0 && mainPlayer.returnHealth() > 0) && fleeFailure) {
+
+        string userChoice;
+        string userWeaponChoice;
+
+        cout << endl;
+        cout << "Player: " << playerName << endl;
+        cout << "Health: " << mainPlayer.returnHealth() << endl;
+        cout << "Inventory: " << printInventory(mainPlayer) << endl;
+        cout << endl;
+        cout << "Goblin Level: " << enemyGoblin.returnLevel() << endl;
+        cout << "Goblin Health: " << enemyGoblin.returnHealth() << endl;
+        cout << endl;
+        cout << endl;
+
+        cout << "Fight or Flee: ";
+        cin >> userChoice;
+        stringToUpper(userChoice);
+
+        if (userChoice == "FIGHT") {
+
+            cout << "What Would You like to Use: ";
+            cin >> userWeaponChoice;
+            stringToUpper(userWeaponChoice);
+            clearScreen();
+
+            // If the Weapon is in the Inventory or If the Item is a Fist
+            if (find(inventory.begin(), inventory.end(), userWeaponChoice) != inventory.end() ||
+                userWeaponChoice == "FIST") {
+
+                // If Attacked With a Fist Deal 5pts Damage
+                if (userWeaponChoice == "FIST") {
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 5pts in Damage!" << endl;
+                    enemyGoblin.dealDamage(5);
+
+                    cout << endl;
+
+                    // Goblin Attack Turn
+                    if (enemyGoblin.returnHealth() > 0) {
+                        int gAttackStrength = enemyGoblin.attack();
+                        cout << "Goblin Attacks!" << endl;
+                        cout << "Goblin Deals " << gAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(gAttackStrength);
+                    }
+
+                }
+
+                else if (userWeaponChoice == "SWORD") {
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 20pts in Damage!" << endl;
+                    enemyGoblin.dealDamage(20);
+
+                    cout << endl;
+
+                    // Goblin Attack Turn if Goblin Still Alive
+                    if (enemyGoblin.returnHealth() > 0) {
+                        int gAttackStrength = enemyGoblin.attack();
+                        cout << "Goblin Attacks!" << endl;
+                        cout << "Goblin Deals " << gAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(gAttackStrength);
+                    }
+
+                }
+
+                else {
+
+                    cout << "Sorry, That Item Cannot Be Used Here!" << endl;
+
+                }
+
+            }
+
+            else if (userWeaponChoice == "HELP") {
+
+                clearScreen();
+
+                cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
+                cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
+                cout << endl;
+            }
+
+            else {
+
+                cout << "You Do Not Have That Item!" << endl;
+
+            }
+
+        }
+
+            // If the User Chooses to Flee, Calculate if Flee was Successful
+        else if (userChoice == "FLEE") {
+
+            clearScreen();
+
+            // Random Seed
+            srand(time(NULL));
+
+            // Generate Random Level Between 1 and 10
+            int escapeChance = 1 + (rand() % (int) (10 - 1 + 1));
+
+            if (escapeChance >= eLevel) {
+                cout << "You Managed to Escape Successfully!" << endl;
+                fleeFailure = false;
+            }
+
+            else {
+                cout << "You Try to Run, but the Goblin Cuts You Off!" << endl;
+
+                if (escapeChance > 5) {
+                    cout << "The Goblin Chooses to Attack!" << endl;
+                    int gAttackStrength = enemyGoblin.attack();
+                    cout << "Goblin Attacks!" << endl;
+                    cout << "Goblin Deals " << gAttackStrength << "pts in Damage!" << endl;
+                    mainPlayer.takeDamage(gAttackStrength);
+                }
+
+                fleeFailure = true;
+            }
+
+        }
+
+        else if (userChoice == "HELP") {
+
+            clearScreen();
+
+            cout << "Type \'FIGHT\' to Engage the Enemy" << endl;
+            cout << "Type \'FLEE\' to Attempt to Run Away From the Enemy" << endl;
+            cout << endl;
+        }
+
+        else {
+            clearScreen();
+            cout << "Sorry, That's Not an Option!" << endl;
+        }
+
+    }
+
+    if (enemyGoblin.returnHealth() <= 0 && mainPlayer.returnHealth() > 0) {
+
+        cout << endl;
+        cout << "Enemy Goblin Defeated!" << endl;
+        cout << endl;
+
+    }
+
+    else if (mainPlayer.returnHealth() > 0) {
+        //Nothing Happens
+    }
+
+    else {
+
+        cout << endl;
+        cout << "You Have Been Killed in Battle. GAME OVER." << endl;
+        exit(1);
+
+    }
+
+}
+
+void enemyBattle(Player& mainPlayer, Orc& enemyOrc) {
+
+    int eLevel = enemyOrc.returnLevel();
+    string playerName = mainPlayer.getName();
+    bool fleeFailure = true;
+    vector<string> inventory = mainPlayer.returnInventory();
+
+    cout << "You Have Encountered a Level " << eLevel << " Orc! Get Ready to Battle!" << endl;
+    cout << endl;
+
+    while ((enemyOrc.returnHealth() > 0 && mainPlayer.returnHealth() > 0) && fleeFailure) {
+
+        string userChoice;
+        string userWeaponChoice;
+
+        cout << endl;
+        cout << "Player: " << playerName << endl;
+        cout << "Health: " << mainPlayer.returnHealth() << endl;
+        cout << "Inventory: " << printInventory(mainPlayer) << endl;
+        cout << endl;
+        cout << "Orc Level: " << enemyOrc.returnLevel() << endl;
+        cout << "Orc Health: " << enemyOrc.returnHealth() << endl;
+        cout << endl;
+        cout << endl;
+
+        cout << "Fight or Flee: ";
+        cin >> userChoice;
+        stringToUpper(userChoice);
+
+        if (userChoice == "FIGHT") {
+
+            cout << "What Would You like to Use: ";
+            cin >> userWeaponChoice;
+            stringToUpper(userWeaponChoice);
+            clearScreen();
+
+            // If the Weapon is in the Inventory or If the Item is a Fist
+            if (find(inventory.begin(), inventory.end(), userWeaponChoice) != inventory.end() ||
+                userWeaponChoice == "FIST") {
+
+                // If Attacked With a Fist Deal 5pts Damage
+                if (userWeaponChoice == "FIST") {
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 5pts in Damage!" << endl;
+                    enemyOrc.dealDamage(5);
+
+                    cout << endl;
+
+                    // Orc Attack Turn
+                    if (enemyOrc.returnHealth() > 0) {
+                        int oAttackStrength = enemyOrc.attack();
+                        cout << "Orc Attacks!" << endl;
+                        cout << "Orc Deals " << oAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(oAttackStrength);
+                    }
+
+                }
+
+                else if (userWeaponChoice == "SWORD") {
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 20pts in Damage!" << endl;
+                    enemyOrc.dealDamage(20);
+
+                    cout << endl;
+
+                    // Orc Attack Turn if Orc Still Alive
+                    if (enemyOrc.returnHealth() > 0) {
+                        int oAttackStrength = enemyOrc.attack();
+                        cout << "Orc Attacks!" << endl;
+                        cout << "Orc Deals " << oAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(oAttackStrength);
+                    }
+
+                }
+
+                else {
+
+                    cout << "Sorry, That Item Cannot Be Used Here!" << endl;
+
+                }
+
+            }
+
+            else if (userWeaponChoice == "HELP") {
+
+                clearScreen();
+
+                cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
+                cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
+                cout << endl;
+            }
+
+            else {
+
+                cout << "You Do Not Have That Item!" << endl;
+
+            }
+
+        }
+
+            // If the User Chooses to Flee, Calculate if Flee was Successful
+        else if (userChoice == "FLEE") {
+
+            clearScreen();
+
+            // Random Seed
+            srand(time(NULL));
+
+            // Generate Random Level Between 1 and 10
+            int escapeChance = 1 + (rand() % (int) (10 - 1 + 1));
+
+            if (escapeChance >= eLevel) {
+                cout << "You Managed to Escape Successfully!" << endl;
+                fleeFailure = false;
+            }
+
+            else {
+                cout << "You Try to Run, but the Orc Cuts You Off!" << endl;
+
+                if (escapeChance > 5) {
+                    cout << "The Orc Chooses to Attack!" << endl;
+                    int oAttackStrength = enemyOrc.attack();
+                    cout << "Orc Attacks!" << endl;
+                    cout << "Orc Deals " << oAttackStrength << "pts in Damage!" << endl;
+                    mainPlayer.takeDamage(oAttackStrength);
+                }
+
+                fleeFailure = true;
+            }
+
+        }
+
+        else if (userChoice == "HELP") {
+
+            clearScreen();
+
+            cout << "Type \'FIGHT\' to Engage the Enemy" << endl;
+            cout << "Type \'FLEE\' to Attempt to Run Away From the Enemy" << endl;
+            cout << endl;
+        }
+
+        else {
+            clearScreen();
+            cout << "Sorry, That's Not an Option!" << endl;
+        }
+
+    }
+
+    if (enemyOrc.returnHealth() <= 0 && mainPlayer.returnHealth() > 0) {
+
+        cout << endl;
+        cout << "Enemy Orc Defeated!" << endl;
+        cout << endl;
+
+    }
+
+    else if (mainPlayer.returnHealth() > 0) {
+        //Nothing Happens
+    }
+
+    else {
+
+        cout << endl;
+        cout << "You Have Been Killed in Battle. GAME OVER." << endl;
+        exit(1);
 
     }
 
@@ -1612,6 +2007,7 @@ bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integer
         }
 
         string playerName = filePlayerLines.at(0);
+        int playerGold = atoi(filePlayerLines.at(3).c_str());
         int playerHealth = atoi(filePlayerLines.at(1).c_str());
         vector<string> playerInventory;
 

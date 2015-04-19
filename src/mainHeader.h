@@ -1384,6 +1384,7 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
                 }
 
                 playerFile << "\n";
+                playerFile << mainPlayer.getGold() << "\n";
                 playerFile.close();
 
                 cout << "Game Successfully Saved!" << endl;
@@ -1455,6 +1456,7 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
         }
 
         playerFile << "\n";
+        playerFile << mainPlayer.getGold() << "\n";
         playerFile.close();
 
         cout << "Game Successfully Saved!" << endl;
@@ -1541,6 +1543,7 @@ bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integer
         }
 
         string playerName = filePlayerLines.at(0);
+        int playerGold = atoi(filePlayerLines.at(3).c_str());
         int playerHealth = atoi(filePlayerLines.at(1).c_str());
         vector<string> playerInventory;
 

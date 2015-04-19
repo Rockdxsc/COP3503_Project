@@ -18,7 +18,7 @@ private:
     int playerHealth;                   // Player Health
     vector<string> playerInventory;     // Stores Elements in the Player's Inventory
     int currentFloor;                       //added a field for current floor
-
+    int playerGold;
 public:
 
     /***** FUNCTION PROTOTYPES *****/
@@ -41,7 +41,7 @@ public:
         // Initialize Player as Player1 with 100 pts of Health
         playerName = "Player1";
         playerHealth = 100;
-
+        playerGold = 0;
     }
 
     /***** PLAYER NAME *****/
@@ -147,5 +147,14 @@ public:
         }
 
     }
-
+	/***** PLAYER GOLD *****/
+	void addGold(int g){
+		playerGold += g;
+	}
+	void removeGold(int g){
+		playerGold -= g;
+	}
+	int getGold(){
+		return playerGold;
+	}
 };

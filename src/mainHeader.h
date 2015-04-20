@@ -1363,7 +1363,7 @@ void shop(Player& P){
         else if (c == "SWORD" && P.getGold() < 50){
             cout << "Not enough gold." << endl;
         }
-           if (c == "IRON SWORD" && P.getGold() >= 60){
+        else if (c == "IRON SWORD" && P.getGold() >= 60){
             cout << "You bought an iron sword." << endl;
             P.addToInventory("IRON SWORD");
             P.removeGold(60);
@@ -1372,7 +1372,7 @@ void shop(Player& P){
         else if (c == "IRON SWORD" && P.getGold() < 60){
             cout << "Not enough gold." << endl;
         }
-           if (c == "RUNE SWORD" && P.getGold() >= 70){
+        else if (c == "RUNE SWORD" && P.getGold() >= 70){
             cout << "You bought a rune sword." << endl;
             P.addToInventory("RUNE SWORD");
             P.removeGold(70);

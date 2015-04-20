@@ -208,7 +208,10 @@ int main() {
             cout << endl;
 
         }
-
+	else if(userAction == "CHEAT"){
+		mainPlayer.addGold(100);
+		
+	}
         else{
 
             clearScreen();

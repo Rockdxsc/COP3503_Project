@@ -156,10 +156,19 @@ int main() {
 
             }
 
+            else if(userCheck == "GOLD"){
+
+                int userGold = mainPlayer.getGold();
+
+                cout << "Your Current Gold is: " << userGold << endl;
+
+            }
+
             else if(userCheck == "HELP"){
 
                 cout << "Type \'INVENTORY\' to View Your Inventory" << endl;
                 cout << "Type \'HEALTH\' to View Your Current Health" << endl;
+                cout << "Type \'GOLD\' to View Your Current Gold" << endl;
                 cout << endl;
             }
 

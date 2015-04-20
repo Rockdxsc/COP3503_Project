@@ -1352,7 +1352,8 @@ void shop(Player& P){
     cout << "\nShop Inventory:\n\nSword - 50 gold\nHealing Soda - 15 gold\nIron Sword - 60\nRune Sword -70" << endl;
     while (c != "EXIT"){
         cout << "What would you like to buy? Type 'exit' to exit the shop." << endl;
-        cin >> c;
+        getline(cin, c);
+        getline(cin, c);
         stringToUpper(c);
         if (c == "SWORD" && P.getGold() >= 50){
             cout << "You bought a sword." << endl;

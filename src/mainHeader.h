@@ -41,6 +41,30 @@ bool checkFileExists(string file);
 string printInventory(Player player);
 int mapCheck();
 
+//Passive events
+string eventList[] = {	"A patch of grass rustles by your side...probably nothing.", 
+						"A passing cow falls over dead, good thing you take vaccines.",
+						"The breeze makes your hair billow in the wind and you take a moment to appreciate your own beauty as a man.",
+						"You notice that your shoe is untied, bet wish you learned how to tie your shoes now don't you.",
+						"It starts to rain, then it stops.",
+						"A young lad in green runs by shouting HYAH and breaking jars with a sword.",
+						"A college student tries to hand you a flyer but you avoid eye contact and hurry away.",
+						"A cthulu appears!!! But it's just a mirage.",
+						"You meet a girl, fall in love, get married, have kids, then continue on your adventure.",
+						"Absolutely nothing of importance happens, I promise.",
+						"You run into a spiderweb, but luckily it was empty.",
+						"A blue box appears out of nowhere and a British fellow steps out, looks around, then gets back in and dissapears again.",
+						"A tree falls in the forest, but you are there to hear it so that doesn't really answer the question.",
+						"A frog asks you for a kiss, but frog stew tastes better.",
+						"A single snowflake falls to the ground and melts instantly on the desert sand."};
+
+//Counts the number of passive events used
+int passiveCount = 0;
+
+//Number of Passives to be places on each floor
+int numPassives1 = 10;
+int numPassives2 = 5;
+
 // Game Floor Number
 int gameFloor = 1;                   //added floor int to keep track of floor placement
 
@@ -139,6 +163,24 @@ vector< vector<int> > generateIntMap(vector<string> itemsList, int numEnemies){
         }
 
     }
+    
+    // While there are passives to place, 10 will be on floor 1
+	while(numPassives1 > 0){
+		// Generate Two Random Seeds for Each Matrix Dimension
+        int randomP1 = rand() % GRID_DIMENSION;
+        int randomP2 = rand() % GRID_DIMENSION;
+
+        // Generate a New Random if Both Digits are the Same
+        while(randomP1 == randomP2){
+            randomP2 = rand() % GRID_DIMENSION;
+        }
+        
+        // If Map Position is Empty, Fill it With a Passive Event
+        if(mapOverlay[randomP1][randomP2] == 0){
+            mapOverlay[randomP1][randomP2] = 270;
+            numPassives1 = numPassives1 - 1;
+        }
+	}
 
     // Stores the Temporary Vector to Push into the Master Vector
     vector<int> tempVector;
@@ -257,6 +299,24 @@ vector< vector<int> > generateIntMap2(vector<string> itemsList, int numEnemies){
         }
         
     }
+    
+    // While there are passives to place, 5 will be on floor 2
+	while(numPassives2 > 0){
+		// Generate Two Random Seeds for Each Matrix Dimension
+        int randomP1 = rand() % GRID_DIMENSION;
+        int randomP2 = rand() % GRID_DIMENSION;
+
+        // Generate a New Random if Both Digits are the Same
+        while(randomP1 == randomP2){
+            randomP2 = rand() % GRID_DIMENSION;
+        }
+        
+        // If Map Position is Empty, Fill it With a Passive Event
+        if(mapOverlay[randomP1][randomP2] == 0){
+            mapOverlay[randomP1][randomP2] = 270;
+            numPassives2 = numPassives2 - 1;
+        }
+	}
 
     // Stores the Temporary Vector to Push into the Master Vector
     vector<int> tempVector;
@@ -517,6 +577,12 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                     if (interactionStatus == 778) {
                         shop(gamePlayer);
                     }
+                    
+                    //passive event
+                    if (interactionStatus == 270) {
+                        cout << eventList[passiveCount] << endl;
+                        passiveCount++;
+                    }
 
                     /* If Item/Puzzle, Announce/Pickup Item */
                     if (interactionStatus <= 100) {
@@ -636,6 +702,12 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                     //shop event
                     if (interactionStatus == 778) {
                         shop(gamePlayer);
+                    }
+                    
+                    //passive event
+                    if (interactionStatus == 270) {
+                        cout << eventList[passiveCount] << endl;
+                        passiveCount++;
                     }
 
                     /* If Item/Puzzle, Announce/Pickup Item */
@@ -760,6 +832,12 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                     if (interactionStatus == 778) {
                         shop(gamePlayer);
                     }
+                    
+                    //passive event
+                    if (interactionStatus == 270) {
+                        cout << eventList[passiveCount] << endl;
+                        passiveCount++;
+                    }
 
                     /* If Item/Puzzle, Announce/Pickup Item */
                     if (interactionStatus <= 100) {
@@ -879,6 +957,12 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                     //shop event
                     if (interactionStatus == 778) {
                         shop(gamePlayer);
+                    }
+                    
+                    //passive event
+                    if (interactionStatus == 270) {
+                        cout << eventList[passiveCount] << endl;
+                        passiveCount++;
                     }
 
                     /* If Item/Puzzle, Announce/Pickup Item */

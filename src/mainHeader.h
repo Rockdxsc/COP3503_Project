@@ -977,7 +977,8 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
         cout << endl;
 
         cout << "Fight or Flee: ";
-        cin >> userChoice;
+        getline(cin,userChoice);
+        getline(cin,userChoice);
         stringToUpper(userChoice);
 
         if(userChoice == "FIGHT"){
@@ -1175,7 +1176,7 @@ void enemybossBattle(Player& mainPlayer, Boss& enemyBoss){
         string userChoice;
         string userWeaponChoice;
         int extra = 0; //attacks will get stronger
-
+	int damage;
         cout << endl;
         cout << "Player: " << playerName << endl;
         cout << "Health: " << mainPlayer.returnHealth() << endl;
@@ -1187,7 +1188,8 @@ void enemybossBattle(Player& mainPlayer, Boss& enemyBoss){
         cout << endl;
 
         cout << "Fight or Flee: ";
-        cin >> userChoice;
+        getline(cin,userChoice);
+        getline(cin,userChoice);
         stringToUpper(userChoice);
 
         if (userChoice == "FIGHT"){
@@ -1202,7 +1204,7 @@ void enemybossBattle(Player& mainPlayer, Boss& enemyBoss){
 
 
                 if (userWeaponChoice == "FIST"){
-                    int damage = extra + 50;
+                    damage = extra + 50;
                     extra += 30;
                     cout << playerName << " Attacks!" << endl;
                     cout << playerName << " Deals "<<damage<<"pts in Damage!" << endl;
@@ -1220,7 +1222,7 @@ void enemybossBattle(Player& mainPlayer, Boss& enemyBoss){
                 }
 
                 else if (userWeaponChoice == "SWORD"){
-                    int damage = extra + 200;
+                    damage = extra + 200;
                     extra += 30;
                     cout << playerName << " Attacks!" << endl;
                     cout << playerName << " Deals "<<damage<<"pts in Damage!" << endl;
@@ -1236,7 +1238,40 @@ void enemybossBattle(Player& mainPlayer, Boss& enemyBoss){
                     }
 
                 }
+                else if (userWeaponChoice == "IRON SWORD"){
+                    damage = extra + 300;
+                    extra += 30;
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals "<<damage<<"pts in Damage!" << endl;
+                    enemyBoss.dealDamage(damage);
 
+                    cout << endl;
+
+                    if (enemyBoss.returnHealth() > 0) {
+                        int sAttackStrength = enemyBoss.attack();
+                        cout << "Hydra Attacks!" << endl;
+                        cout << "Hydra Deals " << sAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(sAttackStrength);
+                    }
+
+                }
+		else if (userWeaponChoice == "RUNE SWORD"){
+                    damage = extra + 400;
+                    extra += 30;
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals "<<damage<<"pts in Damage!" << endl;
+                    enemyBoss.dealDamage(damage);
+
+                    cout << endl;
+
+                    if (enemyBoss.returnHealth() > 0) {
+                        int sAttackStrength = enemyBoss.attack();
+                        cout << "Hydra Attacks!" << endl;
+                        cout << "Hydra Deals " << sAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(sAttackStrength);
+                    }
+
+                }
                 else{
 
                     cout << "Sorry, That Item Cannot Be Used Here!" << endl;
@@ -1715,7 +1750,8 @@ void enemyBattle(Player& mainPlayer, Goblin& enemyGoblin) {
         cout << endl;
 
         cout << "Fight or Flee: ";
-        cin >> userChoice;
+        getline(cin,userChoice);
+        getline(cin,userChoice);
         stringToUpper(userChoice);
 
         if (userChoice == "FIGHT") {
@@ -1924,7 +1960,8 @@ void enemyBattle(Player& mainPlayer, Orc& enemyOrc) {
         cout << endl;
 
         cout << "Fight or Flee: ";
-        cin >> userChoice;
+        getline(cin,userChoice);
+        getline(cin,userChoice);
         stringToUpper(userChoice);
 
         if (userChoice == "FIGHT") {

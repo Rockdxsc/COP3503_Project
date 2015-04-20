@@ -2203,6 +2203,7 @@ bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integer
         }
 
         mainPlayer.setName(playerName);
+        mainPlayer.addGold(playerGold);
         mainPlayer.setHealth(playerHealth);
         mainPlayer.setCurrentFloor(floorLevel);
 

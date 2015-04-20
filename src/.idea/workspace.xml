@@ -34,8 +34,8 @@
       <file leaf-file-name="mainHeader.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mainHeader.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.03577513">
-              <caret line="1347" column="5" selection-start-line="1347" selection-start-column="5" selection-end-line="1347" selection-end-column="5" />
+            <state vertical-scroll-proportion="45.321976">
+              <caret line="1505" column="30" selection-start-line="1505" selection-start-column="28" selection-end-line="1505" selection-end-column="30" />
               <folding>
                 <element signature="e#65#84#0" expanded="true" />
               </folding>
@@ -46,8 +46,8 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.0">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state vertical-scroll-proportion="-6.5">
+              <caret line="93" column="5" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -56,8 +56,8 @@
       <file leaf-file-name="playerClass.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/playerClass.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+            <state vertical-scroll-proportion="-46.2">
+              <caret line="106" column="44" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -69,9 +69,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/enemyClass.h" />
-        <option value="$PROJECT_DIR$/playerClass.h" />
         <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/mainHeader.h" />
+        <option value="$PROJECT_DIR$/playerClass.h" />
       </list>
     </option>
   </component>
@@ -142,6 +142,9 @@
   <component name="RunManager" selected="Application.Build All">
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="src" TARGET_NAME="src" CONFIG_NAME="Debug">
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <method />
     </configuration>
     <configuration default="false" name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
@@ -239,24 +242,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state vertical-scroll-proportion="-6.5">
+          <caret line="93" column="5" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/playerClass.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+        <state vertical-scroll-proportion="-46.2">
+          <caret line="106" column="44" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mainHeader.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.03577513">
-          <caret line="1347" column="5" selection-start-line="1347" selection-start-column="5" selection-end-line="1347" selection-end-column="5" />
+        <state vertical-scroll-proportion="45.321976">
+          <caret line="1505" column="30" selection-start-line="1505" selection-start-column="28" selection-end-line="1505" selection-end-column="30" />
           <folding>
             <element signature="e#65#84#0" expanded="true" />
           </folding>

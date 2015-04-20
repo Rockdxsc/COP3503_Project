@@ -43,6 +43,7 @@ public:
         playerName = "Player1";
         playerHealth = 100;
         playerGold = 0;
+        currentFloor = 1;
     }
 
     /***** PLAYER NAME *****/

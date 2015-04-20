@@ -1606,6 +1606,7 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
 
                 playerFile << "\n";
                 playerFile << mainPlayer.getGold() << "\n";
+                playerFile << mainPlayer.getCurrentFloor() << "\n";
                 playerFile.close();
 
                 cout << "Game Successfully Saved!" << endl;
@@ -1678,6 +1679,7 @@ void gameSave(vector< vector<int> > integerMap, vector < vector <int> > integerM
 
         playerFile << "\n";
         playerFile << mainPlayer.getGold() << "\n";
+        playerFile << mainPlayer.getCurrentFloor() << "\n";
         playerFile.close();
 
         cout << "Game Successfully Saved!" << endl;
@@ -2184,6 +2186,7 @@ bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integer
 
         string playerName = filePlayerLines.at(0);
         int playerGold = atoi(filePlayerLines.at(3).c_str());
+        int floorLevel = atoi(filePlayerLines.at(4).c_str());
         int playerHealth = atoi(filePlayerLines.at(1).c_str());
         vector<string> playerInventory;
 
@@ -2200,6 +2203,8 @@ bool loadGame(vector< vector<int> >& integerMap, vector < vector<int> > &integer
 
         mainPlayer.setName(playerName);
         mainPlayer.setHealth(playerHealth);
+        mainPlayer.setCurrentFloor(floorLevel);
+
         if(mainPlayer.getCurrentFloor() == 1){
             gameFloor = 1;
         }

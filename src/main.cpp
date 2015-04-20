@@ -4,7 +4,6 @@ using namespace std;
 
 /* Function Prototypes */
 
-
 int main() {
 
     string userAction;

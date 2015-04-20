@@ -17,7 +17,7 @@ private:
     string playerName;                  // Player Name
     int playerHealth;                   // Player Health
     vector<string> playerInventory;     // Stores Elements in the Player's Inventory
-    int currentFloor;                       //added a field for current floor
+    int currentFloor;                   //added a field for current floor
     int playerGold;
 
 public:

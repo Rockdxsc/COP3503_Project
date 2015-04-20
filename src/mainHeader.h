@@ -1095,9 +1095,9 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
             srand (time(NULL));
 
             // Generate Random Level Between 1 and 10
-            int escapeChance = 1 + (rand() % (int)(10 - 1 + 1));
+            int escapeChance = 2 + (rand() % (int)(10 - 1 + 1));
 
-            if(escapeChance >= eLevel){
+            if(escapeChance >= eLevel-4){
                 cout << "You Managed to Escape Successfully!" << endl;
                 fleeFailure = false;
             }
@@ -1352,7 +1352,8 @@ void shop(Player& P){
     cout << "\nShop Inventory:\n\nSword - 50 gold\nHealing Soda - 15 gold\nIron Sword - 60\nRune Sword -70" << endl;
     while (c != "EXIT"){
         cout << "What would you like to buy? Type 'exit' to exit the shop." << endl;
-        cin >> c;
+        getline(cin, c);
+        getline(cin, c);
         stringToUpper(c);
         if (c == "SWORD" && P.getGold() >= 50){
             cout << "You bought a sword." << endl;
@@ -1363,7 +1364,7 @@ void shop(Player& P){
         else if (c == "SWORD" && P.getGold() < 50){
             cout << "Not enough gold." << endl;
         }
-           if (c == "IRON SWORD" && P.getGold() >= 60){
+          else if (c == "IRON SWORD" && P.getGold() >= 60){
             cout << "You bought an iron sword." << endl;
             P.addToInventory("IRON SWORD");
             P.removeGold(60);
@@ -1372,7 +1373,7 @@ void shop(Player& P){
         else if (c == "IRON SWORD" && P.getGold() < 60){
             cout << "Not enough gold." << endl;
         }
-           if (c == "RUNE SWORD" && P.getGold() >= 70){
+         else  if (c == "RUNE SWORD" && P.getGold() >= 70){
             cout << "You bought a rune sword." << endl;
             P.addToInventory("RUNE SWORD");
             P.removeGold(70);

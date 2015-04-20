@@ -34,11 +34,21 @@
       <file leaf-file-name="mainHeader.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mainHeader.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27086884">
-              <caret line="1444" column="34" selection-start-line="1444" selection-start-column="34" selection-end-line="1444" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.88926744">
+              <caret line="467" column="17" selection-start-line="467" selection-start-column="17" selection-end-line="467" selection-end-column="17" />
               <folding>
                 <element signature="e#65#84#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -217,10 +227,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mainHeader.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27086884">
-          <caret line="1444" column="34" selection-start-line="1444" selection-start-column="34" selection-end-line="1444" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.88926744">
+          <caret line="467" column="17" selection-start-line="467" selection-start-column="17" selection-end-line="467" selection-end-column="17" />
           <folding>
             <element signature="e#65#84#0" expanded="true" />
           </folding>

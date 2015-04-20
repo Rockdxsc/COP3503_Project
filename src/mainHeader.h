@@ -462,10 +462,10 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                 gameFloor = 1;
             }
             else if(playerMap.at(futureYPosition).at(currentXPosition) == "I"){
-		inn(game.Player);
+		inn(gamePlayer);
             }
              else if(playerMap.at(futureYPosition).at(currentXPosition) == "S"){
-		shop(game.Player);
+		shop(gamePlayer);
             }
 
 

@@ -17,7 +17,7 @@ int main() {
 
     // Initialize the Items that are Available in the Level
     vector<string> itemsList;
-    itemsList.push_back("SWORD");
+    //itemsList.push_back("SWORD");
     itemsList.push_back("HEALING SODA");
     itemsList.push_back("HEALING SODA");
     itemsList.push_back("MAP");

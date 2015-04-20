@@ -1025,6 +1025,40 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
 
                 }
 
+                 else if(userWeaponChoice == "IRON SWORD"){
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 30pts in Damage!" << endl;
+                    enemySpider.dealDamage(30);
+
+                    cout << endl;
+
+                    // Spider Attack Turn if Spider Still Alive
+                    if(enemySpider.returnHealth() > 0) {
+                        int sAttackStrength = enemySpider.attack();
+                        cout << "Spider Attacks!" << endl;
+                        cout << "Spider Deals " << sAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(sAttackStrength);
+                    }
+
+                }
+
+                else if(userWeaponChoice == "RUNE SWORD"){
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 40pts in Damage!" << endl;
+                    enemySpider.dealDamage(40);
+
+                    cout << endl;
+
+                    // Spider Attack Turn if Spider Still Alive
+                    if(enemySpider.returnHealth() > 0) {
+                        int sAttackStrength = enemySpider.attack();
+                        cout << "Spider Attacks!" << endl;
+                        cout << "Spider Deals " << sAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(sAttackStrength);
+                    }
+
+                }
+
                 else{
 
                     cout << "Sorry, That Item Cannot Be Used Here!" << endl;
@@ -1039,6 +1073,8 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
 
                 cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
                 cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
+                cout << "Type \'IRON SWORD\' if You Have One in Your Inventory to Attack (30pts Damage)" << endl;
+                cout << "Type \'RUNE SWORD\' if You Have One in Your Inventory to Attack (40pts Damage)" << endl;
                 cout << endl;
             }
 
@@ -1104,7 +1140,7 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
         cout << "Enemy Spider Defeated!" << endl;
         int goldDrop = enemySpider.returnLevel() * 5;
         cout <<"You got "<<goldDrop<<" gold."<< endl;
-		mainPlayer.addGold(goldDrop);
+        mainPlayer.addGold(goldDrop);
         cout << endl;
 
     }
@@ -1215,6 +1251,8 @@ void enemybossBattle(Player& mainPlayer, Boss& enemyBoss){
 
                 cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
                 cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
+                cout << "Type \'IRON SWORD\' if You Have One in Your Inventory to Attack (30pts Damage)" << endl;
+                cout << "Type \'RUNE SWORD\' if You Have One in Your Inventory to Attack (40pts Damage)" << endl;
                 cout << endl;
             }
 
@@ -1311,7 +1349,7 @@ void shop(Player& P){
     clearScreen();
     string c;
     cout << "You enter the shop." << endl;
-    cout << "\nShop Inventory:\n\nSword - 50 gold\nHealing Soda - 15 gold" << endl;
+    cout << "\nShop Inventory:\n\nSword - 50 gold\nHealing Soda - 15 gold\nIron Sword - 60\nRune Sword -70" << endl;
     while (c != "EXIT"){
         cout << "What would you like to buy? Type 'exit' to exit the shop." << endl;
         cin >> c;
@@ -1323,6 +1361,24 @@ void shop(Player& P){
 
         }
         else if (c == "SWORD" && P.getGold() < 50){
+            cout << "Not enough gold." << endl;
+        }
+           if (c == "IRON SWORD" && P.getGold() >= 60){
+            cout << "You bought an iron sword." << endl;
+            P.addToInventory("IRON SWORD");
+            P.removeGold(60);
+
+        }
+        else if (c == "IRON SWORD" && P.getGold() < 60){
+            cout << "Not enough gold." << endl;
+        }
+           if (c == "RUNE SWORD" && P.getGold() >= 70){
+            cout << "You bought a rune sword." << endl;
+            P.addToInventory("RUNE SWORD");
+            P.removeGold(70);
+
+        }
+        else if (c == "RUNE SWORD" && P.getGold() < 70){
             cout << "Not enough gold." << endl;
         }
         else if (c == "HEALING SODA" && P.getGold() >= 15){
@@ -1446,7 +1502,7 @@ void printItemMap(vector< vector<int> > inputVector){
             int element = inputVector.at(i).at(j);
             string converted;
 
-            if(element == 666 || element == 0 || element == 667 || element == 668 || element == 42096){
+            if(element == 666 || element == 0){
                 converted = ".";
             }
 
@@ -1460,14 +1516,6 @@ void printItemMap(vector< vector<int> > inputVector){
 
             else if(element == 1000){
                 converted = "D1";
-            }
-
-            else if(element == 777){
-                converted = "INN";
-            }
-
-            else if(element == 778){
-                converted = "SHP";
             }
 
             else{
@@ -1713,6 +1761,40 @@ void enemyBattle(Player& mainPlayer, Goblin& enemyGoblin) {
 
                 }
 
+                 else if (userWeaponChoice == "IRON SWORD") {
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 30pts in Damage!" << endl;
+                    enemyGoblin.dealDamage(30);
+
+                    cout << endl;
+
+                    // Goblin Attack Turn if Goblin Still Alive
+                    if (enemyGoblin.returnHealth() > 0) {
+                        int gAttackStrength = enemyGoblin.attack();
+                        cout << "Goblin Attacks!" << endl;
+                        cout << "Goblin Deals " << gAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(gAttackStrength);
+                    }
+
+                }
+
+                 else if (userWeaponChoice == "RUNE SWORD") {
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 40pts in Damage!" << endl;
+                    enemyGoblin.dealDamage(40);
+
+                    cout << endl;
+
+                    // Goblin Attack Turn if Goblin Still Alive
+                    if (enemyGoblin.returnHealth() > 0) {
+                        int gAttackStrength = enemyGoblin.attack();
+                        cout << "Goblin Attacks!" << endl;
+                        cout << "Goblin Deals " << gAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(gAttackStrength);
+                    }
+
+                }
+
                 else {
 
                     cout << "Sorry, That Item Cannot Be Used Here!" << endl;
@@ -1727,6 +1809,8 @@ void enemyBattle(Player& mainPlayer, Goblin& enemyGoblin) {
 
                 cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
                 cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
+                cout << "Type \'IRON SWORD\' if You Have One in Your Inventory to Attack (30pts Damage)" << endl;
+                cout << "Type \'RUNE SWORD\' if You Have One in Your Inventory to Attack (40pts Damage)" << endl;
                 cout << endl;
             }
 
@@ -1792,7 +1876,7 @@ void enemyBattle(Player& mainPlayer, Goblin& enemyGoblin) {
         cout << "Enemy Goblin Defeated!" << endl;
         int goldDrop = enemyGoblin.returnLevel() * 5;
         cout <<"You got "<<goldDrop<<" gold."<< endl;
-		mainPlayer.addGold(goldDrop);
+        mainPlayer.addGold(goldDrop);
         cout << endl;
 
     }
@@ -1886,6 +1970,40 @@ void enemyBattle(Player& mainPlayer, Orc& enemyOrc) {
 
                 }
 
+                 else if (userWeaponChoice == "IRON SWORD") {
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 30pts in Damage!" << endl;
+                    enemyOrc.dealDamage(30);
+
+                    cout << endl;
+
+                    // Orc Attack Turn if Orc Still Alive
+                    if (enemyOrc.returnHealth() > 0) {
+                        int oAttackStrength = enemyOrc.attack();
+                        cout << "Orc Attacks!" << endl;
+                        cout << "Orc Deals " << oAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(oAttackStrength);
+                    }
+
+                }
+
+                 else if (userWeaponChoice == "RUNE SWORD") {
+                    cout << playerName << " Attacks!" << endl;
+                    cout << playerName << " Deals 40pts in Damage!" << endl;
+                    enemyOrc.dealDamage(40);
+
+                    cout << endl;
+
+                    // Orc Attack Turn if Orc Still Alive
+                    if (enemyOrc.returnHealth() > 0) {
+                        int oAttackStrength = enemyOrc.attack();
+                        cout << "Orc Attacks!" << endl;
+                        cout << "Orc Deals " << oAttackStrength << "pts in Damage!" << endl;
+                        mainPlayer.takeDamage(oAttackStrength);
+                    }
+
+                }
+
                 else {
 
                     cout << "Sorry, That Item Cannot Be Used Here!" << endl;
@@ -1900,6 +2018,9 @@ void enemyBattle(Player& mainPlayer, Orc& enemyOrc) {
 
                 cout << "Type \'FIST\' to Punch the Enemy (5pts Damage)" << endl;
                 cout << "Type \'SWORD\' if You Have One in Your Inventory to Attack (20pts Damage)" << endl;
+                cout << "Type \'IRON SWORD\' if You Have One in Your Inventory to Attack (30pts Damage)" << endl;
+                cout << "Type \'RUNE SWORD\' if You Have One in Your Inventory to Attack (40pts Damage)" << endl;
+
                 cout << endl;
             }
 
@@ -1965,7 +2086,7 @@ void enemyBattle(Player& mainPlayer, Orc& enemyOrc) {
         cout << "Enemy Orc Defeated!" << endl;
         int goldDrop = enemyOrc.returnLevel() * 5;
         cout <<"You got "<<goldDrop<<" gold."<< endl;
-		mainPlayer.addGold(goldDrop);
+        mainPlayer.addGold(goldDrop);
         cout << endl;
 
     }

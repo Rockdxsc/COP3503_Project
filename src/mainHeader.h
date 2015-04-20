@@ -1352,6 +1352,7 @@ void shop(Player& P){
     cout << "\nShop Inventory:\n\nSword - 50 gold\nHealing Soda - 15 gold\nIron Sword - 60\nRune Sword -70" << endl;
     while (c != "EXIT"){
         cout << "What would you like to buy? Type 'exit' to exit the shop." << endl;
+        cout << "Current gold: "<< P.getGold() << endl;
         getline(cin, c);
         getline(cin, c);
         stringToUpper(c);
@@ -1390,6 +1391,9 @@ void shop(Player& P){
         }
         else if (c == "HEALING SODA" && P.getGold() < 15){
             cout << "Not enough gold." << endl;
+        }
+        else if (c == "EXIT"){
+        	//do nothing
         }
         else{
             cout << "Statement not recognised." << endl;

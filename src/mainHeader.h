@@ -1361,9 +1361,10 @@ void inn(Player& mainPlayer){
         if (innchoice == "Y" || innchoice == "YES"){
             if (mainPlayer.getGold() >= 10){
                 cout << "You rest in the inn for a night. Your health has been fully restored." << endl;
-                cout << "Current gold: " << mainPlayer.getGold() << endl;
+                
                 mainPlayer.setHealth(100);
                 mainPlayer.removeGold(10);
+                cout << "Current gold: " << mainPlayer.getGold() << endl;
                 exit = 1;
             }
             else{

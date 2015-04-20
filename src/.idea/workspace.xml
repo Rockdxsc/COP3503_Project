@@ -34,8 +34,8 @@
       <file leaf-file-name="mainHeader.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mainHeader.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="45.321976">
-              <caret line="1505" column="30" selection-start-line="1505" selection-start-column="28" selection-end-line="1505" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1505" column="9" selection-start-line="1505" selection-start-column="9" selection-end-line="1505" selection-end-column="9" />
               <folding>
                 <element signature="e#65#84#0" expanded="true" />
               </folding>
@@ -46,7 +46,7 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.5">
+            <state vertical-scroll-proportion="0.0">
               <caret line="94" column="0" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="5" />
               <folding />
             </state>
@@ -56,7 +56,7 @@
       <file leaf-file-name="playerClass.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/playerClass.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-46.2">
+            <state vertical-scroll-proportion="0.0">
               <caret line="106" column="44" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
               <folding />
             </state>
@@ -145,6 +145,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
       <method />
     </configuration>
     <configuration default="false" name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
@@ -175,9 +181,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="743" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24597365" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24597365" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972136" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -222,6 +228,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="94" column="0" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/playerClass.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="106" column="44" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mainHeader.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#65#84#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mainHeader.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -236,13 +268,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.5">
+        <state vertical-scroll-proportion="0.0">
           <caret line="94" column="0" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="5" />
           <folding />
         </state>
@@ -250,7 +281,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/playerClass.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-46.2">
+        <state vertical-scroll-proportion="0.0">
           <caret line="106" column="44" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
           <folding />
         </state>
@@ -258,8 +289,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mainHeader.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="45.321976">
-          <caret line="1505" column="30" selection-start-line="1505" selection-start-column="28" selection-end-line="1505" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1505" column="9" selection-start-line="1505" selection-start-column="9" selection-end-line="1505" selection-end-column="9" />
           <folding>
             <element signature="e#65#84#0" expanded="true" />
           </folding>

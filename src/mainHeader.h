@@ -1095,9 +1095,9 @@ void enemyBattle(Player& mainPlayer, Spider& enemySpider){
             srand (time(NULL));
 
             // Generate Random Level Between 1 and 10
-            int escapeChance = 1 + (rand() % (int)(10 - 1 + 1));
+            int escapeChance = 2 + (rand() % (int)(10 - 1 + 1));
 
-            if(escapeChance >= eLevel){
+            if(escapeChance >= eLevel-4){
                 cout << "You Managed to Escape Successfully!" << endl;
                 fleeFailure = false;
             }

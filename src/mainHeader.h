@@ -461,6 +461,14 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                 gamePlayer.setCurrentFloor(1);
                 gameFloor = 1;
             }
+            else if(playerMap.at(futureYPosition).at(currentXPosition) == "I"){
+		inn(game.Player);
+            }
+             else if(playerMap.at(futureYPosition).at(currentXPosition) == "S"){
+		shop(game.Player);
+            }
+
+
 
             else if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
 
@@ -576,7 +584,12 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                 gamePlayer.setCurrentFloor(1);
                 gameFloor = 1;
             }
-
+	    else if(playerMap.at(futureYPosition).at(currentXPosition) == "I"){
+                inn(gamePlayer);
+            }
+            else if(playerMap.at(futureYPosition).at(currentXPosition) == "S"){
+                shop(gamePlayer);
+            }
             else  if(playerMap.at(futureYPosition).at(currentXPosition) != "D") {
 
                 // Mark Old Space as Walked On
@@ -691,7 +704,13 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                 gamePlayer.setCurrentFloor(1);
                 gameFloor = 1;
             }
-
+            else if(playerMap.at(currentYPosition).at(futureXPosition) == "I"){
+               inn(gamePlayer);
+            }
+            else if(playerMap.at(currentYPosition).at(futureXPosition) == "S"){
+                shop(gamePlayer);
+            }
+            
 
             else if(playerMap.at(currentYPosition).at(futureXPosition) != "D") {
 
@@ -808,7 +827,12 @@ void movePlayer(Player& gamePlayer, string direction, vector< vector<int> >& int
                 gamePlayer.setCurrentFloor(1);
                 gameFloor = 1;
             }
-
+	    else if(playerMap.at(currentYPosition).at(futureXPosition) == "I"){
+               inn(gamePlayer);
+            }
+            else if(playerMap.at(currentYPosition).at(futureXPosition) == "S"){
+                shop(gamePlayer);
+            }
             else if(playerMap.at(currentYPosition).at(futureXPosition) != "D") {
 
                 // Mark Old Space as Walked On
